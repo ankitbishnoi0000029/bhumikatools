@@ -13,7 +13,6 @@ import {
   Monitor, Sun, Moon, Sparkle, FileOutput, CheckSquare, Minus,
   ChevronDown, ChevronUp, RotateCw, List, type LucideIcon,
 } from 'lucide-react';
-import PptxGenJS from 'pptxgenjs';
 import {
   getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer,
 } from '@/lib/pdf-utils';
@@ -484,6 +483,7 @@ export default function PdfToPowerPointPage() {
   const buildPPTX = async (): Promise<Blob> => {
     if (!pres) throw new Error('No presentation');
 
+    const { default: PptxGenJS } = await import('pptxgenjs');
     const pptx = new PptxGenJS();
     const ar = ASPECT_RATIOS.find((a) => a.id === aspectRatio)!;
     pptx.defineLayout({ name: 'CUSTOM', width: ar.w, height: ar.h });
