@@ -1,0 +1,56 @@
+{
+  "name": "idcardtools — Print E-Aadhaar PVC & Free PDF Tools",
+  "short_name": "idcardtools",
+  "description": "Print E-Aadhaar on PVC cards. 31+ free PDF tools. UIDAI-compliant. Privacy-first.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f1ea",
+  "theme_color": "#ff6a00",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities", "business"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Print E-Aadhaar PVC",
+      "short_name": "Aadhaar PVC",
+      "description": "Print your E-Aadhaar on a PVC card",
+      "url": "/aadhaar-pvc",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Merge PDF",
+      "short_name": "Merge",
+      "description": "Combine multiple PDFs",
+      "url": "/pdf-tools/merge",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Compress PDF",
+      "short_name": "Compress",
+      "description": "Reduce file size",
+      "url": "/pdf-tools/compress",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
