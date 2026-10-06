@@ -41,8 +41,8 @@ const toolsMenu = [
     color: "#3b82f6",
     tools: [
       { id: "pdf-word", title: "PDF to Word", icon: FileOutput },
-      { id: "pdf-ppt", title: "PDF to PowerPoint", icon: Presentation },
-      { id: "pdf-excel", title: "PDF to Excel", icon: FileSpreadsheet },
+      { id: "pdf-to-powerpoint", title: "PDF to PowerPoint", icon: Presentation },
+      { id: "pdf-to-excel", title: "PDF to Excel", icon: FileSpreadsheet },
       { id: "word-pdf", title: "Word to PDF", icon: FileText },
       { id: "jpg-pdf", title: "JPG to PDF", icon: ImageIcon },
       { id: "html-pdf", title: "HTML to PDF", icon: FileCode2 },
@@ -116,7 +116,7 @@ export const Header = () => {
       <motion.header
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as any }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
         style={{ paddingTop: headerPadding, paddingBottom: headerPadding }}
         className="fixed top-0 left-0 w-full z-50 px-6 md:px-8 transition-all duration-500"
         onMouseLeave={() => setShowToolsMenu(false)}
@@ -199,7 +199,7 @@ export const Header = () => {
             </button>
 
             <Link
-              href="/login"
+              href="/auth/login"
               className="hidden md:inline-flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-black text-white text-[12px] font-medium tracking-tight hover:bg-[#ff6a00] transition-colors duration-300 group"
             >
               Login / Sign Up
@@ -246,7 +246,7 @@ export const Header = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as any }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
               className="hidden lg:block absolute left-0 right-0 top-full"
               onMouseEnter={() => setShowToolsMenu(true)}
             >
@@ -255,7 +255,7 @@ export const Header = () => {
                   initial={{ scale: 0.98, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.98, opacity: 0 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as any }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
                   className="bg-[#f4f1ea] border border-black/[0.08] rounded-[22px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] overflow-hidden"
                 >
                   <div className="grid grid-cols-12">
@@ -281,7 +281,7 @@ export const Header = () => {
                             transition={{
                               delay: 0.08 + i * 0.05,
                               duration: 0.4,
-                              ease: [0.22, 1, 0.36, 1] as any,
+                              ease: [0.22, 1, 0.36, 1] as const,
                             }}
                             onMouseEnter={() => setActiveToolsCategory(i)}
                             className={`relative px-6 py-3 cursor-pointer transition-all duration-300 ${isActive ? "bg-[#f4f1ea]" : "hover:bg-black/[0.02]"}`}
@@ -302,7 +302,7 @@ export const Header = () => {
                                   scale: isActive ? 1.6 : 1,
                                   boxShadow: isActive ? `0 0 0 4px ${cat.color}20, 0 0 12px ${cat.color}60` : "0 0 0 0px transparent, 0 0 0px transparent",
                                 }}
-                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as any }}
+                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
                                 className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
                                 style={{ backgroundColor: cat.color }}
                               />
@@ -359,7 +359,7 @@ export const Header = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 0.4, scale: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
                         className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl pointer-events-none"
                         style={{ backgroundColor: activeCat.color }}
                       />
@@ -369,7 +369,7 @@ export const Header = () => {
                         key={`header-${activeToolsCategory}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as any }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
                         className="relative flex items-center justify-between mb-5 pb-4 border-b border-black/[0.06]"
                       >
                         <div className="flex items-center gap-3">
@@ -443,7 +443,7 @@ export const Header = () => {
                                       scale: 1,
                                       transition: {
                                         duration: 0.4,
-                                        ease: [0.22, 1, 0.36, 1] as any,
+                                        ease: [0.22, 1, 0.36, 1] as const,
                                       },
                                     },
                                     exit: {
@@ -454,7 +454,11 @@ export const Header = () => {
                                   }}
                                 >
                                   <Link
-                                    href={`/pdf-tools/${tool.id}`}
+                                    href={
+                                      tool.id === "crop" || tool.id === "ai-summarizer"
+                                        ? "/pdf-tools"
+                                        : `/pdf-tools/${tool.id}`
+                                    }
                                     className="group/tool flex items-center gap-3 p-3 rounded-[12px] hover:bg-white transition-all duration-300 relative overflow-hidden"
                                   >
                                     {/* Slide-in accent on hover */}
@@ -531,7 +535,7 @@ export const Header = () => {
                         key={`progress-${activeToolsCategory}`}
                         initial={{ scaleX: 0, opacity: 0 }}
                         animate={{ scaleX: 1, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as any }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
                         className="relative mt-4 pt-4 border-t border-black/[0.06] flex items-center justify-between"
                       >
                         <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40">
@@ -588,7 +592,7 @@ export const Header = () => {
                       transition={{ delay: 0.45, duration: 0.5 }}
                     >
                       <Link
-                        href="/pdf-tools/ai-summarizer"
+                        href="/pdf-tools"
                         className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black hover:text-[#ff6a00] transition-colors"
                       >
                         Try it
@@ -611,7 +615,7 @@ export const Header = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as any }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
               className="hidden lg:block absolute left-0 right-0 top-full"
               onMouseEnter={() => setShowToolsMenu(true)}
             >
@@ -702,7 +706,7 @@ export const Header = () => {
                           initial={{ opacity: 0, x: 10 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -10 }}
-                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as any }}
+                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
                           className="grid grid-cols-2 gap-1"
                         >
                           {activeCat.tools.map((tool) => {
@@ -710,7 +714,11 @@ export const Header = () => {
                             return (
                               <Link
                                 key={tool.id}
-                                href={`/pdf-tools/${tool.id}`}
+                                href={
+                                  tool.id === "crop" || tool.id === "ai-summarizer"
+                                    ? "/pdf-tools"
+                                    : `/pdf-tools/${tool.id}`
+                                }
                                 className="group/tool flex items-center gap-3 p-3 rounded-[12px] hover:bg-white transition-colors duration-200"
                               >
                                 <div className="w-9 h-9 rounded-[10px] bg-white group-hover/tool:bg-[#ff6a00] flex items-center justify-center transition-all duration-300 shrink-0">
@@ -757,7 +765,7 @@ export const Header = () => {
                       </span>
                     </div>
                     <Link
-                      href="/pdf-tools/ai-summarizer"
+                      href="/pdf-tools"
                       className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black hover:text-[#ff6a00] transition-colors"
                     >
                       Try it
@@ -809,7 +817,7 @@ export const Header = () => {
                     key={item.name}
                     initial={{ x: 30, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + index * 0.06, ease: [0.22, 1, 0.36, 1] as any }}
+                    transition={{ delay: 0.1 + index * 0.06, ease: [0.22, 1, 0.36, 1] as const }}
                     className="border-b border-black/[0.08]"
                   >
                     <Link

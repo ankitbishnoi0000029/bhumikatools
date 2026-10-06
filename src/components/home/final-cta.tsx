@@ -60,7 +60,7 @@ export const FinalCta = () => {
 
           {/* CTA buttons */}
           <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
-            <Link href="/tools" className="group inline-flex items-center gap-4">
+            <Link href="/pdf-tools" className="group inline-flex items-center gap-4">
               <span className="relative text-[17px] font-medium text-black pb-1.5">
                 Explore the toolkit
                 <span className="absolute left-0 right-0 bottom-0 h-[1.5px] bg-black group-hover:bg-[#ff6a00] transition-colors" />
@@ -70,7 +70,7 @@ export const FinalCta = () => {
               </span>
             </Link>
 
-            <Link href="/aadhaar-pvc" className="group inline-flex items-center gap-4">
+            <Link href="/contacts" className="group inline-flex items-center gap-4">
               <span className="relative text-[17px] text-black/50 hover:text-black transition-colors pb-1.5">
                 Order Aadhaar PVC
               </span>

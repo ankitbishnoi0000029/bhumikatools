@@ -194,7 +194,7 @@ export default function LoginPage() {
                           <label className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">Password</label>
                           {mode === "login" && (
                             <Link
-                              href="/forgot-password"
+                              href="/contacts"
                               className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#ff6a00] hover:underline"
                             >
                               Forgot?

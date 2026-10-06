@@ -350,9 +350,9 @@ export default function PdfToExcelPage() {
       setEditedTables(initial);
       setHistory([initial]);
       setHistoryIndex(0);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to extract. PDF may be scanned.');
+      setError(e instanceof Error ? e.message || 'Failed to extract. PDF may be scanned.' : 'Failed to extract. PDF may be scanned.');
       setFile(null);
     } finally {
       setIsLoading(false);
@@ -601,7 +601,7 @@ export default function PdfToExcelPage() {
           }
           XLSX.utils.book_append_sheet(wb, ws, finalName);
         });
-    } else if (sheetStructure === 'combined' || outputMode === 'single-sheet') {
+    } else if (sheetStructure === 'combined') {
       // All combined into one sheet
       const aoa: any[][] = [];
       tablesToExport.forEach((table, tidx) => {
@@ -664,9 +664,9 @@ export default function PdfToExcelPage() {
         const blob = new Blob([wbout], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         setResult({ blob, filename: `${excel.title}.xlsx` });
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Conversion failed.');
+      setError(e instanceof Error ? e.message || 'Conversion failed.' : 'Conversion failed.');
     } finally {
       setIsProcessing(false);
     }

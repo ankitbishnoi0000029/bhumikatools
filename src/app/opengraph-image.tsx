@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "idcardtools — Print E-Aadhaar PVC & Free PDF Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -39,14 +38,13 @@ export default async function Image() {
             letterSpacing: "-0.02em",
             color: "#0a0a0a",
             marginBottom: 30,
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          Print your{" "}
-          <span style={{ fontStyle: "italic", color: "#ff6a00" }}>
-            E-Aadhaar
-          </span>
-          <br />
-          onto a PVC card.
+          <div>Print your</div>
+          <div style={{ fontStyle: "italic", color: "#ff6a00" }}>E-Aadhaar</div>
+          <div>onto a PVC card.</div>
         </div>
         <div
           style={{

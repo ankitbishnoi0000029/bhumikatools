@@ -152,7 +152,7 @@ export default function BlogPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16"
         >
-          <Link href={`/blog/${featuredPost.id}`} className="block group">
+          <Link href="/blog#articles" className="block group">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 p-8 md:p-10 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500">
               
               {/* Left: Featured tag */}
@@ -248,7 +248,7 @@ export default function BlogPage() {
         </motion.div>
 
         {/* Posts grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredPosts.map((post, i) => (
             <motion.div
               key={post.id}
@@ -257,7 +257,7 @@ export default function BlogPage() {
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: i * 0.05, ease: "easeOut" }}
             >
-              <Link href={`/blog/${post.id}`} className="block h-full outline-none group">
+              <Link href="/blog#articles" className="block h-full outline-none group">
                 <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/[0.06] group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500 overflow-hidden">
 
                   {/* Color accent */}

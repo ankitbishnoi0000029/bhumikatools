@@ -8,11 +8,20 @@ import {
   Image as ImageIcon, PenTool, Stamp, RotateCw, FileCode2, 
   Lock, Unlock, LayoutList, FileSpreadsheet, Presentation, 
   Wrench, ScanText, ShieldAlert, EyeOff, Crop, FileInput, 
-  Brain, Languages, ArrowUpRight, Search
+  Brain, Languages, ArrowUpRight, Search, type LucideIcon
 } from 'lucide-react';
 
 // --- DATA ---
-const toolsData = [
+type Tool = {
+  id: string;
+  title: string;
+  desc: string;
+  icon: LucideIcon;
+  category: string;
+  isNew?: boolean;
+};
+
+const toolsData: Tool[] = [
   { id: 'merge', title: 'Merge PDF', desc: 'Combine PDFs in the order you want.', icon: Layers, category: 'Organize PDF' },
   { id: 'split', title: 'Split PDF', desc: 'Separate one page or a whole set into independent files.', icon: Scissors, category: 'Organize PDF' },
   { id: 'rotate', title: 'Rotate PDF', desc: 'Rotate your PDFs the way you need them.', icon: RotateCw, category: 'Organize PDF' },
@@ -67,18 +76,31 @@ const itemVariants = {
   show: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.5, ease: "easeOut" } 
+    transition: { duration: 0.5, ease: "easeOut" as const }
   },
   exit: { opacity: 0, y: -10, transition: { duration: 0.2 } }
 };
 
 // --- TOOL CARD ---
-const ToolCard = ({ tool, index }: { tool: any; index: number }) => {
+const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
   const Icon = tool.icon;
 
   return (
     <motion.div variants={itemVariants} className="h-full">
-      <Link href={`/tools/${tool.id}`} className="block h-full outline-none group">
+      <Link
+        href={
+          tool.id === "pdf-ppt"
+            ? "/pdf-tools/pdf-to-powerpoint"
+            : tool.id === "pdf-excel"
+              ? "/pdf-tools/pdf-to-excel"
+              : tool.id === "excel-pdf"
+                ? "/pdf-tools/excel-to-pdf"
+                : ["crop", "pdf-a", "ai-summarizer"].includes(tool.id)
+                  ? "/pdf-tools"
+                  : `/pdf-tools/${tool.id}`
+        }
+        className="block h-full outline-none group"
+      >
         <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/[0.06] transition-all duration-500 ease-out group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.18)] overflow-hidden">
           
           {/* Soft gradient wash top-right (appears on hover) */}
@@ -312,7 +334,7 @@ export default function ToolsPage() {
                 Nothing found.
               </h3>
               <p className="text-[13px] text-black/50">
-                No tools match "{searchQuery}" in {activeCategory === 'All' ? 'any category' : activeCategory}.
+                No tools match &quot;{searchQuery}&quot; in {activeCategory === 'All' ? 'any category' : activeCategory}.
               </p>
             </motion.div>
           )}
@@ -336,7 +358,7 @@ export default function ToolsPage() {
               Can&apos;t find the tool you&apos;re <span className="italic">looking</span> for?
             </h3>
           </div>
-          <Link href="/contact" className="group inline-flex items-center gap-3 self-start md:self-end">
+          <Link href="/contacts" className="group inline-flex items-center gap-3 self-start md:self-end">
             <span className="relative text-[15px] font-medium text-black pb-1">
               Request a tool
               <span className="absolute left-0 right-0 bottom-0 h-px bg-black group-hover:bg-[#ff6a00] transition-colors" />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PdfToolsPage from "@/components/pdf-tools/pdf-landing";
 
 // ============================================
@@ -10,7 +11,7 @@ const PAGE_URL = `${SITE_URL}/pdf-tools`;
 
 export const metadata: Metadata = {
   // ---------- Basic Meta ----------
-  title: "Free PDF Tools Online — Merge, Split, Compress, Convert & More | idcardtools",
+  title: "Free PDF Tools Online — Merge, Split, Compress, Convert & More",
   description:
     "31+ free PDF tools to merge, split, compress, convert, sign, and protect PDFs. No signup, no watermarks, no limits. Files processed in your browser — 100% private and secure. Trusted by 2M+ Indians.",
   
@@ -85,17 +86,13 @@ export const metadata: Metadata = {
   // ---------- Canonical ----------
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
   },
 
   // ---------- Open Graph ----------
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "Free PDF Tools Online — 31+ Tools for Every Task",
@@ -104,14 +101,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-tools.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools — 31+ Free PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/og-tools-square.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools PDF Tools",
@@ -128,7 +125,7 @@ export const metadata: Metadata = {
     title: "Free PDF Tools — 31+ Tools for Every Task",
     description:
       "Merge, split, compress, convert PDFs. Free forever. No signup. Privacy-first.",
-    images: [`${SITE_URL}/og-tools.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
 
   // ---------- Robots ----------
@@ -177,7 +174,7 @@ const collectionSchema = {
   },
   primaryImageOfPage: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/og-tools.png`,
+    url: `${SITE_URL}/demo.png`,
     width: 1200,
     height: 630,
   },
@@ -307,7 +304,7 @@ const softwareSchema = {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
+      url: `${SITE_URL}/favicon.ico`,
     },
   },
 };
@@ -576,7 +573,7 @@ const Page = () => {
           <nav aria-label="Breadcrumb">
             <ol>
               <li>
-                <a href="/">Home</a>
+                <Link href="/">Home</Link>
               </li>
               <li>
                 <a href="/pdf-tools" aria-current="page">

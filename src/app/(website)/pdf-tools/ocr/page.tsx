@@ -9,10 +9,11 @@ import {
   ChevronLeft, ChevronRight, Languages, Settings2, Copy, Check,
   Search, Type, FileType, FileCode2, Package, Sparkle, Brain,
   ZoomIn, ZoomOut, Maximize2, RotateCw, Layers, Hash, BookOpen,
-  Wand2, Gauge, Target, Percent,
+  Wand2, Gauge, Target, Percent, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import {
+  createBlobFromBytes,
   getPDFInfo,
   formatBytes,
   downloadBlob,
@@ -67,13 +68,13 @@ const LANGUAGES = [
   { code: 'spa', label: 'Spanish', flag: '🇪🇸' },
 ];
 
-const OCR_MODES: { id: OcrMode; label: string; desc: string; icon: any; color: string }[] = [
+const OCR_MODES: { id: OcrMode; label: string; desc: string; icon: LucideIcon; color: string }[] = [
   { id: 'fast', label: 'Fast', desc: 'Quick scan', icon: Gauge, color: '#10b981' },
   { id: 'balanced', label: 'Balanced', desc: 'Good accuracy', icon: Target, color: '#3b82f6' },
   { id: 'accurate', label: 'Accurate', desc: 'Best quality', icon: Sparkle, color: '#a855f7' },
 ];
 
-const OUTPUT_FORMATS: { id: OutputFormat; label: string; ext: string; icon: any; desc: string }[] = [
+const OUTPUT_FORMATS: { id: OutputFormat; label: string; ext: string; icon: LucideIcon; desc: string }[] = [
   { id: 'txt', label: 'Plain Text', ext: 'txt', icon: FileText, desc: '.txt' },
   { id: 'pdf', label: 'Searchable PDF', ext: 'pdf', icon: FileType, desc: '.pdf' },
   { id: 'docx', label: 'Word Document', ext: 'doc', icon: FileType, desc: '.doc' },
@@ -270,9 +271,9 @@ export default function OcrPDFPage() {
       const initial: Record<number, string> = {};
       ocrResults.forEach((r) => { initial[r.pageNum] = r.text; });
       setEditedTexts(initial);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'OCR failed. Please try again.');
+      setError(e instanceof Error ? e.message || 'OCR failed. Please try again.' : 'OCR failed. Please try again.');
     } finally {
       setIsProcessing(false);
       setCurrentOcrPage(0);
@@ -419,9 +420,9 @@ export default function OcrPDFPage() {
         downloadBlob(new Blob([docHtml], { type: 'application/msword' }), `${baseName}-ocr.doc`);
       } else if (outputFormat === 'pdf') {
         const bytes = await buildSearchablePDF();
-        downloadBlob(new Blob([bytes], { type: 'application/pdf' }), `${baseName}-searchable.pdf`);
+        downloadBlob(createBlobFromBytes(bytes, 'application/pdf'), `${baseName}-searchable.pdf`);
       }
-    } catch (e: any) {
+    } catch {
       setError('Download failed. Please try again.');
     }
   };

@@ -216,7 +216,7 @@ export default function AboutPage() {
             </h3>
           </div>
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Link href="/tools" className="group inline-flex items-center gap-3">
+            <Link href="/pdf-tools" className="group inline-flex items-center gap-3">
               <span className="relative text-[15px] font-medium text-black pb-1">
                 Explore tools
                 <span className="absolute left-0 right-0 bottom-0 h-px bg-black group-hover:bg-[#ff6a00] transition-colors" />
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 <ArrowUpRight size={15} className="text-black group-hover:text-white transition-colors" />
               </span>
             </Link>
-            <Link href="/contact" className="group inline-flex items-center gap-3">
+            <Link href="/contacts" className="group inline-flex items-center gap-3">
               <span className="relative text-[15px] text-black/50 hover:text-black transition-colors pb-1">
                 Get in touch
               </span>

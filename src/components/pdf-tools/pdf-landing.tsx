@@ -12,11 +12,20 @@ import {
   UploadCloud, Settings, Download, CheckCircle2, Shield, Zap,
   Users, Briefcase, GraduationCap, Building2, Heart, Scale,
   Clock, Infinity, Globe, Cpu, Sparkles, Check, X,
-  Trash2
+  Trash2, type LucideIcon
 } from 'lucide-react';
 
 // --- TOOLS DATA ---
-const toolsData = [
+type Tool = {
+  id: string;
+  title: string;
+  desc: string;
+  icon: LucideIcon;
+  category: string;
+  isNew?: boolean;
+};
+
+const toolsData: Tool[] = [
   { id: 'merge', title: 'Merge PDF', desc: 'Combine PDFs in the order you want.', icon: Layers, category: 'Organize PDF' },
   { id: 'split', title: 'Split PDF', desc: 'Separate one page or a whole set into independent files.', icon: Scissors, category: 'Organize PDF' },
   { id: 'rotate', title: 'Rotate PDF', desc: 'Rotate your PDFs the way you need them.', icon: RotateCw, category: 'Organize PDF' },
@@ -248,16 +257,29 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
   exit: { opacity: 0, y: -10, transition: { duration: 0.2 } }
 };
 
 // --- TOOL CARD ---
-const ToolCard = ({ tool, index }: { tool: any; index: number }) => {
+const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
   const Icon = tool.icon;
   return (
     <motion.div variants={itemVariants} className="h-full">
-      <Link href={`/pdf-tools/${tool.id}`} className="block h-full outline-none group">
+      <Link
+        href={
+          tool.id === "pdf-ppt"
+            ? "/pdf-tools/pdf-to-powerpoint"
+            : tool.id === "pdf-excel"
+              ? "/pdf-tools/pdf-to-excel"
+              : tool.id === "excel-pdf"
+                ? "/pdf-tools/excel-to-pdf"
+                : ["crop", "pdf-a", "ai-summarizer"].includes(tool.id)
+                  ? "/pdf-tools"
+                  : `/pdf-tools/${tool.id}`
+        }
+        className="block h-full outline-none group"
+      >
         <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/[0.06] transition-all duration-500 ease-out group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.18)] overflow-hidden">
           <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-gradient-to-br from-[#ff6a00]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           {tool.isNew && (
@@ -758,7 +780,7 @@ export default function PdfToolsPage() {
                     Still have a <span className="italic text-[#ff6a00]">question?</span>
                   </h3>
                   <p className="text-[13px] leading-[1.7] text-black/55 font-light mb-5">Our team typically responds within 2 hours on weekdays.</p>
-                  <Link href="/contact" className="group inline-flex items-center gap-3">
+                  <Link href="/contacts" className="group inline-flex items-center gap-3">
                     <span className="relative text-[13px] font-medium text-black pb-1">
                       Contact support
                       <span className="absolute left-0 right-0 bottom-0 h-px bg-black group-hover:bg-[#ff6a00] transition-colors" />
@@ -841,7 +863,7 @@ export default function PdfToolsPage() {
             {blogPosts.map((post, i) => (
               <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}>
-                <Link href={`/blog/${post.id}`} className="block group">
+                <Link href="/blog#articles" className="block group">
                   <div className="p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 transition-all duration-500">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#ff6a00]" />
@@ -884,7 +906,7 @@ export default function PdfToolsPage() {
                   <ArrowUpRight size={17} className="text-black group-hover:text-white transition-colors" />
                 </span>
               </Link>
-              <Link href="/aadhaar-pvc" className="group inline-flex items-center gap-4">
+              <Link href="/contacts" className="group inline-flex items-center gap-4">
                 <span className="relative text-[17px] text-black/50 hover:text-black transition-colors pb-1.5">Order Aadhaar PVC</span>
               </Link>
             </div>

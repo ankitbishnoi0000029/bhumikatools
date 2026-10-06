@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import LoginPage from "@/components/login";
 
 const SITE_URL = "https://idcardtools.com";
-const PAGE_URL = `${SITE_URL}/login`;
+const PAGE_URL = `${SITE_URL}/auth/login`;
 
 // ============================================
 // SEO METADATA — NOINDEX (Critical for auth pages)
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
       "Sign in to your idcardtools account to track orders and access premium tools.",
     images: [
       {
-        url: `${SITE_URL}/og-login.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "Login to idcardtools",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "Login / Sign Up — idcardtools",
     description:
       "Sign in to your idcardtools account to track PVC card orders and access all tools.",
-    images: [`${SITE_URL}/og-login.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
 
   // ---------- Other meta ----------

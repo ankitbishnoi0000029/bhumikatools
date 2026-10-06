@@ -4,7 +4,7 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { UploadCloud, FileText, X, GripVertical, Trash2, Layers, ArrowUpRight, Loader2, AlertCircle, CheckCircle2, Download, RefreshCw, Sparkles, Eye, ChevronLeft, ChevronRight, File } from "lucide-react";
-import { mergePDFsWithInfo, getPDFInfo, formatBytes, downloadBlob } from "@/lib/pdf-utils";
+import { createBlobFromBytes, mergePDFsWithInfo, getPDFInfo, formatBytes, downloadBlob } from "@/lib/pdf-utils";
 
 // ============================================
 // TYPES
@@ -174,14 +174,14 @@ export default function MergePDFPage() {
       const res = await mergePDFsWithInfo(fileList);
       setProgress(100);
 
-      const blob = new Blob([res.bytes], { type: "application/pdf" });
+      const blob = createBlobFromBytes(res.bytes, "application/pdf");
       setResult({
         blob,
         filename: "merged.pdf",
         totalPages: res.totalPages,
       });
-    } catch (e: any) {
-      setError(e.message || "Failed to merge PDFs. Please try again.");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message || "Failed to merge PDFs. Please try again." : "Failed to merge PDFs. Please try again.");
     } finally {
       setIsProcessing(false);
     }

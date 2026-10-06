@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
-import { unlockPDF } from '@/lib/pdf-utils';
+import { createBlobFromBytes, unlockPDF } from '@/lib/pdf-utils';
 
 export default function UnlockPage() {
   const [pw, setPw] = useState('');
@@ -13,7 +13,7 @@ export default function UnlockPage() {
       description="Remove password protection from your own PDF files."
       onProcess={async (files) => {
         const bytes = await unlockPDF(files[0], pw);
-        return { blob: new Blob([bytes], { type: 'application/pdf' }), filename: 'unlocked.pdf' };
+        return { blob: createBlobFromBytes(bytes, 'application/pdf'), filename: 'unlocked.pdf' };
       }}
     >
       {() => (

@@ -17,7 +17,7 @@ interface ToolShellProps {
   multiple?: boolean;
   accept?: string;
   children?: (files: File[], reset: () => void) => React.ReactNode;
-  onProcess?: (files: File[], setProgress: (p: number) => void) => Promise<{ blob: Blob; filename: string; extra?: any }>;
+  onProcess?: (files: File[], setProgress: (p: number) => void) => Promise<{ blob: Blob; filename: string; extra?: unknown }>;
 }
 
 export default function ToolShell({
@@ -34,7 +34,7 @@ export default function ToolShell({
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [result, setResult] = useState<{ blob: Blob; filename: string; extra?: any } | null>(null);
+  const [result, setResult] = useState<{ blob: Blob; filename: string; extra?: unknown } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -74,8 +74,8 @@ export default function ToolShell({
       const res = await onProcess(files, setProgress);
       setProgress(100);
       setResult(res);
-    } catch (e: any) {
-      setError(e.message || 'Something went wrong. Please try again.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Something went wrong. Please try again.');
     } finally {
       setIsProcessing(false);
     }

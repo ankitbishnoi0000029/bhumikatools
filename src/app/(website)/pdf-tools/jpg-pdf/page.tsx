@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { UploadCloud, X, Loader2, AlertCircle, CheckCircle2, Download, RefreshCw, Image as ImageIcon, ArrowUpRight, Eye, Sparkles, GripVertical, FileText, Trash2, RotateCw, RotateCcw, Layers, Settings2, ChevronLeft, ChevronRight, Check, Maximize, Minimize } from "lucide-react";
 import { PDFDocument, degrees, rgb } from "pdf-lib";
-import { formatBytes, downloadBlob, readFileAsArrayBuffer } from "@/lib/pdf-utils";
+import { createBlobFromBytes, formatBytes, downloadBlob, readFileAsArrayBuffer } from "@/lib/pdf-utils";
 
 // ============================================
 // TYPES
@@ -321,16 +321,16 @@ export default function JpgToPdfPage() {
 
     try {
       const bytes = await buildPDF();
-      const blob = new Blob([bytes], { type: "application/pdf" });
+      const blob = createBlobFromBytes(bytes, "application/pdf");
 
       setResult({
         blob,
         filename: images.length === 1 ? `${images[0].file.name.replace(/\.[^.]+$/, "")}.pdf` : `images-${images.length}-pages.pdf`,
         totalPages: images.length,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to create PDF. Please try again.");
+      setError(e instanceof Error ? e.message || "Failed to create PDF. Please try again." : "Failed to create PDF. Please try again.");
     } finally {
       setIsProcessing(false);
     }

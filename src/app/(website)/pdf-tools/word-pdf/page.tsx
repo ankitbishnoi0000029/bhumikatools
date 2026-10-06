@@ -243,9 +243,9 @@ export default function WordToPdfPage() {
       setHistory([parsed.html]);
       setHistoryIndex(0);
       setLoadProgress(100);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to parse Word document.');
+      setError(e instanceof Error ? e.message || 'Failed to parse Word document.' : 'Failed to parse Word document.');
     } finally {
       setIsLoading(false);
     }
@@ -710,9 +710,9 @@ export default function WordToPdfPage() {
         blob,
         filename: `${doc.fileName}.pdf`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'PDF generation failed.');
+      setError(e instanceof Error ? e.message || 'PDF generation failed.' : 'PDF generation failed.');
     } finally {
       setIsProcessing(false);
     }

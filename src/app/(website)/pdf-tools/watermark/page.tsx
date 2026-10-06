@@ -11,10 +11,11 @@ import {
   Image as ImageIcon, Eraser, Wand2, Palette, Grid3x3, Maximize2,
   Lock, Unlock, Move, Plus, Minus, AlertTriangle, ScanLine,
   FileSearch, EyeOff, ShieldAlert, Undo2, Redo2, Grid, Anchor,
-  AlignLeft, AlignCenter, AlignRight, Play, Pause,
+  AlignLeft, AlignCenter, AlignRight, Play, Pause, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument, rgb, StandardFonts, degrees } from 'pdf-lib';
 import {
+  createBlobFromBytes,
   getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer,
 } from '@/lib/pdf-utils';
 
@@ -76,7 +77,7 @@ const COLORS = [
   '#3b82f6', '#8b5cf6', '#ec4899', '#06b6d4', '#ff6a00',
 ];
 
-const POSITIONS: { id: WatermarkPosition; label: string; icon: any }[] = [
+const POSITIONS: { id: WatermarkPosition; label: string; icon: LucideIcon }[] = [
   { id: 'center', label: 'Center', icon: Anchor },
   { id: 'top-left', label: 'Top Left', icon: AlignLeft },
   { id: 'top-right', label: 'Top Right', icon: AlignRight },
@@ -219,7 +220,7 @@ export default function WatermarkPage() {
         ...prev,
         pageRange: { from: 1, to: info.pageCount },
       }));
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
       setError('Failed to read PDF.');
       setFile(null);
@@ -491,7 +492,7 @@ export default function WatermarkPage() {
 
     const savedBytes = await doc.save();
     return {
-      blob: new Blob([savedBytes], { type: 'application/pdf' }),
+      blob: createBlobFromBytes(savedBytes, 'application/pdf'),
       filename: `${file.name.replace(/\.pdf$/i, '')}-watermarked.pdf`,
       stats: {
         pages: appliedCount,
@@ -654,7 +655,7 @@ export default function WatermarkPage() {
     const savedBytes = await finalDoc.save({ useObjectStreams: intensity === 'deep' });
 
     return {
-      blob: new Blob([savedBytes], { type: 'application/pdf' }),
+      blob: createBlobFromBytes(savedBytes, 'application/pdf'),
       filename: `${file.name.replace(/\.pdf$/i, '')}-clean.pdf`,
       stats: {
         intensity,
@@ -677,9 +678,9 @@ export default function WatermarkPage() {
     try {
       const res = mode === 'add' ? await processAdd() : await processRemove();
       setResult(res);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Processing failed.');
+      setError(e instanceof Error ? e.message || 'Processing failed.' : 'Processing failed.');
     } finally {
       setIsProcessing(false);
     }

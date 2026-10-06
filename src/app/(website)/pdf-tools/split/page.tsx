@@ -16,6 +16,7 @@ import {
   downloadAsZip,
   downloadBlob,
   getAllPageThumbnails,
+  createBlobFromBytes,
   getPDFInfo,
   formatBytes,
 } from '@/lib/pdf-utils';
@@ -273,8 +274,8 @@ export default function SplitPDFPage() {
       }
 
       setResults(splitResults);
-    } catch (e: any) {
-      setError(e.message || 'Failed to split PDF. Please try again.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message || 'Failed to split PDF. Please try again.' : 'Failed to split PDF. Please try again.');
     } finally {
       setIsProcessing(false);
     }
@@ -285,14 +286,14 @@ export default function SplitPDFPage() {
   const downloadAll = async () => {
     if (!results || results.length === 0) return;
     if (results.length === 1) {
-      downloadBlob(new Blob([results[0].bytes], { type: 'application/pdf' }), results[0].name);
+      downloadBlob(createBlobFromBytes(results[0].bytes, 'application/pdf'), results[0].name);
     } else {
       await downloadAsZip(results, 'split-pdfs.zip');
     }
   };
 
   const downloadOne = (result: SplitResult) => {
-    downloadBlob(new Blob([result.bytes], { type: 'application/pdf' }), result.name);
+    downloadBlob(createBlobFromBytes(result.bytes, 'application/pdf'), result.name);
   };
 
   // ============================================

@@ -46,10 +46,7 @@ export const metadata: Metadata = {
   classification: "PDF Tutorials, Guides, Industry News",
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
     types: {
       "application/rss+xml": `${SITE_URL}/blog/rss.xml`,
     },
@@ -57,7 +54,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "Blog — PDF Tips, Aadhaar PVC Guides & Privacy Insights",
@@ -66,14 +62,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-blog.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Blog — PDF Tools & Document Guides",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/og-blog-square.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools Blog",
@@ -88,7 +84,7 @@ export const metadata: Metadata = {
     title: "Blog — PDF Tips, Aadhaar PVC Guides & Privacy Insights",
     description:
       "Expert guides on PDF tools, E-Aadhaar PVC printing, and document privacy.",
-    images: [`${SITE_URL}/og-blog.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
   robots: {
     index: true,
@@ -124,7 +120,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "8 min",
-    image: `${SITE_URL}/blog/aadhaar-pvc-guide.png`,
+    image: `${SITE_URL}/demo.png`,
   },
   {
     slug: "pdf-privacy",
@@ -135,7 +131,7 @@ const blogPosts = [
     author: "Priya Sharma",
     category: "Privacy",
     readTime: "5 min",
-    image: `${SITE_URL}/blog/pdf-privacy.png`,
+    image: `${SITE_URL}/demo.png`,
   },
   {
     slug: "pan-card-guide",
@@ -146,7 +142,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "4 min",
-    image: `${SITE_URL}/blog/pan-card-guide.png`,
+    image: `${SITE_URL}/demo.png`,
   },
   {
     slug: "ai-ocr",
@@ -157,7 +153,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Product Update",
     readTime: "6 min",
-    image: `${SITE_URL}/blog/ai-ocr.png`,
+    image: `${SITE_URL}/demo.png`,
   },
   {
     slug: "digital-india",
@@ -168,7 +164,7 @@ const blogPosts = [
     author: "Rajesh Kumar",
     category: "Industry",
     readTime: "10 min",
-    image: `${SITE_URL}/blog/digital-india.png`,
+    image: `${SITE_URL}/demo.png`,
   },
   {
     slug: "merge-pdf-guide",
@@ -179,7 +175,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "5 min",
-    image: `${SITE_URL}/blog/merge-pdf-guide.png`,
+    image: `${SITE_URL}/demo.png`,
   },
 ];
 
@@ -204,7 +200,7 @@ const blogSchema = {
     name: "idcardtools",
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
+      url: `${SITE_URL}/favicon.ico`,
       width: 512,
       height: 512,
     },
@@ -221,32 +217,6 @@ const blogSchema = {
       { "@type": "ListItem", position: 2, name: "Blog", item: PAGE_URL },
     ],
   },
-  blogPost: blogPosts.map((post) => ({
-    "@type": "BlogPosting",
-    "@id": `${SITE_URL}/blog/${post.slug}#article`,
-    headline: post.title,
-    description: post.excerpt,
-    url: `${SITE_URL}/blog/${post.slug}`,
-    datePublished: post.date,
-    dateModified: post.date,
-    image: {
-      "@type": "ImageObject",
-      url: post.image,
-      width: 1200,
-      height: 630,
-    },
-    author: {
-      "@type": "Person",
-      name: post.author,
-    },
-    publisher: {
-      "@type": "Organization",
-      "@id": `${SITE_URL}#organization`,
-    },
-    articleSection: post.category,
-    wordCount: parseInt(post.readTime) * 200,
-    inLanguage: "en-IN",
-  })),
 };
 
 // 2. CollectionPage Schema
@@ -276,7 +246,7 @@ const collectionSchema = {
       "@type": "ListItem",
       position: i + 1,
       name: post.title,
-      url: `${SITE_URL}/blog/${post.slug}`,
+      url: `${PAGE_URL}#articles`,
     })),
   },
 };
@@ -313,7 +283,7 @@ const itemListSchema = {
   itemListElement: blogPosts.map((post, i) => ({
     "@type": "ListItem",
     position: i + 1,
-    url: `${SITE_URL}/blog/${post.slug}`,
+    url: `${PAGE_URL}#articles`,
     name: post.title,
     image: post.image,
   })),
@@ -328,7 +298,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/favicon.ico`,
     width: 512,
     height: 512,
   },

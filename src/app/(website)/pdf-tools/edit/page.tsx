@@ -3,9 +3,9 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2, Download, ArrowUpRight, Type, Image as ImageIcon, Square, Circle as CircleIcon, Pen, Highlighter, Eraser, MousePointer2, Undo2, Redo2, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Trash2, Save, Bold, Italic, Stamp, Signature, Minus, Droplet, EyeOff, Eye as EyeIcon, Edit3, FileEdit, TextCursor, Copy, AlignLeft, AlignCenter, AlignRight, Lock, Unlock, Move, Layers as LayersIcon, Plus } from "lucide-react";
+import { UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2, Download, ArrowUpRight, Type, Image as ImageIcon, Square, Circle as CircleIcon, Pen, Highlighter, Eraser, MousePointer2, Undo2, Redo2, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, Trash2, Save, Bold, Italic, Stamp, Signature, Minus, Droplet, EyeOff, Eye as EyeIcon, Edit3, FileEdit, TextCursor, Copy, AlignLeft, AlignCenter, AlignRight, Lock, Unlock, Move, Layers as LayersIcon, Plus, type LucideIcon } from "lucide-react";
 import { PDFDocument, rgb, StandardFonts, degrees } from "pdf-lib";
-import { getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer } from "@/lib/pdf-utils";
+import { createBlobFromBytes, getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer } from "@/lib/pdf-utils";
 
 // ============================================
 // CONSTANTS
@@ -28,7 +28,7 @@ interface BaseElement {
   rotation?: number;
 }
 
-interface ExistingTextElement extends BaseElement {
+interface ExistingTextElement extends Omit<BaseElement, "type"> {
   type: "existingText";
   originalContent: string;
   content: string;
@@ -116,7 +116,7 @@ type EditorElement = TextElement | ImageElement | ShapeElement | HighlightElemen
 interface ToolConfig {
   id: ToolType;
   label: string;
-  icon: any;
+  icon: LucideIcon;
   group: "existing" | "basic" | "shapes" | "annotate" | "insert";
 }
 
@@ -1301,12 +1301,12 @@ export default function EditorPage() {
     setError(null);
     try {
       const bytes = await buildPDF();
-      const blob = new Blob([bytes], { type: "application/pdf" });
+      const blob = createBlobFromBytes(bytes, "application/pdf");
       const baseName = file.name.replace(/\.pdf$/i, "");
       setResult({ blob, filename: `${baseName}-edited.pdf` });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || "Failed to save PDF.");
+      setError(e instanceof Error ? e.message || "Failed to save PDF." : "Failed to save PDF.");
     } finally {
       setIsProcessing(false);
     }

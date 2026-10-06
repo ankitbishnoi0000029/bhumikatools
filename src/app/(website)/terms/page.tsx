@@ -9,7 +9,7 @@ const PAGE_URL = `${SITE_URL}/terms`;
 // ============================================
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Rules for Using idcardtools | idcardtools",
+  title: "Terms of Service — Rules for Using idcardtools",
   description:
     "Read idcardtools' terms of service in plain English. Free PDF tools, UIDAI-compliant PVC card printing, full refund policy within 24 hours, and your rights as a user. Governed by Indian law.",
   keywords: [
@@ -39,15 +39,11 @@ export const metadata: Metadata = {
   classification: "Terms of Service",
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "Terms of Service — Rules for Using idcardtools",
@@ -56,14 +52,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-terms.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Terms of Service",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/og-terms-square.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools Terms",
@@ -78,7 +74,7 @@ export const metadata: Metadata = {
     title: "Terms of Service — idcardtools",
     description:
       "Plain-English terms of service. Free tools, refund policy, and your rights.",
-    images: [`${SITE_URL}/og-terms.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
   robots: {
     index: true,
@@ -140,7 +136,7 @@ const termsPageSchema = {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
+      url: `${SITE_URL}/favicon.ico`,
       width: 512,
       height: 512,
     },
@@ -163,7 +159,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/favicon.ico`,
     width: 512,
     height: 512,
   },

@@ -10,7 +10,7 @@ import {
   Settings2, Bold, Italic, Type, AlignLeft, ListOrdered, List,
   Layers, Hash, ChevronLeft, ChevronRight, Save, Wand2, BookOpen,
   Layout, Table as TableIcon, Palette, Undo2, Redo2, Maximize2,
-  ZoomIn, ZoomOut, Search, Filter, BarChart3, Info,
+  ZoomIn, ZoomOut, Search, Filter, BarChart3, Info, type LucideIcon,
 } from 'lucide-react';
 import {
   Document, Packer, Paragraph, TextRun, HeadingLevel,
@@ -58,7 +58,7 @@ interface ExtractedDocument {
 type OutputFormat = 'docx' | 'doc' | 'rtf' | 'txt' | 'html';
 type LayoutMode = 'simple' | 'preserve' | 'structured';
 
-const FORMAT_OPTIONS: { id: OutputFormat; label: string; ext: string; mime: string; desc: string; icon: any }[] = [
+const FORMAT_OPTIONS: { id: OutputFormat; label: string; ext: string; mime: string; desc: string; icon: LucideIcon }[] = [
   { id: 'docx', label: 'Word (.docx)', ext: 'docx', mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', desc: 'Best compatibility', icon: FileType },
   { id: 'doc', label: 'Word 97 (.doc)', ext: 'doc', mime: 'application/msword', desc: 'Legacy format', icon: FileOutput },
   { id: 'rtf', label: 'Rich Text (.rtf)', ext: 'rtf', mime: 'application/rtf', desc: 'Universal format', icon: FileCode2 },
@@ -66,7 +66,7 @@ const FORMAT_OPTIONS: { id: OutputFormat; label: string; ext: string; mime: stri
   { id: 'txt', label: 'Plain Text (.txt)', ext: 'txt', mime: 'text/plain', desc: 'Simple text', icon: FileText },
 ];
 
-const LAYOUT_OPTIONS: { id: LayoutMode; label: string; desc: string; icon: any }[] = [
+const LAYOUT_OPTIONS: { id: LayoutMode; label: string; desc: string; icon: LucideIcon }[] = [
   { id: 'simple', label: 'Simple Text', desc: 'Continuous paragraph flow', icon: Type },
   { id: 'structured', label: 'Structured', desc: 'Page-wise sections', icon: Layout },
   { id: 'preserve', label: 'Preserve Layout', desc: 'Approximate positions', icon: Layers },
@@ -278,9 +278,9 @@ export default function PdfToWordPage() {
       setEditedPages(initial);
       setHistory([initial]);
       setHistoryIndex(0);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to extract text. The PDF may be scanned or corrupted.');
+      setError(e instanceof Error ? e.message || 'Failed to extract text. The PDF may be scanned or corrupted.' : 'Failed to extract text. The PDF may be scanned or corrupted.');
       setFile(null);
     } finally {
       setIsLoading(false);
@@ -694,9 +694,9 @@ ${pagesHtml}
         blob,
         filename: `${doc.title}.${format.ext}`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Conversion failed.');
+      setError(e instanceof Error ? e.message || 'Conversion failed.' : 'Conversion failed.');
     } finally {
       setIsProcessing(false);
     }

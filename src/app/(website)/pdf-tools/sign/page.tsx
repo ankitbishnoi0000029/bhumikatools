@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
-import { readFileAsArrayBuffer } from '@/lib/pdf-utils';
+import { createBlobFromBytes, readFileAsArrayBuffer } from '@/lib/pdf-utils';
 
 export default function SignPdfPage() {
   const [sig, setSig] = useState('');
@@ -27,7 +27,7 @@ export default function SignPdfPage() {
           color: rgb(0.1, 0.1, 0.5),
         });
         const out = await doc.save();
-        return { blob: new Blob([out], { type: 'application/pdf' }), filename: 'signed.pdf' };
+        return { blob: createBlobFromBytes(out, 'application/pdf'), filename: 'signed.pdf' };
       }}
     >
       {() => (

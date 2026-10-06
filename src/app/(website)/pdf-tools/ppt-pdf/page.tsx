@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2,
   Download, ArrowUpRight, Eye, Sparkles, Presentation, Copy, Check,
-  Edit3, Settings2, Layers, ChevronLeft, ChevronRight, Save,
+  Edit3, Settings2, Layers, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Save,
   Palette, Image as ImageIcon, ZoomIn, ZoomOut, RefreshCw, Info,
   BarChart3, Grid3x3, Search, Plus, Minus, Trash2, RotateCw,
   Monitor, FileOutput, CheckSquare, List, EyeOff, Maximize2,
@@ -366,9 +366,9 @@ export default function PptToPdfPage() {
       setFilename(parsed.fileName);
       setHistory([parsed.slides]);
       setHistoryIndex(0);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to parse PowerPoint file.');
+      setError(e instanceof Error ? e.message || 'Failed to parse PowerPoint file.' : 'Failed to parse PowerPoint file.');
     } finally {
       setIsLoading(false);
     }
@@ -644,9 +644,9 @@ export default function PptToPdfPage() {
         blob,
         filename: `${filename || 'presentation'}.pdf`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'PDF generation failed.');
+      setError(e instanceof Error ? e.message || 'PDF generation failed.' : 'PDF generation failed.');
     } finally {
       setIsProcessing(false);
       setCurrentRenderingSlide(0);

@@ -11,10 +11,10 @@ import {
   Circle as CircleIcon, ChevronDown, Calendar, Hash, Mail,
   Phone, User, MapPin, Plus, Minus, MousePointer2,
   Move, Undo2, Redo2, FileSignature, PenTool, AlertTriangle,
-  FileCheck, Wand2, AlignLeft,
+  FileCheck, Wand2, AlignLeft, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import { getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer } from '@/lib/pdf-utils';
+import { createBlobFromBytes, getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer } from '@/lib/pdf-utils';
 
 // ============================================
 // TYPES
@@ -70,7 +70,7 @@ interface PageData {
 // CONSTANTS
 // ============================================
 
-const FIELD_TYPES: { id: FieldType; label: string; icon: any; desc: string }[] = [
+const FIELD_TYPES: { id: FieldType; label: string; icon: LucideIcon; desc: string }[] = [
   { id: 'text', label: 'Text', icon: Type, desc: 'Single-line text' },
   { id: 'multiline', label: 'Multiline', icon: AlignLeft, desc: 'Multi-line text' },
   { id: 'checkbox', label: 'Checkbox', icon: CheckSquare, desc: 'Yes/No toggle' },
@@ -384,9 +384,9 @@ export default function FormsPage() {
       const pageData = await renderPage(f, 1);
       setPages([pageData]);
       setPageSize({ width: pageData.width, height: pageData.height });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to load PDF.');
+      setError(e instanceof Error ? e.message || 'Failed to load PDF.' : 'Failed to load PDF.');
       setFile(null);
     } finally {
       setIsLoading(false);
@@ -793,7 +793,7 @@ export default function FormsPage() {
     }
 
     const savedBytes = await doc.save();
-    return new Blob([savedBytes], { type: 'application/pdf' });
+    return createBlobFromBytes(savedBytes, 'application/pdf');
   };
 
   const handleSave = async () => {
@@ -819,9 +819,9 @@ export default function FormsPage() {
         filename: mode === 'fill' ? `${baseName}-filled.pdf` : `${baseName}-with-forms.pdf`,
       });
       setSuccess(mode === 'fill' ? 'Form filled!' : 'Form fields added!');
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Processing failed.');
+      setError(e instanceof Error ? e.message || 'Processing failed.' : 'Processing failed.');
     } finally {
       setIsProcessing(false);
     }

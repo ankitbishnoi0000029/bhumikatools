@@ -32,8 +32,8 @@ export async function GET() {
       (post) => `
     <item>
       <title><![CDATA[${post.title}]]></title>
-      <link>${SITE_URL}/blog/${post.slug}</link>
-      <guid isPermaLink="true">${SITE_URL}/blog/${post.slug}</guid>
+      <link>${SITE_URL}/blog#articles</link>
+      <guid isPermaLink="false">${SITE_URL}/blog#${post.slug}</guid>
       <description><![CDATA[${post.excerpt}]]></description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <author>hello@idcardtools.com (${post.author})</author>
@@ -51,7 +51,7 @@ export async function GET() {
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${SITE_URL}/blog/rss.xml" rel="self" type="application/rss+xml" />
     <image>
-      <url>${SITE_URL}/logo.png</url>
+      <url>${SITE_URL}/favicon.ico</url>
       <title>idcardtools Blog</title>
       <link>${SITE_URL}/blog</link>
     </image>

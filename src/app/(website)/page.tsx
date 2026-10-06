@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "Print E-Aadhaar on premium PVC cards. 31+ free PDF tools. UIDAI-compliant. Delivered in 24 hours.",
     url: "https://idcardtools.com",
-    images: ["/og-home.png"],
+    images: ["/demo.png"],
   },
 };
 
@@ -138,7 +138,7 @@ const productSchema = {
         price: "149",
         priceCurrency: "INR",
         availability: "https://schema.org/InStock",
-        url: "https://idcardtools.com/aadhaar-pvc",
+        url: "https://idcardtools.com/contacts",
       },
       {
         "@type": "Offer",
@@ -146,7 +146,7 @@ const productSchema = {
         price: "99",
         priceCurrency: "INR",
         availability: "https://schema.org/InStock",
-        url: "https://idcardtools.com/aadhaar-pvc/bulk",
+        url: "https://idcardtools.com/contacts",
       },
     ],
   },

@@ -364,7 +364,7 @@ export const AutoIdCropper = () => {
             </div>
 
             <Link
-              href="/tools/id-card-crop"
+              href="/pdf-tools"
               className="group inline-flex items-center gap-3"
             >
               <span className="relative text-[15px] font-medium text-black pb-1">

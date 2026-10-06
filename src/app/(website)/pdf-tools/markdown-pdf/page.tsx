@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
-import { markdownToPDF } from '@/lib/pdf-utils';
+import { createBlobFromBytes, markdownToPDF } from '@/lib/pdf-utils';
 
 export default function MarkdownToPdfPage() {
   const [md, setMd] = useState('# Hello\n\nThis is **markdown** content.');
@@ -14,7 +14,7 @@ export default function MarkdownToPdfPage() {
       description="Convert Markdown into a beautifully formatted PDF."
       onProcess={async () => {
         const bytes = await markdownToPDF(md);
-        return { blob: new Blob([bytes], { type: 'application/pdf' }), filename: 'markdown.pdf' };
+        return { blob: createBlobFromBytes(bytes, 'application/pdf'), filename: 'markdown.pdf' };
       }}
     >
       {() => (

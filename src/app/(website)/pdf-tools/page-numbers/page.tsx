@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
-import { addPageNumbers } from '@/lib/pdf-utils';
+import { addPageNumbers, createBlobFromBytes } from '@/lib/pdf-utils';
 
 export default function PageNumbersPage() {
   const [position, setPosition] = useState<'bottom-center' | 'bottom-right' | 'bottom-left' | 'top-center' | 'top-right' | 'top-left'>('bottom-center');
@@ -23,7 +23,7 @@ export default function PageNumbersPage() {
       description="Add page numbers to every page with custom position and format."
       onProcess={async (files) => {
         const bytes = await addPageNumbers(files[0], { position });
-        return { blob: new Blob([bytes], { type: 'application/pdf' }), filename: 'numbered.pdf' };
+        return { blob: createBlobFromBytes(bytes, 'application/pdf'), filename: 'numbered.pdf' };
       }}
     >
       {() => (

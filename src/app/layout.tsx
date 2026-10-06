@@ -57,32 +57,20 @@ export const metadata: Metadata = {
 
   // Icons
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
     shortcut: "/favicon.ico",
   },
 
   // Canonical
   alternates: {
     canonical: SITE_URL,
-    languages: {
-      "en-IN": SITE_URL,
-      "hi-IN": `${SITE_URL}/hi`,
-    },
+    languages: { "en-IN": SITE_URL },
   },
 
   // OpenGraph
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: SITE_URL,
     siteName: SITE_NAME,
     title: SITE_TITLE,
@@ -90,14 +78,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-image.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools — Print E-Aadhaar on PVC Card & Free PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/og-square.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools",
@@ -113,7 +101,7 @@ export const metadata: Metadata = {
     creator: "@idcardtools",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [`${SITE_URL}/og-image.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
 
   // Robots
@@ -129,13 +117,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-
-  // Verification (Google, Bing)
-  verification: {
-    google: "your-google-verification-code",
-    // yandex: "your-yandex-code",
-    // other: { "msvalidate.01": "your-bing-code" },
   },
 
   // Other meta
@@ -197,7 +178,7 @@ export default function RootLayout({
               name: "idcardtools",
               alternateName: ["ID Card Tools", "idcardtools.com"],
               url: SITE_URL,
-              logo: `${SITE_URL}/logo.png`,
+              logo: `${SITE_URL}/favicon.ico`,
               description: SITE_DESCRIPTION,
               foundingDate: "2023",
               founders: [{ "@type": "Person", name: "idcardtools Team" }],
@@ -254,7 +235,7 @@ export default function RootLayout({
                 name: "idcardtools",
                 logo: {
                   "@type": "ImageObject",
-                  url: `${SITE_URL}/logo.png`,
+                  url: `${SITE_URL}/favicon.ico`,
                 },
               },
               potentialAction: {
@@ -278,7 +259,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               "@id": `${SITE_URL}#business`,
               name: "idcardtools",
-              image: `${SITE_URL}/og-image.png`,
+              image: `${SITE_URL}/demo.png`,
               url: SITE_URL,
               telephone: "+91-9876543210",
               priceRange: "₹99 - ₹499",
@@ -316,7 +297,7 @@ export default function RootLayout({
       </head>
 
       <body className="relative min-h-screen bg-[#f4f1ea] text-[#0a0a0a] antialiased">
-        <main className="relative">{children}</main>
+        <main className="relative mt-20">{children}</main>
       </body>
     </html>
   );

@@ -2,14 +2,14 @@ import ContactPage from "@/components/contact-page";
 import type { Metadata } from "next";
 
 const SITE_URL = "https://idcardtools.com";
-const PAGE_URL = `${SITE_URL}/contact`;
+const PAGE_URL = `${SITE_URL}/contacts`;
 
 // ============================================
 // SEO METADATA
 // ============================================
 
 export const metadata: Metadata = {
-  title: "Contact Us — Support, Bulk Orders & Partnerships | idcardtools",
+  title: "Contact Us — Support, Bulk Orders & Partnerships",
   description:
     "Get in touch with idcardtools. Email support within 2 hours, phone support Mon-Fri 10AM-6PM, or visit our Bangalore office. Bulk PVC card orders and partnerships welcome.",
   keywords: [
@@ -34,15 +34,11 @@ export const metadata: Metadata = {
   category: "Contact",
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "Contact idcardtools — Support, Bulk Orders & Partnerships",
@@ -51,7 +47,7 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-contact.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "Contact idcardtools",
@@ -66,7 +62,7 @@ export const metadata: Metadata = {
     title: "Contact idcardtools — Support & Bulk Orders",
     description:
       "Email support within 2 hours. Bulk PVC card orders welcome.",
-    images: [`${SITE_URL}/og-contact.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
   robots: {
     index: true,
@@ -136,7 +132,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/favicon.ico`,
     width: 512,
     height: 512,
   },
@@ -201,7 +197,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   "@id": `${SITE_URL}#localbusiness`,
   name: "idcardtools",
-  image: `${SITE_URL}/og-contact.png`,
+  image: `${SITE_URL}/demo.png`,
   url: SITE_URL,
   telephone: "+91-9876543210",
   email: "hello@idcardtools.com",

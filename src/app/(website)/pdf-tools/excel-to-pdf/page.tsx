@@ -189,7 +189,7 @@ export default function ExcelToPdfPage() {
         const firstRow = normalized[0];
         const firstRowHasNumbers = firstRow.filter((c) => /^-?\d+\.?\d*$/.test(c)).length;
         const allText = firstRow.every((c) => c !== '' && isNaN(Number(c.replace(/[$,%]/g, ''))));
-        if (allText || firstRowHasNumerуs === 0) {
+        if (allText || firstRowHasNumbers === 0) {
           hasHeader = true;
         }
       }
@@ -242,9 +242,9 @@ export default function ExcelToPdfPage() {
       setEditedSheets(initial);
       setHistory([initial]);
       setHistoryIndex(0);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to parse file.');
+      setError(e instanceof Error ? e.message || 'Failed to parse file.' : 'Failed to parse file.');
     } finally {
       setIsLoading(false);
     }
@@ -571,9 +571,9 @@ export default function ExcelToPdfPage() {
         blob,
         filename: `${workbook.fileName}.pdf`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'PDF generation failed.');
+      setError(e instanceof Error ? e.message || 'PDF generation failed.' : 'PDF generation failed.');
     } finally {
       setIsProcessing(false);
     }

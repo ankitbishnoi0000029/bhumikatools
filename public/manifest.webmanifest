@@ -13,44 +13,44 @@
   "categories": ["productivity", "utilities", "business"],
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/icon.svg",
+      "src": "/favicon.ico",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
     }
   ],
   "shortcuts": [
     {
-      "name": "Print E-Aadhaar PVC",
-      "short_name": "Aadhaar PVC",
-      "description": "Print your E-Aadhaar on a PVC card",
-      "url": "/aadhaar-pvc",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "name": "PVC card enquiries",
+      "short_name": "PVC enquiries",
+      "description": "Contact idcardtools about PVC card printing",
+      "url": "/contacts",
+      "icons": [{ "src": "/favicon.ico", "sizes": "any" }]
     },
     {
       "name": "Merge PDF",
       "short_name": "Merge",
       "description": "Combine multiple PDFs",
       "url": "/pdf-tools/merge",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/favicon.ico", "sizes": "any" }]
     },
     {
       "name": "Compress PDF",
       "short_name": "Compress",
       "description": "Reduce file size",
       "url": "/pdf-tools/compress",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/favicon.ico", "sizes": "any" }]
     }
   ]
 }

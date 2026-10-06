@@ -25,6 +25,11 @@ export function downloadBlob(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+export function createBlobFromBytes(bytes: Uint8Array, type: string): Blob {
+  const buffer = new ArrayBuffer(bytes.byteLength);
+  new Uint8Array(buffer).set(bytes);
+  return new Blob([buffer], { type });
+}
 
 export async function readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
   return new Promise((resolve, reject) => {
@@ -471,17 +476,19 @@ export async function protectPDF(
   }
 ): Promise<Uint8Array> {
   const bytes = await readFileAsArrayBuffer(file);
-  const doc = await PDFDocument.load(bytes, { ignoreEncryption: true });
+  const { PDFDocument: EncryptablePDFDocument } = await import('@cantoo/pdf-lib');
+  const doc = await EncryptablePDFDocument.load(bytes, { ignoreEncryption: true });
 
-  await doc.encrypt({
+  doc.encrypt({
     userPassword: password,
     ownerPassword: options?.ownerPassword || password,
+    algorithm: options?.encryption === 'aes-128' ? 'AES-128' : 'AES-256',
     permissions: {
       printing: options?.permissions?.printing === 'high-res' ? 'highResolution'
-        : options?.permissions?.printing === 'low-res' ? 'lowResolution' : undefined,
+        : options?.permissions?.printing === 'low-res' ? 'lowResolution' : false,
       copying: options?.permissions?.copying ?? false,
       modifying: options?.permissions?.modifying ?? false,
-    } as any,
+    },
   });
 
   return await doc.save();

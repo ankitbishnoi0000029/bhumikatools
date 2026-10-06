@@ -41,15 +41,11 @@ export const metadata: Metadata = {
   classification: "Company Information",
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "About idcardtools — Privacy-First PDF Tools & Aadhaar PVC",
@@ -58,14 +54,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-about.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "About idcardtools — Privacy-First PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/og-about-square.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools About",
@@ -80,7 +76,7 @@ export const metadata: Metadata = {
     title: "About idcardtools — Privacy-First PDF Tools",
     description:
       "Building free, privacy-first PDF tools and premium Aadhaar PVC cards. Trusted by 2M+ Indians.",
-    images: [`${SITE_URL}/og-about.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
   robots: {
     index: true,
@@ -126,7 +122,7 @@ const aboutPageSchema = {
   },
   primaryImageOfPage: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/og-about.png`,
+    url: `${SITE_URL}/demo.png`,
     width: 1200,
     height: 630,
   },
@@ -153,11 +149,11 @@ const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/favicon.ico`,
     width: 512,
     height: 512,
   },
-  image: `${SITE_URL}/og-about.png`,
+  image: `${SITE_URL}/demo.png`,
   description:
     "idcardtools provides 31+ free, privacy-first PDF tools and premium E-Aadhaar PVC card printing services across India. Founded in 2023. Trusted by 2M+ users.",
   slogan: "Secure · Innovate · Succeed",

@@ -13,7 +13,7 @@ import {
   Wand2, BookOpen, Layout, Table as TableIcon, Code, Link2,
   Quote, Minus, CheckSquare, Image as ImageIcon, ZoomIn, ZoomOut,
   Undo2, Redo2, Info, BarChart3, Braces, Maximize2, Search,
-  SplitSquareHorizontal, FileOutput, DownloadCloud, FolderTree,
+  SplitSquareHorizontal, FileOutput, DownloadCloud, FolderTree, type LucideIcon,
 } from 'lucide-react';
 import {
   getPDFInfo, formatBytes, downloadBlob, readFileAsArrayBuffer,
@@ -80,13 +80,13 @@ const LIST_STYLES: { id: ListStyle; label: string; char: string }[] = [
   { id: 'plus', label: 'Plus', char: '+' },
 ];
 
-const OUTPUT_MODES: { id: OutputMode; label: string; desc: string; icon: any }[] = [
+const OUTPUT_MODES: { id: OutputMode; label: string; desc: string; icon: LucideIcon }[] = [
   { id: 'single', label: 'Single File', desc: 'All pages in one .md', icon: FileText },
   { id: 'per-page', label: 'Per Page', desc: 'One .md per page', icon: Layers },
   { id: 'outline', label: 'Outline Only', desc: 'Headings summary', icon: List },
 ];
 
-const DETECTION_MODES: { id: DetectionMode; label: string; desc: string; icon: any }[] = [
+const DETECTION_MODES: { id: DetectionMode; label: string; desc: string; icon: LucideIcon }[] = [
   { id: 'conservative', label: 'Conservative', desc: 'Only obvious headings', icon: CheckSquare },
   { id: 'balanced', label: 'Balanced', desc: 'Smart defaults', icon: Wand2 },
   { id: 'aggressive', label: 'Aggressive', desc: 'Detect more structure', icon: Sparkles },
@@ -571,9 +571,9 @@ export default function PdfToMarkdownPage() {
       setDoc(extracted);
       const fullMd = extracted.pages.map((p) => p.markdown).join('\n\n---\n\n');
       setEditedMarkdown(fullMd);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to extract text. PDF may be scanned.');
+      setError(e instanceof Error ? e.message || 'Failed to extract text. PDF may be scanned.' : 'Failed to extract text. PDF may be scanned.');
       setFile(null);
     } finally {
       setIsLoading(false);
@@ -683,9 +683,9 @@ export default function PdfToMarkdownPage() {
           filename: `${doc.title}-outline.md`,
         });
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Export failed.');
+      setError(e instanceof Error ? e.message || 'Export failed.' : 'Export failed.');
     } finally {
       setIsProcessing(false);
     }

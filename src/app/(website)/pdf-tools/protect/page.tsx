@@ -194,8 +194,8 @@ export default function ProtectPDFPage() {
         pageCount = doc.getPageCount();
         title = doc.getTitle() || '';
         author = doc.getAuthor() || '';
-      } catch (e: any) {
-        if (e.message?.includes('encrypted')) {
+      } catch (e: unknown) {
+        if (e instanceof Error && e.message.includes('encrypted')) {
           isEncrypted = true;
         }
         // Try to get page count from pdfjs
@@ -234,7 +234,7 @@ export default function ProtectPDFPage() {
         title,
         author,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
       setError('Failed to read PDF file.');
       setFile(null);
@@ -333,12 +333,12 @@ export default function ProtectPDFPage() {
         blob,
         filename: `${baseName}-protected.pdf`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      if (e.message?.includes('encrypt')) {
+      if (e instanceof Error && e.message.includes('encrypt')) {
         setError('Encryption not supported. Please install @cantoo/pdf-lib.');
       } else {
-        setError(e.message || 'Failed to protect PDF.');
+        setError(e instanceof Error ? e.message || 'Failed to protect PDF.' : 'Failed to protect PDF.');
       }
     } finally {
       setIsProcessing(false);

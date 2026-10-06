@@ -229,7 +229,7 @@ export const Faqs = () => {
                 </p>
 
                 <Link 
-                  href="/contact" 
+                  href="/contacts"
                   className="group inline-flex items-center gap-3"
                 >
                   <span className="relative text-[14px] font-medium text-black pb-1">

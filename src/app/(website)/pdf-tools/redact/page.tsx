@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
-import { redactArea } from '@/lib/pdf-utils';
+import { createBlobFromBytes, redactArea } from '@/lib/pdf-utils';
 
 export default function RedactPage() {
   const [page, setPage] = useState(1);
@@ -18,7 +18,7 @@ export default function RedactPage() {
       description="Permanently black out sensitive regions on any page."
       onProcess={async (files) => {
         const bytes = await redactArea(files[0], [{ page, x, y, width: w, height: h }]);
-        return { blob: new Blob([bytes], { type: 'application/pdf' }), filename: 'redacted.pdf' };
+        return { blob: createBlobFromBytes(bytes, 'application/pdf'), filename: 'redacted.pdf' };
       }}
     >
       {() => (

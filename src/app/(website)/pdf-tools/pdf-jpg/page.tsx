@@ -263,8 +263,8 @@ export default function PdfToJpgPage() {
       }
 
       setImages(converted);
-    } catch (e: any) {
-      setError(e.message || 'Failed to convert PDF. Please try again.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message || 'Failed to convert PDF. Please try again.' : 'Failed to convert PDF. Please try again.');
     } finally {
       setIsProcessing(false);
     }

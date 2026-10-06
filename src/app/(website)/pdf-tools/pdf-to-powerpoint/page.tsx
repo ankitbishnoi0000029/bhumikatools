@@ -11,7 +11,7 @@ import {
   RefreshCw, Info, BarChart3, Maximize2, Search, Grid3x3,
   AlignLeft, AlignCenter, AlignRight, Hash, SplitSquareHorizontal,
   Monitor, Sun, Moon, Sparkle, FileOutput, CheckSquare, Minus,
-  ChevronDown, ChevronUp, RotateCw, List,
+  ChevronDown, ChevronUp, RotateCw, List, type LucideIcon,
 } from 'lucide-react';
 import PptxGenJS from 'pptxgenjs';
 import {
@@ -91,7 +91,7 @@ const THEMES: ThemeConfig[] = [
   },
 ];
 
-const LAYOUTS: { id: LayoutType; label: string; desc: string; icon: any }[] = [
+const LAYOUTS: { id: LayoutType; label: string; desc: string; icon: LucideIcon }[] = [
   { id: 'title-content', label: 'Title + Content', desc: 'Heading with body', icon: Layout },
   { id: 'title-only', label: 'Title Only', desc: 'Just the heading', icon: Type },
   { id: 'two-column', label: 'Two Column', desc: 'Split content', icon: SplitSquareHorizontal },
@@ -370,9 +370,9 @@ export default function PdfToPowerPointPage() {
       setEditedSlides(initial);
       setHistory([initial]);
       setHistoryIndex(0);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to extract. PDF may be scanned.');
+      setError(e instanceof Error ? e.message || 'Failed to extract. PDF may be scanned.' : 'Failed to extract. PDF may be scanned.');
       setFile(null);
     } finally {
       setIsLoading(false);
@@ -712,9 +712,9 @@ export default function PdfToPowerPointPage() {
         const blob = await buildImagesZip();
         setResult({ blob, filename: `${pres.title}.zip` });
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Conversion failed.');
+      setError(e instanceof Error ? e.message || 'Conversion failed.' : 'Conversion failed.');
     } finally {
       setIsProcessing(false);
     }

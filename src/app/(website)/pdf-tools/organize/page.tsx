@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { PDFDocument, degrees } from 'pdf-lib';
 import {
+  createBlobFromBytes,
   getPDFInfo,
   getAllPageThumbnails,
   formatBytes,
@@ -375,14 +376,14 @@ export default function OrganizePDFPage() {
 
     try {
       const bytes = await buildPDF();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blob = createBlobFromBytes(bytes, 'application/pdf');
       const baseName = file.name.replace(/\.pdf$/i, '');
       setResult({
         blob,
         filename: `${baseName}-organized.pdf`,
       });
-    } catch (e: any) {
-      setError(e.message || 'Failed to process PDF. Please try again.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message || 'Failed to process PDF. Please try again.' : 'Failed to process PDF. Please try again.');
     } finally {
       setIsProcessing(false);
     }

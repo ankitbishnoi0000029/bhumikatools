@@ -11,10 +11,10 @@ import {
   ChevronLeft, ChevronRight, Grid3x3, Maximize2, RefreshCw,
   Check, Palette, Hash, Image as ImageIcon, ZoomIn, ZoomOut,
   Files, Copy, LayoutGrid,
-  Save,
+  Save, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument, rgb } from 'pdf-lib';
-import { formatBytes, downloadBlob } from '@/lib/pdf-utils';
+import { createBlobFromBytes, formatBytes, downloadBlob } from '@/lib/pdf-utils';
 
 // ============================================
 // TYPES
@@ -42,7 +42,7 @@ type Orientation = 'portrait' | 'landscape' | 'auto';
 // FILTER CONFIG
 // ============================================
 
-const FILTERS: { id: FilterType; label: string; css: string; icon: any }[] = [
+const FILTERS: { id: FilterType; label: string; css: string; icon: LucideIcon }[] = [
   { id: 'original', label: 'Original', css: 'none', icon: ImageIcon },
   { id: 'magic', label: 'Magic Color', css: 'contrast(130%) saturate(140%) brightness(105%)', icon: Wand2 },
   { id: 'grayscale', label: 'Grayscale', css: 'grayscale(100%) contrast(115%)', icon: Droplet },
@@ -484,14 +484,14 @@ export default function ScanToPdfPage() {
 
     try {
       const bytes = await buildPDF();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blob = createBlobFromBytes(bytes, 'application/pdf');
       setResult({
         blob,
         filename: `scan-${Date.now()}.pdf`,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to create PDF.');
+      setError(e instanceof Error ? e.message || 'Failed to create PDF.' : 'Failed to create PDF.');
     } finally {
       setIsProcessing(false);
     }

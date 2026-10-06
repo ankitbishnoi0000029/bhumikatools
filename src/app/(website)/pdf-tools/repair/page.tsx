@@ -8,10 +8,11 @@ import {
   Download, RefreshCw, Wrench, ArrowUpRight, Eye, Sparkles,
   ShieldCheck, Zap, Activity, FileWarning, AlertTriangle,
   TrendingUp, Gauge, Check, Info, ChevronLeft, ChevronRight,
-  FileSearch, Layers, Cpu, FileCheck, RotateCcw,
+  FileSearch, Layers, Cpu, FileCheck, RotateCcw, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import {
+  createBlobFromBytes,
   getPDFInfo,
   formatBytes,
   downloadBlob,
@@ -43,7 +44,7 @@ interface RepairResult {
 
 type RepairMode = 'auto' | 'aggressive' | 'deep';
 
-const REPAIR_MODES: { id: RepairMode; label: string; desc: string; icon: any; color: string }[] = [
+const REPAIR_MODES: { id: RepairMode; label: string; desc: string; icon: LucideIcon; color: string }[] = [
   { id: 'auto', label: 'Auto', desc: 'Smart fix', icon: Sparkles, color: '#10b981' },
   { id: 'aggressive', label: 'Aggressive', desc: 'Force recover', icon: Zap, color: '#f59e0b' },
   { id: 'deep', label: 'Deep', desc: 'Full rebuild', icon: Cpu, color: '#ef4444' },
@@ -309,7 +310,7 @@ export default function RepairPDFPage() {
 
     try {
       const { bytes, pageCount: repairedPageCount } = await buildRepairedPDF();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blob = createBlobFromBytes(bytes, 'application/pdf');
 
       // Count fixed issues from diagnostics
       const fixedIssues = diagnostics.filter((d) => d.status === 'warning' || d.status === 'failed').length;

@@ -7,10 +7,11 @@ import {
   UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2,
   Download, RefreshCw, Minimize, ArrowUpRight, Eye, Sparkles,
   ChevronLeft, ChevronRight, TrendingDown, Zap, Gauge, Settings2,
-  Image as ImageIcon, Layers, FileDown, Percent, Target,
+  Image as ImageIcon, Layers, FileDown, Percent, Target, type LucideIcon,
 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
 import {
+  createBlobFromBytes,
   getPDFInfo,
   formatBytes,
   downloadBlob,
@@ -42,7 +43,7 @@ interface CompressionResult {
 // PRESETS
 // ============================================
 
-const PRESETS: { id: CompressionPreset; label: string; desc: string; quality: number; scale: number; icon: any; color: string }[] = [
+const PRESETS: { id: CompressionPreset; label: string; desc: string; quality: number; scale: number; icon: LucideIcon; color: string }[] = [
   { id: 'light', label: 'Light', desc: 'Best quality', quality: 0.92, scale: 1.5, icon: ImageIcon, color: '#10b981' },
   { id: 'balanced', label: 'Balanced', desc: 'Good quality', quality: 0.75, scale: 1.2, icon: Gauge, color: '#3b82f6' },
   { id: 'strong', label: 'Strong', desc: 'Smaller size', quality: 0.55, scale: 1.0, icon: Zap, color: '#f59e0b' },
@@ -334,7 +335,7 @@ export default function CompressPage() {
 
     try {
       const bytes = await buildCompressedPDF();
-      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blob = createBlobFromBytes(bytes, 'application/pdf');
       const originalSize = file.size;
       const compressedSize = blob.size;
       const savedBytes = originalSize - compressedSize;
@@ -347,9 +348,9 @@ export default function CompressPage() {
         savedBytes,
         savedPercent,
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message || 'Failed to compress PDF. Please try again.');
+      setError(e instanceof Error ? e.message || 'Failed to compress PDF. Please try again.' : 'Failed to compress PDF. Please try again.');
     } finally {
       setIsProcessing(false);
     }

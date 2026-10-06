@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import ToolShell from '@/components/pdf-tools/tool-shell';
-import { htmlToPDF } from '@/lib/pdf-utils';
+import { createBlobFromBytes, htmlToPDF } from '@/lib/pdf-utils';
 
 export default function HtmlToPdfPage() {
   const [html, setHtml] = useState('<h1>Hello World</h1>\n<p>This is HTML content.</p>');
@@ -14,7 +14,7 @@ export default function HtmlToPdfPage() {
       description="Paste HTML and convert to a clean, printable PDF document."
       onProcess={async () => {
         const bytes = await htmlToPDF(html);
-        return { blob: new Blob([bytes], { type: 'application/pdf' }), filename: 'html-to-pdf.pdf' };
+        return { blob: createBlobFromBytes(bytes, 'application/pdf'), filename: 'html-to-pdf.pdf' };
       }}
     >
       {() => (

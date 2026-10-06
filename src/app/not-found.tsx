@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
@@ -16,7 +22,7 @@ export default function NotFound() {
             Lost?
           </h1>
           <p className="text-[16px] md:text-[18px] leading-[1.7] text-black/60 max-w-lg mx-auto mb-12 font-light">
-            The page you're looking for doesn't exist. But our tools are still here —
+            The page you&apos;re looking for doesn&apos;t exist. But our tools are still here —
             ready to help with your documents.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6">

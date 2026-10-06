@@ -11,26 +11,26 @@ const footerColumns = [
     links: [
       { name: 'Home', href: '/' },
       { name: 'PDF Tools', href: '/pdf-tools' },
-      { name: 'Pricing', href: '/pricing' },
+      { name: 'Free PDF Tools', href: '/pdf-tools' },
       { name: 'Blog', href: '/blog' },
     ],
   },
   {
     label: 'Products',
     links: [
-      { name: 'E-Aadhaar to PVC', href: '/aadhaar-pvc' },
-      { name: 'Merge PDF', href: '/tools/merge' },
-      { name: 'Compress PDF', href: '/tools/compress' },
-      { name: 'PDF to Word', href: '/tools/pdf-word' },
+      { name: 'E-Aadhaar to PVC', href: '/contacts' },
+      { name: 'Merge PDF', href: '/pdf-tools/merge' },
+      { name: 'Compress PDF', href: '/pdf-tools/compress' },
+      { name: 'PDF to Word', href: '/pdf-tools/pdf-word' },
     ],
   },
   {
     label: 'Company',
     links: [
       { name: 'About Us', href: '/about' },
-      { name: 'Contact', href: '/contact' },
-      { name: 'Careers', href: '/careers' },
-      { name: 'Press Kit', href: '/press' },
+      { name: 'Contact', href: '/contacts' },
+      { name: 'Careers', href: '/contacts' },
+      { name: 'Press enquiries', href: '/contacts' },
     ],
   },
 ];

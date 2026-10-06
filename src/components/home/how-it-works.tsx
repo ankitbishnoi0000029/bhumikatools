@@ -149,7 +149,7 @@ export const HowItWorks = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-12 flex justify-center"
         >
-          <Link href="/tools" className="group inline-flex items-center gap-3">
+          <Link href="/pdf-tools" className="group inline-flex items-center gap-3">
             <span className="relative text-[15px] font-medium text-black pb-1">
               Explore all tools
               <span className="absolute left-0 right-0 bottom-0 h-px bg-black group-hover:bg-[#ff6a00] transition-colors" />

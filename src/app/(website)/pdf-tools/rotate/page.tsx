@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import {
   rotatePDF,
+  createBlobFromBytes,
   getPDFInfo,
   getAllPageThumbnails,
   formatBytes,
@@ -232,7 +233,7 @@ export default function RotatePDFPage() {
       const pages = target === 'selected' ? Array.from(selectedPages) : undefined;
       const bytes = await rotatePDF(file, angle, pages);
 
-      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const blob = createBlobFromBytes(bytes, 'application/pdf');
       const suffix = target === 'all'
         ? `all-${angle}deg`
         : `pages-${selectedPages.size}-${angle}deg`;
@@ -241,8 +242,8 @@ export default function RotatePDFPage() {
         blob,
         filename: `rotated-${suffix}.pdf`,
       });
-    } catch (e: any) {
-      setError(e.message || 'Failed to rotate PDF. Please try again.');
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message || 'Failed to rotate PDF. Please try again.' : 'Failed to rotate PDF. Please try again.');
     } finally {
       setIsProcessing(false);
     }

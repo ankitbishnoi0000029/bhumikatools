@@ -9,7 +9,7 @@ const PAGE_URL = `${SITE_URL}/privacy`;
 // ============================================
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — How We Protect Your Data | idcardtools",
+  title: "Privacy Policy — How We Protect Your Data",
   description:
     "Read idcardtools' privacy policy in plain English. 2-hour file auto-deletion, TLS 1.3 encryption, zero tracking, and no data selling. Your documents stay yours — always.",
   keywords: [
@@ -39,15 +39,11 @@ export const metadata: Metadata = {
   classification: "Privacy Policy",
   alternates: {
     canonical: PAGE_URL,
-    languages: {
-      "en-IN": PAGE_URL,
-      "hi-IN": `${PAGE_URL}?lang=hi`,
-    },
+    languages: { "en-IN": PAGE_URL },
   },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    alternateLocale: ["hi_IN"],
     url: PAGE_URL,
     siteName: "idcardtools",
     title: "Privacy Policy — How We Protect Your Data | idcardtools",
@@ -56,7 +52,7 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/og-privacy.png`,
+        url: `${SITE_URL}/demo.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Privacy Policy",
@@ -71,7 +67,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy — idcardtools",
     description:
       "Plain-English privacy policy. 2-hour deletion. Zero tracking. No data selling.",
-    images: [`${SITE_URL}/og-privacy.png`],
+    images: [`${SITE_URL}/demo.png`],
   },
   robots: {
     index: true,
@@ -131,7 +127,7 @@ const privacyPageSchema = {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: `${SITE_URL}/logo.png`,
+      url: `${SITE_URL}/favicon.ico`,
       width: 512,
       height: 512,
     },
@@ -154,7 +150,7 @@ const organizationSchema = {
   url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/logo.png`,
+    url: `${SITE_URL}/favicon.ico`,
     width: 512,
     height: 512,
   },
