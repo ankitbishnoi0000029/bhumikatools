@@ -1,15 +1,35 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Search, ChevronDown, Menu, X, ArrowUpRight, User2, Layers, Scissors, RotateCw, LayoutList, FileText, Crop, Minimize, Wrench, ScanText, FileInput, FileOutput, Presentation, FileSpreadsheet, Image as ImageIcon, FileCode2, Edit3, PenTool, Stamp, Lock, Unlock, EyeOff, ShieldAlert, Brain, Languages, Sparkles, LucideCreditCardReader } from "lucide-react";
+import { Search, ChevronDown, Menu, X, ArrowUpRight, User2, Layers, Scissors, RotateCw, LayoutList, FileText, Crop, Minimize, Wrench, ScanText, FileInput, FileOutput, Presentation, FileSpreadsheet, Image as ImageIcon, FileCode2, Edit3, PenTool, Stamp, Lock, Unlock, EyeOff, ShieldAlert, Brain, Languages, Sparkles, LucideCreditCardReader, ImageDown, ImageUp, Eraser, Smile, Expand, ScanFace, Palette, Scaling, Wand2, Type, UserRound, UserMinus, Trash2, Focus, Plus, Square, Contrast, Grid3x3, LayoutGrid, Film, Circle, Download, Music, Volume2, VolumeX, Captions, Mic, Podcast, Radio, Video, type LucideIcon } from "lucide-react";
+
+type MenuTool = {
+  id: string;
+  title: string;
+  icon: LucideIcon;
+  desc?: string;
+  isNew?: boolean;
+};
+
+type MenuCategory = {
+  name: string;
+  slug: string;
+  group: "pdf" | "image" | "video";
+  desc: string;
+  color: string;
+  tools: MenuTool[];
+};
 
 // --- CATEGORIES WITH TOOLS ---
-const toolsMenu = [
+const toolsMenu: MenuCategory[] = [
+  // ===================== PDF GROUPS =====================
   {
     name: "Organize PDF",
     slug: "organize",
+    group: "pdf",
     desc: "Merge, split, rotate, and rearrange",
     color: "#ff6a00",
     tools: [
@@ -25,6 +45,7 @@ const toolsMenu = [
   {
     name: "Optimize PDF",
     slug: "optimize",
+    group: "pdf",
     desc: "Compress, repair, and OCR",
     color: "#10b981",
     tools: [
@@ -37,12 +58,14 @@ const toolsMenu = [
   {
     name: "Convert PDF",
     slug: "convert",
+    group: "pdf",
     desc: "To and from any format",
     color: "#3b82f6",
     tools: [
       { id: "pdf-word", title: "PDF to Word", icon: FileOutput },
       { id: "pdf-to-powerpoint", title: "PDF to PowerPoint", icon: Presentation },
       { id: "pdf-to-excel", title: "PDF to Excel", icon: FileSpreadsheet },
+      { id: "pdf-to-jpg", title: "PDF to JPG", icon: ImageIcon },
       { id: "word-pdf", title: "Word to PDF", icon: FileText },
       { id: "jpg-pdf", title: "JPG to PDF", icon: ImageIcon },
       { id: "html-pdf", title: "HTML to PDF", icon: FileCode2 },
@@ -52,6 +75,7 @@ const toolsMenu = [
   {
     name: "Edit PDF",
     slug: "edit",
+    group: "pdf",
     desc: "Edit, sign, and annotate",
     color: "#a855f7",
     tools: [
@@ -64,6 +88,7 @@ const toolsMenu = [
   {
     name: "PDF Security",
     slug: "security",
+    group: "pdf",
     desc: "Protect, unlock, and redact",
     color: "#ef4444",
     tools: [
@@ -75,6 +100,7 @@ const toolsMenu = [
   {
     name: "PDF Intelligence",
     slug: "intelligence",
+    group: "pdf",
     desc: "AI-powered tools",
     color: "#ec4899",
     tools: [
@@ -83,13 +109,200 @@ const toolsMenu = [
       { id: "translate", title: "Translate PDF", icon: Languages, isNew: true },
     ],
   },
+
+  // ===================== IMAGE GROUPS =====================
+  {
+    name: "AI Image",
+    slug: "image-ai",
+    group: "image",
+    desc: "Generate, enhance, and remove with AI",
+    color: "#8b5cf6",
+    tools: [
+      { id: "bg-remove", title: "Remove Background", icon: Eraser, desc: "Instantly detect and cut out backgrounds.", isNew: true },
+      { id: "upscale-image", title: "Upscale Image", icon: Expand, desc: "Enlarge images without quality loss.", isNew: true },
+      { id: "colorize-photo", title: "Colorize Photo", icon: Palette, desc: "Add colour to black & white photos." },
+    ],
+  },
+  {
+    name: "Convert Image",
+    slug: "image-convert",
+    group: "image",
+    desc: "Convert to and from any image format",
+    color: "#3b82f6",
+    tools: [
+      { id: "convert-to-jpg", title: "Convert to JPG", icon: ImageDown, desc: "PNG, GIF, TIF, PSD, SVG, WEBP, HEIC, RAW → JPG." },
+      { id: "convert-from-jpg", title: "Convert from JPG", icon: ImageUp, desc: "JPG → PNG, GIF, or animated GIF." },
+      { id: "heic-to-jpg", title: "HEIC to JPG", icon: ImageDown, desc: "Convert iPhone HEIC images to JPG." },
+      { id: "heic-to-png", title: "HEIC to PNG", icon: ImageUp, desc: "Convert iPhone HEIC images to PNG." },
+      { id: "webp-to-jpg", title: "WebP to JPG", icon: ImageDown, desc: "Upload WebP and download as JPG." },
+      { id: "webp-to-png", title: "WEBP to PNG", icon: ImageUp, desc: "Convert a WEBP image to PNG online." },
+      { id: "png-to-jpg", title: "PNG to JPG", icon: ImageDown, desc: "Convert a PNG image to JPG online." },
+      { id: "jpg-to-png", title: "JPG to PNG", icon: ImageUp, desc: "Convert a JPG image to PNG online." },
+      { id: "png-to-webp", title: "PNG to WEBP", icon: ImageUp, desc: "Convert a PNG image to WEBP online." },
+      { id: "jpg-to-webp", title: "JPG to WEBP", icon: ImageUp, desc: "Convert a JPG image to WEBP online." },
+      { id: "png-to-svg", title: "PNG to SVG", icon: FileCode2, desc: "Convert a PNG image to SVG online." },
+      { id: "jpg-to-svg", title: "JPG to SVG", icon: FileCode2, desc: "Convert a JPG image to SVG online." },
+      { id: "svg-to-png", title: "SVG to PNG", icon: ImageUp, desc: "Convert an SVG image to PNG free." },
+      { id: "jpg-to-gif", title: "JPG to GIF", icon: ImageUp, desc: "Convert a JPG image to GIF online." },
+    ],
+  },
+  {
+    name: "Optimize Image",
+    slug: "image-optimize",
+    group: "image",
+    desc: "Compress, resize, crop, and rotate",
+    color: "#10b981",
+    tools: [
+      { id: "compress-image", title: "Compress IMAGE", icon: Minimize, desc: "Compress JPG, PNG, SVG, and GIFs while saving space." },
+      { id: "resize-image", title: "Resize IMAGE", icon: Scaling, desc: "Resize by percent or pixel." },
+      { id: "crop-image", title: "Crop IMAGE", icon: Crop, desc: "Crop with pixel or visual editor." },
+      { id: "rotate-image", title: "Rotate IMAGE", icon: RotateCw, desc: "Rotate many JPG, PNG or GIF at once." },
+      { id: "pixelate-image", title: "Pixelate Image", icon: Grid3x3, desc: "Pixelate any part of your photo." },
+      { id: "html-to-image", title: "HTML to IMAGE", icon: FileCode2, desc: "Convert webpages in HTML to JPG or SVG." },
+    ],
+  },
+  {
+    name: "Edit Image",
+    slug: "image-edit",
+    group: "image",
+    desc: "Edit, style, and compose images",
+    color: "#f59e0b",
+    tools: [
+      { id: "photo-editor", title: "Photo Editor", icon: Palette, desc: "Add text, effects, frames or stickers." },
+      { id: "combine-images", title: "Combine Images", icon: Layers, desc: "Combine multiple images online." },
+      { id: "image-splitter", title: "Image Splitter", icon: Grid3x3, desc: "Cut an image into pieces." },
+      { id: "make-round-image", title: "Make Round Image", icon: Circle, desc: "Make any image round in one click." },
+      { id: "profile-photo-maker", title: "Profile Photo Maker", icon: UserRound, desc: "Create a round profile photo." },
+      { id: "watermark-image", title: "Watermark IMAGE", icon: Stamp, desc: "Stamp text/image with position control." },
+    ],
+  },
+
+  {
+    name: "Convert Video",
+    slug: "video-convert",
+    group: "video",
+    desc: "Convert between video formats",
+    color: "#3b82f6",
+    tools: [
+      { id: "mov-to-mp4", title: "MOV to MP4", icon: Video, desc: "Convert MOV to MP4." },
+      { id: "mp4-to-avi", title: "MP4 to AVI", icon: Video, desc: "Convert MP4 to AVI." },
+      { id: "webm-to-mp4", title: "WEBM to MP4", icon: Video, desc: "Convert WEBM to MP4." },
+      { id: "mkv-to-mp4", title: "MKV to MP4", icon: Video, desc: "Convert MKV to MP4." },
+      { id: "avi-to-mp4", title: "AVI to MP4", icon: Video, desc: "Convert AVI to MP4." },
+      { id: "mp4-to-mov", title: "MP4 to MOV", icon: Video, desc: "Convert MP4 to MOV." },
+      { id: "mp4-to-webm", title: "MP4 to WEBM", icon: Video, desc: "Convert MP4 to WEBM." },
+      { id: "mov-to-avi", title: "MOV to AVI", icon: Video, desc: "Convert MOV to AVI." },
+      { id: "avi-to-mov", title: "AVI to MOV", icon: Video, desc: "Convert AVI to MOV." },
+      { id: "mkv-to-mov", title: "MKV to MOV", icon: Video, desc: "Convert MKV to MOV." },
+      { id: "webm-to-mov", title: "WEBM to MOV", icon: Video, desc: "Convert WEBM to MOV." },
+      { id: "avi-to-mkv", title: "AVI to MKV", icon: Video, desc: "Convert AVI to MKV." },
+      { id: "mkv-to-avi", title: "MKV to AVI", icon: Video, desc: "Convert MKV to AVI." },
+      { id: "m4a-to-mp4", title: "M4A to MP4", icon: Video, desc: "Convert M4A to MP4." },
+      { id: "aac-to-mp4", title: "AAC to MP4", icon: Video, desc: "Convert AAC to MP4." },
+    ],
+  },
+  {
+    name: "Video to Audio",
+    slug: "video-audio",
+    group: "video",
+    desc: "Extract or convert to audio formats",
+    color: "#10b981",
+    tools: [
+      { id: "mp4-to-mp3", title: "MP4 to MP3", icon: Music, desc: "Convert MP4 to MP3 audio." },
+      { id: "extract-audio", title: "Extract Audio from Video", icon: Music, desc: "Extract audio from your video." },
+      { id: "mov-to-mp3", title: "MOV to MP3", icon: Music, desc: "Convert MOV to MP3 audio." },
+      { id: "mp4-to-wav", title: "MP4 to WAV", icon: Music, desc: "Convert MP4 to WAV audio." },
+      { id: "mkv-to-mp3", title: "MKV to MP3", icon: Music, desc: "Convert MKV to MP3 audio." },
+      { id: "webm-to-mp3", title: "WEBM to MP3", icon: Music, desc: "Convert WEBM to MP3." },
+      { id: "mov-to-wav", title: "MOV to WAV", icon: Music, desc: "Convert MOV to WAV audio." },
+      { id: "avi-to-mp3", title: "AVI to MP3", icon: Music, desc: "Convert AVI to MP3 audio." },
+      { id: "m4a-to-mp3", title: "M4A to MP3", icon: Music, desc: "Convert M4A to MP3 audio." },
+      { id: "m4a-to-wav", title: "M4A to WAV", icon: Music, desc: "Convert M4A to WAV audio." },
+      { id: "ogg-to-mp3", title: "OGG to MP3", icon: Music, desc: "Convert OGG to MP3 audio." },
+      { id: "ogg-to-wav", title: "OGG to WAV", icon: Music, desc: "Convert OGG to WAV." },
+      { id: "mp4-to-ogg", title: "MP4 to OGG", icon: Music, desc: "Convert MP4 to OGG audio." },
+      { id: "aac-to-mp3", title: "AAC to MP3", icon: Music, desc: "Convert AAC to MP3 audio." },
+      { id: "aac-to-wav", title: "AAC to WAV", icon: Music, desc: "Convert AAC to WAV audio." },
+      { id: "aac-to-m4r", title: "AAC to M4R", icon: Music, desc: "Convert AAC to M4R audio." },
+      { id: "aac-to-flac", title: "AAC to FLAC", icon: Music, desc: "Convert AAC to FLAC audio." },
+    ],
+  },
+  {
+    name: "Video to GIF",
+    slug: "video-gif",
+    group: "video",
+    desc: "Convert between video and GIF",
+    color: "#a855f7",
+    tools: [
+      { id: "video-to-gif", title: "Video to Gif", icon: Film, desc: "Upload MP4 and convert to animated GIF." },
+      { id: "mp4-to-gif", title: "MP4 to GIF", icon: Film, desc: "Convert MP4 to GIF." },
+      { id: "mov-to-gif", title: "MOV to GIF", icon: Film, desc: "Convert MOV to GIF." },
+      { id: "mkv-to-gif", title: "MKV to GIF", icon: Film, desc: "Convert MKV to GIF." },
+      { id: "avi-to-gif", title: "AVI to GIF", icon: Film, desc: "Convert AVI to GIF." },
+      { id: "gif-to-mov", title: "GIF to MOV", icon: Film, desc: "Convert animated GIF to MOV online." },
+      { id: "gif-to-webm", title: "GIF to WEBM", icon: Film, desc: "Convert animated GIF to WEBM online." },
+      { id: "video-to-webp", title: "Video to WebP", icon: ImageIcon, desc: "Upload a video file to convert to WebP." },
+    ],
+  },
+  {
+    name: "Edit & Compress",
+    slug: "video-edit",
+    group: "video",
+    desc: "Trim, resize, mute, and compress video",
+    color: "#f59e0b",
+    tools: [
+      { id: "trim-video", title: "Trim Video", icon: Scissors, desc: "Select start/stop and download trimmed video." },
+      { id: "resize-video", title: "Resize Video", icon: Scaling, desc: "Resize video resolution, maintain aspect ratio." },
+      { id: "mute-video", title: "Mute Video", icon: VolumeX, desc: "Download the video with no sound." },
+      { id: "add-subtitles", title: "Add subtitles", icon: Captions, desc: "Add subtitles to video." },
+      { id: "compress-video", title: "Compress Video", icon: Minimize, desc: "Lessen the file size of a video file." },
+      { id: "compress-mov", title: "Compress MOV", icon: Minimize, desc: "Compress MOV video." },
+      { id: "compress-avi", title: "Compress AVI", icon: Minimize, desc: "Compress AVI video." },
+      { id: "compress-mkv", title: "Compress MKV", icon: Minimize, desc: "Compress MKV video." },
+    ],
+  },
+  {
+    name: "Transcribe & Text",
+    slug: "video-transcribe",
+    group: "video",
+    desc: "Turn video and audio into text",
+    color: "#ec4899",
+    tools: [
+      { id: "youtube-to-text", title: "Youtube to Text", icon: Mic, desc: "Convert video to text.", isNew: true },
+      { id: "video-to-text", title: "Video to Text", icon: Type, desc: "Transcribe video to text.", isNew: true },
+      { id: "audio-to-text", title: "Audio to Text", icon: Mic, desc: "Transcribe audio to text.", isNew: true },
+      { id: "youtube-transcript", title: "YouTube Transcript Generator", icon: Radio, desc: "Transcribe YouTube video." },
+      { id: "transcribe-podcast", title: "Transcribe Podcast", icon: Podcast, desc: "Transcribe podcast to text." },
+      { id: "summarize-podcast", title: "Summarize Podcast", icon: Brain, desc: "Summarize podcast content." },
+    ],
+  },
 ];
 
+// --- HELPERS ---
+const getToolHref = (tool: { id: string }, category: { slug: string; group: string }) => {
+  if (category.group === "image") return `/image-tools/${tool.id}`;
+  if (category.group === "video") return `/video-tools/${tool.id}`;
+  if (tool.id === "crop" || tool.id === "ai-summarizer") return "/pdf-tools";
+  return `/pdf-tools/${tool.id}`;
+};
+
+const getCategoryHref = (category: { slug: string; group: string }) => {
+  if (category.group === "image") return `/image-tools?category=${category.slug}`;
+  if (category.group === "video") return `/video-tools?category=${category.slug}`;
+  return `/pdf-tools?category=${category.slug}`;
+};
+
 export const Header = () => {
+  const pathname = usePathname();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showToolsMenu, setShowToolsMenu] = useState(false);
-  const [activeToolsCategory, setActiveToolsCategory] = useState(0);
+  const [activeMenuGroup, setActiveMenuGroup] = useState<"pdf" | "image" | "video">("pdf");
+  const [activeToolsCategory, setActiveToolsCategory] = useState<string>("organize");
+
+  const headerRef = useRef<HTMLElement | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { scrollY } = useScroll();
   const headerPadding = useTransform(scrollY, [0, 100], ["20px", "14px"]);
@@ -101,25 +314,111 @@ export const Header = () => {
     return () => unsubscribe();
   }, [scrollY]);
 
+  /* ------------------------------------------------------------------ */
+  /* HOVER HELPERS                                                       */
+  /* ------------------------------------------------------------------ */
+  const clearCloseTimer = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+
+  const openToolsMenu = (group: "pdf" | "image" | "video", category: string) => {
+    clearCloseTimer();
+    setActiveMenuGroup(group);
+    setActiveToolsCategory(category);
+    setShowToolsMenu(true);
+  };
+
+  const closeToolsMenu = (delay = 0) => {
+    clearCloseTimer();
+    if (delay <= 0) {
+      setShowToolsMenu(false);
+      return;
+    }
+    closeTimer.current = setTimeout(() => {
+      setShowToolsMenu(false);
+      closeTimer.current = null;
+    }, delay);
+  };
+
+  // cleanup timer on unmount
+  useEffect(() => {
+    return () => clearCloseTimer();
+  }, []);
+
+  // close dropdown when clicking anywhere outside the header
+  useEffect(() => {
+    const handleDocClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setShowToolsMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleDocClick);
+    return () => document.removeEventListener("mousedown", handleDocClick);
+  }, []);
+
+  // close everything on route change
+  useEffect(() => {
+    setShowToolsMenu(false);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  /* ------------------------------------------------------------------ */
+  /* NAV ITEMS + ACTIVE STATE (pathname based)                           */
+  /* ------------------------------------------------------------------ */
   const navItems = [
-    { name: "Home", href: "/", active: true },
-    { name: "PDF Tools", href: "/pdf-tools", dropdown: true },
+    { name: "Home", href: "/" },
+    {
+      name: "PDF Tools",
+      href: "/pdf-tools",
+      dropdown: true,
+      group: "pdf" as const,
+      defaultCategory: "organize",
+    },
+    {
+      name: "Image Tools",
+      href: "/image-tools",
+      dropdown: true,
+      group: "image" as const,
+      defaultCategory: "image-ai",
+    },
+    // {
+    //   name: "Video Tools",
+    //   href: "/video-tools",
+    //   dropdown: true,
+    //   group: "video" as const,
+    //   defaultCategory: "video-convert",
+    // },
     { name: "Contacts", href: "/contacts" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
-  ];
+  ].map((item) => {
+    const active = item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(`${item.href}/`) || pathname.startsWith(`${item.href}?`);
 
-  const activeCat = toolsMenu[activeToolsCategory];
+    return { ...item, active };
+  });
+
+  // Filter categories by active group
+  const visibleCategories = toolsMenu.filter((cat) => cat.group === activeMenuGroup);
+
+  const activeCat = toolsMenu.find((c) => c.slug === activeToolsCategory) ?? visibleCategories[0];
+
+  const isMediaGroup = activeMenuGroup === "image" || activeMenuGroup === "video";
+
+  const groupLabel = activeMenuGroup === "image" ? "Image Categories" : activeMenuGroup === "video" ? "Video Categories" : "PDF Categories";
 
   return (
     <>
       <motion.header
+        ref={headerRef}
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
         style={{ paddingTop: headerPadding, paddingBottom: headerPadding }}
         className="fixed top-0 left-0 w-full z-50 px-6 md:px-8 transition-all duration-500"
-        onMouseLeave={() => setShowToolsMenu(false)}
+        onMouseLeave={() => closeToolsMenu(120)}
       >
         {/* Scroll-based background */}
         <motion.div
@@ -134,6 +433,7 @@ export const Header = () => {
           <Link
             href="/"
             className="group flex items-center gap-3"
+            onMouseEnter={() => closeToolsMenu(0)}
           >
             <div className="relative w-9 h-9 flex items-center justify-center">
               <svg
@@ -162,35 +462,47 @@ export const Header = () => {
 
           {/* ================= CENTER: NAVIGATION ================= */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <div
-                key={item.name}
-                className="relative"
-                onMouseEnter={() => {
-                  if (item.dropdown) setShowToolsMenu(true);
-                  else setShowToolsMenu(false);
-                }}
-              >
-                <Link
-                  href={item.href}
-                  className={`relative flex items-center gap-1 text-[13px] font-medium tracking-tight transition-colors pb-1 ${item.active ? "text-black" : "text-black/55 hover:text-black"}`}
+            {navItems.map((item) => {
+              const isDropdownOpen = showToolsMenu && item.dropdown && item.group === activeMenuGroup;
+
+              return (
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => {
+                    if (item.dropdown && item.group) {
+                      openToolsMenu(item.group, item.defaultCategory!);
+                    } else {
+                      closeToolsMenu(0);
+                    }
+                  }}
                 >
-                  {item.name}
-                  {item.dropdown && (
-                    <ChevronDown
-                      size={12}
-                      className={`mt-0.5 transition-all duration-300 ${showToolsMenu ? "rotate-180 opacity-100 text-[#ff6a00]" : "opacity-50"}`}
-                    />
-                  )}
-                  {item.active && <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#ff6a00]" />}
-                  {!item.active && <span className={`absolute -bottom-0.5 left-0 right-0 h-px bg-black/40 origin-left transition-transform duration-300 ease-out ${showToolsMenu && item.dropdown ? "scale-x-100 bg-[#ff6a00]" : "scale-x-0 group-hover:scale-x-100"}`} />}
-                </Link>
-              </div>
-            ))}
+                  <Link
+                    href={item.href}
+                    onClick={() => closeToolsMenu(0)}
+                    className={`group relative flex items-center gap-1 text-[13px] font-medium tracking-tight transition-colors pb-1 ${item.active ? "text-black" : "text-black/55 hover:text-black"}`}
+                  >
+                    {item.name}
+                    {item.dropdown && (
+                      <ChevronDown
+                        size={12}
+                        className={`mt-0.5 transition-all duration-300 ${isDropdownOpen ? "rotate-180 opacity-100 text-[#ff6a00]" : "opacity-50"}`}
+                      />
+                    )}
+
+                    {/* single underline: active OR dropdown-open OR hover */}
+                    <span className={`absolute -bottom-0.5 left-0 right-0 h-px origin-left transition-transform duration-300 ease-out ${item.active || isDropdownOpen ? "scale-x-100 bg-[#ff6a00]" : "scale-x-0 bg-black/40 group-hover:scale-x-100"}`} />
+                  </Link>
+                </div>
+              );
+            })}
           </nav>
 
           {/* ================= RIGHT: ACTIONS ================= */}
-          <div className="flex items-center gap-3">
+          <div
+            className="flex items-center gap-3"
+            onMouseEnter={() => closeToolsMenu(0)}
+          >
             <button className="hidden sm:flex w-9 h-9 items-center justify-center rounded-full border border-black/[0.12] hover:border-black hover:bg-black hover:text-white text-black transition-all duration-300 group">
               <Search
                 size={14}
@@ -240,6 +552,7 @@ export const Header = () => {
           </div>
         </div>
 
+        {/* ================= MEGA DROPDOWN MENU ================= */}
         <AnimatePresence>
           {showToolsMenu && (
             <motion.div
@@ -248,9 +561,18 @@ export const Header = () => {
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
               className="hidden lg:block absolute left-0 right-0 top-full"
-              onMouseEnter={() => setShowToolsMenu(true)}
             >
-              <div className="max-w-[1400px] mx-auto px-8 pt-4">
+              {/*
+                This wrapper is the actual hover zone.
+                Leaving it (side / bottom / anywhere) => close after a small delay.
+                Re-entering it (or the nav item) => cancel the pending close.
+              */}
+              <div
+                className="max-w-[1400px] mx-auto px-8 pt-4"
+                onMouseEnter={clearCloseTimer}
+                onMouseLeave={() => closeToolsMenu(120)}
+                onClick={() => closeToolsMenu(0)}
+              >
                 <motion.div
                   initial={{ scale: 0.98, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -267,42 +589,47 @@ export const Header = () => {
                         transition={{ delay: 0.05 }}
                         className="px-6 pb-3 mb-1 border-b border-black/[0.06]"
                       >
-                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">Categories</div>
+                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">{groupLabel}</div>
                       </motion.div>
 
-                      {toolsMenu.map((cat, i) => {
-                        const isActive = activeToolsCategory === i;
+                      {visibleCategories.map((cat, i) => {
+                        const isActive = activeCat.slug === cat.slug;
                         return (
                           <motion.div
-                            key={cat.slug}
+                            key={`${activeMenuGroup}-${cat.slug}`}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                             transition={{
-                              delay: 0.08 + i * 0.05,
+                              delay: 0.08 + i * 0.04,
                               duration: 0.4,
                               ease: [0.22, 1, 0.36, 1] as const,
                             }}
-                            onMouseEnter={() => setActiveToolsCategory(i)}
+                            onMouseEnter={() => setActiveToolsCategory(cat.slug)}
                             className={`relative px-6 py-3 cursor-pointer transition-all duration-300 ${isActive ? "bg-[#f4f1ea]" : "hover:bg-black/[0.02]"}`}
                           >
-                            {/* Active left bar */}
                             {isActive && (
                               <motion.div
-                                layoutId="activeCategoryBar"
+                                layoutId={`activeCategoryBar-${activeMenuGroup}`}
                                 className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#ff6a00]"
-                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                transition={{
+                                  type: "spring",
+                                  stiffness: 400,
+                                  damping: 30,
+                                }}
                               />
                             )}
 
                             <div className="flex items-start gap-3">
-                              {/* Dot with pulse effect on active */}
                               <motion.div
                                 animate={{
                                   scale: isActive ? 1.6 : 1,
                                   boxShadow: isActive ? `0 0 0 4px ${cat.color}20, 0 0 12px ${cat.color}60` : "0 0 0 0px transparent, 0 0 0px transparent",
                                 }}
-                                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
+                                transition={{
+                                  duration: 0.35,
+                                  ease: [0.22, 1, 0.36, 1] as const,
+                                }}
                                 className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
                                 style={{ backgroundColor: cat.color }}
                               />
@@ -316,12 +643,13 @@ export const Header = () => {
                                     }}
                                     transition={{ duration: 0.3 }}
                                     className="text-[14px]"
-                                    style={{ fontFamily: isActive ? "Georgia, serif" : "inherit" }}
+                                    style={{
+                                      fontFamily: isActive ? "Georgia, serif" : "inherit",
+                                    }}
                                   >
                                     {cat.name}
                                   </motion.span>
 
-                                  {/* Count badge with animated bg */}
                                   <motion.span
                                     animate={{
                                       backgroundColor: isActive ? `${cat.color}15` : "rgba(0,0,0,0)",
@@ -353,37 +681,45 @@ export const Header = () => {
 
                     {/* ==================== RIGHT: TOOLS OF ACTIVE CATEGORY ==================== */}
                     <div className="col-span-8 p-6 relative overflow-hidden">
-                      {/* Animated background aura (changes color with category) */}
                       <motion.div
-                        key={`aura-${activeToolsCategory}`}
+                        key={`aura-${activeCat.slug}`}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 0.4, scale: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+                        transition={{
+                          duration: 0.6,
+                          ease: [0.22, 1, 0.36, 1] as const,
+                        }}
                         className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl pointer-events-none"
                         style={{ backgroundColor: activeCat.color }}
                       />
 
-                      {/* Header — animated on category change */}
+                      {/* Header */}
                       <motion.div
-                        key={`header-${activeToolsCategory}`}
+                        key={`header-${activeCat.slug}`}
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
+                        transition={{
+                          duration: 0.35,
+                          ease: [0.22, 1, 0.36, 1] as const,
+                        }}
                         className="relative flex items-center justify-between mb-5 pb-4 border-b border-black/[0.06]"
                       >
                         <div className="flex items-center gap-3">
-                          {/* Big colored dot with ping effect */}
                           <div className="relative">
                             <div
                               className="w-2 h-2 rounded-full relative z-10"
                               style={{ backgroundColor: activeCat.color }}
                             />
                             <motion.div
-                              key={`ping-${activeToolsCategory}`}
+                              key={`ping-${activeCat.slug}`}
                               initial={{ scale: 0.8, opacity: 0.8 }}
                               animate={{ scale: 2.5, opacity: 0 }}
-                              transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                              transition={{
+                                duration: 1.2,
+                                repeat: Infinity,
+                                ease: "easeOut",
+                              }}
                               className="absolute inset-0 rounded-full"
                               style={{ backgroundColor: activeCat.color }}
                             />
@@ -398,7 +734,7 @@ export const Header = () => {
                           <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40">· {activeCat.tools.length} tools</span>
                         </div>
                         <Link
-                          href={`/pdf-tools?category=${activeCat.slug}`}
+                          href={getCategoryHref(activeCat)}
                           className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black/50 hover:text-[#ff6a00] transition-colors"
                         >
                           View all
@@ -409,11 +745,11 @@ export const Header = () => {
                         </Link>
                       </motion.div>
 
-                      {/* Tools grid — staggered entry */}
+                      {/* Tools grid */}
                       <div className="relative">
                         <AnimatePresence mode="wait">
                           <motion.div
-                            key={activeToolsCategory}
+                            key={activeCat.slug}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
@@ -422,16 +758,17 @@ export const Header = () => {
                               visible: {
                                 opacity: 1,
                                 transition: {
-                                  staggerChildren: 0.04,
+                                  staggerChildren: 0.03,
                                   delayChildren: 0.05,
                                 },
                               },
                               exit: { opacity: 0 },
                             }}
-                            className="grid grid-cols-2 gap-1"
+                            className={`grid gap-1 pr-1 ${isMediaGroup ? "grid-cols-1 md:grid-cols-2 max-h-[58vh] overflow-y-auto image-tools-scroll" : "grid-cols-2"}`}
                           >
-                            {activeCat.tools.map((tool, idx) => {
+                            {activeCat.tools.map((tool) => {
                               const Icon = tool.icon;
+                              const hasDesc = "desc" in tool && tool.desc;
                               return (
                                 <motion.div
                                   key={tool.id}
@@ -442,7 +779,7 @@ export const Header = () => {
                                       y: 0,
                                       scale: 1,
                                       transition: {
-                                        duration: 0.4,
+                                        duration: 0.35,
                                         ease: [0.22, 1, 0.36, 1] as const,
                                       },
                                     },
@@ -454,14 +791,10 @@ export const Header = () => {
                                   }}
                                 >
                                   <Link
-                                    href={
-                                      tool.id === "crop" || tool.id === "ai-summarizer"
-                                        ? "/pdf-tools"
-                                        : `/pdf-tools/${tool.id}`
-                                    }
-                                    className="group/tool flex items-center gap-3 p-3 rounded-[12px] hover:bg-white transition-all duration-300 relative overflow-hidden"
+                                    href={getToolHref(tool, activeCat)}
+                                    title={hasDesc ? tool.desc : tool.title}
+                                    className={`group/tool flex ${hasDesc ? "items-start" : "items-center"} gap-3 p-3 rounded-[12px] hover:bg-white transition-all duration-300 relative overflow-hidden`}
                                   >
-                                    {/* Slide-in accent on hover */}
                                     <motion.div
                                       initial={false}
                                       className="absolute inset-0 rounded-[12px] opacity-0 group-hover/tool:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -470,14 +803,14 @@ export const Header = () => {
                                       }}
                                     />
 
-                                    {/* Icon box with rotate on hover */}
                                     <motion.div
                                       whileHover={{ rotate: -6, scale: 1.05 }}
-                                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                                      className="relative z-10 w-9 h-9 rounded-[10px] bg-white group-hover/tool:bg-[#ff6a00] flex items-center justify-center transition-all duration-300 shrink-0"
-                                      style={{
-                                        boxShadow: `0 0 0 0px ${activeCat.color}40`,
+                                      transition={{
+                                        type: "spring",
+                                        stiffness: 400,
+                                        damping: 20,
                                       }}
+                                      className="relative z-10 w-9 h-9 rounded-[10px] bg-white group-hover/tool:bg-[#ff6a00] flex items-center justify-center transition-all duration-300 shrink-0"
                                     >
                                       <Icon
                                         size={15}
@@ -489,7 +822,7 @@ export const Header = () => {
                                     <div className="relative z-10 flex-1 min-w-0">
                                       <div className="flex items-center gap-2">
                                         <span className="text-[13px] text-black group-hover/tool:text-[#ff6a00] transition-colors truncate">{tool.title}</span>
-                                        {tool.isNew && (
+                                        {"isNew" in tool && tool.isNew && (
                                           <motion.span
                                             animate={{
                                               rotate: [0, 8, -8, 0],
@@ -509,13 +842,13 @@ export const Header = () => {
                                           </motion.span>
                                         )}
                                       </div>
+                                      {hasDesc && <p className="text-[10.5px] leading-tight text-black/45 group-hover/tool:text-black/65 transition-colors mt-0.5 line-clamp-2">{tool.desc}</p>}
                                     </div>
 
-                                    {/* Arrow slides in from right on hover */}
                                     <motion.div
                                       initial={{ opacity: 0, x: -4 }}
                                       whileHover={{ opacity: 1, x: 0 }}
-                                      className="relative z-10 opacity-0 group-hover/tool:opacity-100 transition-opacity duration-300 shrink-0"
+                                      className={`relative z-10 opacity-0 group-hover/tool:opacity-100 transition-opacity duration-300 shrink-0 ${hasDesc ? "mt-1" : ""}`}
                                     >
                                       <ArrowUpRight
                                         size={12}
@@ -530,24 +863,27 @@ export const Header = () => {
                         </AnimatePresence>
                       </div>
 
-                      {/* Progress indicator — how many tools visible */}
+                      {/* Progress indicator */}
                       <motion.div
-                        key={`progress-${activeToolsCategory}`}
+                        key={`progress-${activeCat.slug}`}
                         initial={{ scaleX: 0, opacity: 0 }}
                         animate={{ scaleX: 1, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+                        transition={{
+                          duration: 0.6,
+                          ease: [0.22, 1, 0.36, 1] as const,
+                        }}
                         className="relative mt-4 pt-4 border-t border-black/[0.06] flex items-center justify-between"
                       >
                         <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40">
                           {activeCat.tools.length} tools in {activeCat.name}
                         </span>
                         <div className="flex items-center gap-1.5">
-                          {toolsMenu.map((_, i) => (
+                          {visibleCategories.map((cat) => (
                             <motion.div
-                              key={i}
+                              key={cat.slug}
                               animate={{
-                                width: i === activeToolsCategory ? 16 : 6,
-                                backgroundColor: i === activeToolsCategory ? activeCat.color : "rgba(0,0,0,0.15)",
+                                width: cat.slug === activeCat.slug ? 16 : 6,
+                                backgroundColor: cat.slug === activeCat.slug ? activeCat.color : "rgba(0,0,0,0.15)",
                               }}
                               transition={{ duration: 0.3 }}
                               className="h-1 rounded-full"
@@ -567,9 +903,7 @@ export const Header = () => {
                       className="flex items-center gap-3"
                     >
                       <motion.div
-                        animate={{
-                          rotate: [0, 360],
-                        }}
+                        animate={{ rotate: [0, 360] }}
                         transition={{
                           duration: 8,
                           repeat: Infinity,
@@ -583,7 +917,7 @@ export const Header = () => {
                         />
                       </motion.div>
                       <span className="text-[11px] text-black/60">
-                        <span className="font-medium text-black">New:</span> AI Summarizer can now handle 500-page PDFs
+                        <span className="font-medium text-black">New:</span> {activeMenuGroup === "video" ? "Youtube to Text, Video to Text & Audio to Text ab live hain" : activeMenuGroup === "image" ? "Image Tools ab 5 categories me organized hain" : "PDF to JPG and AI Summarizer now available"}
                       </span>
                     </motion.div>
                     <motion.div
@@ -592,7 +926,7 @@ export const Header = () => {
                       transition={{ delay: 0.45, duration: 0.5 }}
                     >
                       <Link
-                        href="/pdf-tools"
+                        href={activeMenuGroup === "video" ? "/video-tools" : activeMenuGroup === "image" ? "/image-tools" : "/pdf-tools"}
                         className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black hover:text-[#ff6a00] transition-colors"
                       >
                         Try it
@@ -608,179 +942,27 @@ export const Header = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        {/* ================= MEGA DROPDOWN MENU ================= */}
-        <AnimatePresence>
-          {showToolsMenu && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-              className="hidden lg:block absolute left-0 right-0 top-full"
-              onMouseEnter={() => setShowToolsMenu(true)}
-            >
-              <div className="max-w-[1400px] mx-auto px-8 pt-4">
-                <div className="bg-[#f4f1ea] border border-black/[0.08] rounded-[22px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] overflow-hidden">
-                  <div className="grid grid-cols-12">
-                    {/* LEFT: CATEGORY LIST */}
-                    <div className="col-span-4 bg-white border-r border-black/[0.06] py-4">
-                      <div className="px-6 pb-3 mb-1 border-b border-black/[0.06]">
-                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">Categories</div>
-                      </div>
-
-                      {toolsMenu.map((cat, i) => {
-                        const isActive = activeToolsCategory === i;
-                        return (
-                          <div
-                            key={cat.slug}
-                            onMouseEnter={() => setActiveToolsCategory(i)}
-                            className={`relative px-6 py-3 cursor-pointer transition-colors duration-200 ${isActive ? "bg-[#f4f1ea]" : "hover:bg-black/[0.02]"}`}
-                          >
-                            {/* Active indicator */}
-                            {isActive && (
-                              <motion.div
-                                layoutId="activeCategory"
-                                className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#ff6a00]"
-                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                              />
-                            )}
-
-                            <div className="flex items-start gap-3">
-                              <div
-                                className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 transition-transform duration-300"
-                                style={{
-                                  backgroundColor: cat.color,
-                                  transform: isActive ? "scale(1.5)" : "scale(1)",
-                                }}
-                              />
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between">
-                                  <span
-                                    className={`text-[14px] transition-colors ${isActive ? "text-[#ff6a00]" : "text-black"}`}
-                                    style={{ fontFamily: isActive ? "Georgia, serif" : "inherit" }}
-                                  >
-                                    {cat.name}
-                                  </span>
-                                  <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/30">{String(cat.tools.length).padStart(2, "0")}</span>
-                                </div>
-                                <p className="text-[11px] text-black/45 mt-0.5 truncate">{cat.desc}</p>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* RIGHT: TOOLS OF ACTIVE CATEGORY */}
-                    <div className="col-span-8 p-6">
-                      <div className="flex items-center justify-between mb-5 pb-4 border-b border-black/[0.06]">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className="w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: activeCat.color }}
-                          />
-                          <span
-                            className="text-[15px] text-black"
-                            style={{ fontFamily: "Georgia, serif" }}
-                          >
-                            {activeCat.name}
-                          </span>
-                          <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40">· {activeCat.tools.length} tools</span>
-                        </div>
-                        <Link
-                          href={`/pdf-tools?category=${activeCat.slug}`}
-                          className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black/50 hover:text-[#ff6a00] transition-colors"
-                        >
-                          View all
-                          <ArrowUpRight
-                            size={11}
-                            className="group-hover:translate-x-0.5 transition-transform"
-                          />
-                        </Link>
-                      </div>
-
-                      {/* Tools grid */}
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={activeToolsCategory}
-                          initial={{ opacity: 0, x: 10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -10 }}
-                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-                          className="grid grid-cols-2 gap-1"
-                        >
-                          {activeCat.tools.map((tool) => {
-                            const Icon = tool.icon;
-                            return (
-                              <Link
-                                key={tool.id}
-                                href={
-                                  tool.id === "crop" || tool.id === "ai-summarizer"
-                                    ? "/pdf-tools"
-                                    : `/pdf-tools/${tool.id}`
-                                }
-                                className="group/tool flex items-center gap-3 p-3 rounded-[12px] hover:bg-white transition-colors duration-200"
-                              >
-                                <div className="w-9 h-9 rounded-[10px] bg-white group-hover/tool:bg-[#ff6a00] flex items-center justify-center transition-all duration-300 shrink-0">
-                                  <Icon
-                                    size={15}
-                                    strokeWidth={1.75}
-                                    className="text-black/70 group-hover/tool:text-white transition-colors"
-                                  />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-[13px] text-black group-hover/tool:text-[#ff6a00] transition-colors truncate">{tool.title}</span>
-                                    {tool.isNew && (
-                                      <Sparkles
-                                        size={10}
-                                        className="text-[#ff6a00] shrink-0"
-                                      />
-                                    )}
-                                  </div>
-                                </div>
-                                <ArrowUpRight
-                                  size={12}
-                                  className="text-black/20 group-hover/tool:text-[#ff6a00] group-hover/tool:translate-x-0.5 transition-all shrink-0"
-                                />
-                              </Link>
-                            );
-                          })}
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-
-                  {/* Bottom strip — featured tool */}
-                  <div className="border-t border-black/[0.06] bg-white px-6 py-3 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-full bg-[#ff6a00]/10 border border-[#ff6a00]/20 flex items-center justify-center">
-                        <Sparkles
-                          size={10}
-                          className="text-[#ff6a00]"
-                        />
-                      </div>
-                      <span className="text-[11px] text-black/60">
-                        <span className="font-medium text-black">New:</span> AI Summarizer can now handle 500-page PDFs
-                      </span>
-                    </div>
-                    <Link
-                      href="/pdf-tools"
-                      className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black hover:text-[#ff6a00] transition-colors"
-                    >
-                      Try it
-                      <ArrowUpRight
-                        size={11}
-                        className="group-hover:translate-x-0.5 transition-transform"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.header>
+
+      {/* Custom scrollbar for media tools list */}
+      <style
+        jsx
+        global
+      >{`
+        .image-tools-scroll::-webkit-scrollbar {
+          width: 6px;
+        }
+        .image-tools-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .image-tools-scroll::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.12);
+          border-radius: 999px;
+        }
+        .image-tools-scroll::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 106, 0, 0.4);
+        }
+      `}</style>
 
       {/* ================= MOBILE MENU ================= */}
       <AnimatePresence>
@@ -817,7 +999,10 @@ export const Header = () => {
                     key={item.name}
                     initial={{ x: 30, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + index * 0.06, ease: [0.22, 1, 0.36, 1] as const }}
+                    transition={{
+                      delay: 0.1 + index * 0.06,
+                      ease: [0.22, 1, 0.36, 1] as const,
+                    }}
                     className="border-b border-black/[0.08]"
                   >
                     <Link

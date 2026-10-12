@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FileText, Layers, Scissors, Minimize, FileOutput, Edit3, 
-  Image as ImageIcon, PenTool, Stamp, RotateCw, FileCode2, 
-  Lock, Unlock, LayoutList, FileSpreadsheet, Presentation, 
-  Wrench, ScanText, ShieldAlert, EyeOff, Crop, FileInput, 
+import {
+  FileText, Layers, Scissors, Minimize, FileOutput, Edit3,
+  Image as ImageIcon, PenTool, Stamp, RotateCw, FileCode2,
+  Lock, Unlock, LayoutList, FileSpreadsheet, Presentation,
+  Wrench, ScanText, ShieldAlert, EyeOff, Crop, FileInput,
   Brain, Languages, ArrowUpRight, Search, Star, Plus, Minus,
   UploadCloud, Settings, Download, CheckCircle2, Shield, Zap,
   Users, Briefcase, GraduationCap, Building2, Heart, Scale,
@@ -23,31 +23,32 @@ type Tool = {
   icon: LucideIcon;
   category: string;
   isNew?: boolean;
+  isFeatured?: boolean;
 };
 
 const toolsData: Tool[] = [
-  { id: 'merge', title: 'Merge PDF', desc: 'Combine PDFs in the order you want.', icon: Layers, category: 'Organize PDF' },
-  { id: 'split', title: 'Split PDF', desc: 'Separate one page or a whole set into independent files.', icon: Scissors, category: 'Organize PDF' },
+  { id: 'merge', title: 'Merge PDF', desc: 'Combine PDFs in the order you want.', icon: Layers, category: 'Organize PDF', isFeatured: true },
+  { id: 'split', title: 'Split PDF', desc: 'Separate one page or a whole set into independent files.', icon: Scissors, category: 'Organize PDF', isFeatured: true },
   { id: 'rotate', title: 'Rotate PDF', desc: 'Rotate your PDFs the way you need them.', icon: RotateCw, category: 'Organize PDF' },
   { id: 'organize', title: 'Organize PDF', desc: 'Sort pages however you like. Delete or add pages.', icon: LayoutList, category: 'Organize PDF' },
   { id: 'page-numbers', title: 'Page Numbers', desc: 'Add page numbers with chosen typography and position.', icon: FileText, category: 'Organize PDF' },
   { id: 'crop', title: 'Crop PDF', desc: 'Crop margins or select specific areas of your document.', icon: Crop, category: 'Organize PDF' },
-  { id: 'compress', title: 'Compress PDF', desc: 'Reduce file size while optimizing for maximal quality.', icon: Minimize, category: 'Optimize PDF' },
+  { id: 'compress', title: 'Compress PDF', desc: 'Reduce file size while optimizing for maximal quality.', icon: Minimize, category: 'Optimize PDF', isFeatured: true },
   { id: 'repair', title: 'Repair PDF', desc: 'Repair damaged PDFs and recover corrupted data.', icon: Wrench, category: 'Optimize PDF' },
-  { id: 'ocr', title: 'OCR PDF', desc: 'Convert scanned PDFs into searchable and selectable text.', icon: ScanText, category: 'Optimize PDF' },
+  { id: 'ocr', title: 'OCR PDF', desc: 'Convert scanned PDFs into searchable and selectable text.', icon: ScanText, category: 'Optimize PDF', isFeatured: true },
   { id: 'scan', title: 'Scan to PDF', desc: 'Capture scans from your phone and send to browser.', icon: FileInput, category: 'Optimize PDF' },
-  { id: 'pdf-word', title: 'PDF to Word', desc: 'Convert PDFs into editable DOC and DOCX documents.', icon: FileOutput, category: 'Convert PDF' },
+  { id: 'pdf-word', title: 'PDF to Word', desc: 'Convert PDFs into editable DOC and DOCX documents.', icon: FileOutput, category: 'Convert PDF', isFeatured: true },
   { id: 'pdf-ppt', title: 'PDF to PowerPoint', desc: 'Turn PDFs into editable PPT and PPTX slideshows.', icon: Presentation, category: 'Convert PDF' },
   { id: 'pdf-excel', title: 'PDF to Excel', desc: 'Pull data straight from PDFs into Excel spreadsheets.', icon: FileSpreadsheet, category: 'Convert PDF' },
   { id: 'word-pdf', title: 'Word to PDF', desc: 'Make DOC and DOCX files easy to read as PDF.', icon: FileText, category: 'Convert PDF' },
   { id: 'ppt-pdf', title: 'PowerPoint to PDF', desc: 'Make PPT and PPTX slideshows easy to view.', icon: Presentation, category: 'Convert PDF' },
   { id: 'excel-pdf', title: 'Excel to PDF', desc: 'Make Excel spreadsheets easy to read as PDF.', icon: FileSpreadsheet, category: 'Convert PDF' },
-  { id: 'pdf-jpg', title: 'PDF to JPG', desc: 'Convert each PDF page into a JPG or extract images.', icon: ImageIcon, category: 'Convert PDF' },
+  { id: 'pdf-jpg', title: 'PDF to JPG', desc: 'Convert each PDF page into a JPG or extract images.', icon: ImageIcon, category: 'Convert PDF', isFeatured: true },
   { id: 'jpg-pdf', title: 'JPG to PDF', desc: 'Convert JPG images to PDF with adjustable margins.', icon: ImageIcon, category: 'Convert PDF' },
   { id: 'html-pdf', title: 'HTML to PDF', desc: 'Convert webpages in HTML to PDF with one click.', icon: FileCode2, category: 'Convert PDF' },
   { id: 'pdf-a', title: 'PDF to PDF/A', desc: 'Transform PDF to the ISO-standardized archival format.', icon: FileText, category: 'Convert PDF' },
   { id: 'pdf-md', title: 'PDF to Markdown', desc: 'Turn PDFs into Markdown for notes, docs, and LLMs.', icon: FileCode2, category: 'Convert PDF', isNew: true },
-  { id: 'edit', title: 'Edit PDF', desc: 'Add text, images, shapes, or freehand annotations.', icon: Edit3, category: 'Edit PDF' },
+  { id: 'edit', title: 'Edit PDF', desc: 'Add text, images, shapes, or freehand annotations.', icon: Edit3, category: 'Edit PDF', isFeatured: true },
   { id: 'sign', title: 'Sign PDF', desc: 'Sign yourself or request e-signatures from others.', icon: PenTool, category: 'Edit PDF' },
   { id: 'watermark', title: 'Watermark', desc: 'Stamp an image or text over your PDF in seconds.', icon: Stamp, category: 'Edit PDF' },
   { id: 'forms', title: 'PDF Forms', desc: 'Create interactive fillable PDFs or fill forms yourself.', icon: FileInput, category: 'Edit PDF', isNew: true },
@@ -71,54 +72,12 @@ const categories = [
 
 // --- CATEGORIES DEEP DIVE ---
 const categoriesDetail = [
-  {
-    num: '01',
-    name: 'Organize PDF',
-    slug: 'organize',
-    desc: 'Rearrange, reorder, and restructure your documents. Merge multiple PDFs, split large files, rotate pages, or crop unwanted margins.',
-    tools: ['Merge', 'Split', 'Rotate', 'Organize', 'Page Numbers', 'Crop'],
-    color: '#ff6a00',
-  },
-  {
-    num: '02',
-    name: 'Optimize PDF',
-    slug: 'optimize',
-    desc: 'Reduce file size, repair damaged PDFs, and unlock scanned documents with OCR. Perfect for emailing or archiving large files.',
-    tools: ['Compress', 'Repair', 'OCR', 'Scan'],
-    color: '#10b981',
-  },
-  {
-    num: '03',
-    name: 'Convert PDF',
-    slug: 'convert',
-    desc: 'Convert PDFs to and from Word, Excel, PowerPoint, JPG, HTML, and Markdown. Preserve formatting with 99% accuracy.',
-    tools: ['PDF to Word', 'PDF to Excel', 'Word to PDF', 'JPG to PDF', 'HTML to PDF'],
-    color: '#3b82f6',
-  },
-  {
-    num: '04',
-    name: 'Edit PDF',
-    slug: 'edit',
-    desc: 'Add text, images, and annotations. Sign documents electronically. Watermark pages. Create interactive fillable forms.',
-    tools: ['Edit', 'Sign', 'Watermark', 'Forms'],
-    color: '#a855f7',
-  },
-  {
-    num: '05',
-    name: 'PDF Security',
-    slug: 'security',
-    desc: 'Protect sensitive documents with password encryption. Remove forgotten passwords from your own files. Redact permanently.',
-    tools: ['Unlock', 'Protect', 'Redact'],
-    color: '#ef4444',
-  },
-  {
-    num: '06',
-    name: 'PDF Intelligence',
-    slug: 'intelligence',
-    desc: 'AI-powered tools: summarize long PDFs in seconds, translate while preserving layout, compare versions side-by-side.',
-    tools: ['AI Summarizer', 'Translate', 'Compare'],
-    color: '#ec4899',
-  },
+  { num: '01', name: 'Organize PDF', slug: 'organize', desc: 'Rearrange, reorder, and restructure your documents. Merge multiple PDFs, split large files, rotate pages, or crop unwanted margins.', tools: ['Merge', 'Split', 'Rotate', 'Organize', 'Page Numbers', 'Crop'], color: '#ff6a00' },
+  { num: '02', name: 'Optimize PDF', slug: 'optimize', desc: 'Reduce file size, repair damaged PDFs, and unlock scanned documents with OCR. Perfect for emailing or archiving large files.', tools: ['Compress', 'Repair', 'OCR', 'Scan'], color: '#10b981' },
+  { num: '03', name: 'Convert PDF', slug: 'convert', desc: 'Convert PDFs to and from Word, Excel, PowerPoint, JPG, HTML, and Markdown. Preserve formatting with 99% accuracy.', tools: ['PDF to Word', 'PDF to Excel', 'Word to PDF', 'JPG to PDF'], color: '#3b82f6' },
+  { num: '04', name: 'Edit PDF', slug: 'edit', desc: 'Add text, images, and annotations. Sign documents electronically. Watermark pages. Create interactive fillable forms.', tools: ['Edit', 'Sign', 'Watermark', 'Forms'], color: '#a855f7' },
+  { num: '05', name: 'PDF Security', slug: 'security', desc: 'Protect sensitive documents with password encryption. Remove forgotten passwords from your own files. Redact permanently.', tools: ['Unlock', 'Protect', 'Redact'], color: '#ef4444' },
+  { num: '06', name: 'PDF Intelligence', slug: 'intelligence', desc: 'AI-powered tools: summarize long PDFs in seconds, translate while preserving layout, compare versions side-by-side.', tools: ['AI Summarizer', 'Translate', 'Compare'], color: '#ec4899' },
 ];
 
 // --- HOW IT WORKS DATA ---
@@ -140,48 +99,12 @@ const features = [
 
 // --- USE CASES ---
 const useCases = [
-  {
-    num: '01',
-    icon: Briefcase,
-    title: 'For Businesses',
-    desc: 'Merge contracts, compress invoices, extract data from receipts, and sign agreements — all without paid software.',
-    color: '#ff6a00',
-  },
-  {
-    num: '02',
-    icon: GraduationCap,
-    title: 'For Students',
-    desc: 'Convert lecture notes to PDF, compress assignments, merge project submissions, and translate research papers.',
-    color: '#3b82f6',
-  },
-  {
-    num: '03',
-    icon: Scale,
-    title: 'For Lawyers',
-    desc: 'Redact sensitive information, compare contract versions, and organize case files — with airtight privacy.',
-    color: '#a855f7',
-  },
-  {
-    num: '04',
-    icon: Heart,
-    title: 'For Doctors',
-    desc: 'Scan patient records, protect medical PDFs with encryption, and extract data from lab reports instantly.',
-    color: '#10b981',
-  },
-  {
-    num: '05',
-    icon: Building2,
-    title: 'For Government',
-    desc: 'Process Aadhaar, PAN, and Voter ID documents. OCR support for Hindi, Tamil, and 12+ Indian languages.',
-    color: '#ec4899',
-  },
-  {
-    num: '06',
-    icon: Users,
-    title: 'For Everyone',
-    desc: 'Whether you\'re merging 2 files or 200, our tools work the same — fast, free, and beautifully simple.',
-    color: '#06b6d4',
-  },
+  { num: '01', icon: Briefcase, title: 'For Businesses', desc: 'Merge contracts, compress invoices, extract data from receipts, and sign agreements — all without paid software.', color: '#ff6a00' },
+  { num: '02', icon: GraduationCap, title: 'For Students', desc: 'Convert lecture notes to PDF, compress assignments, merge project submissions, and translate research papers.', color: '#3b82f6' },
+  { num: '03', icon: Scale, title: 'For Lawyers', desc: 'Redact sensitive information, compare contract versions, and organize case files — with airtight privacy.', color: '#a855f7' },
+  { num: '04', icon: Heart, title: 'For Doctors', desc: 'Scan patient records, protect medical PDFs with encryption, and extract data from lab reports instantly.', color: '#10b981' },
+  { num: '05', icon: Building2, title: 'For Government', desc: 'Process Aadhaar, PAN, and Voter ID documents. OCR support for Hindi, Tamil, and 12+ Indian languages.', color: '#ec4899' },
+  { num: '06', icon: Users, title: 'For Everyone', desc: 'Whether you\'re merging 2 files or 200, our tools work the same — fast, free, and beautifully simple.', color: '#06b6d4' },
 ];
 
 // --- COMPARISON ---
@@ -261,7 +184,7 @@ const itemVariants = {
   exit: { opacity: 0, y: -10, transition: { duration: 0.2 } }
 };
 
-// --- TOOL CARD ---
+// --- TOOL CARD (refined) ---
 const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
   const Icon = tool.icon;
   return (
@@ -280,24 +203,43 @@ const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
         }
         className="block h-full outline-none group"
       >
-        <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/[0.06] transition-all duration-500 ease-out group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.18)] overflow-hidden">
-          <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-gradient-to-br from-[#ff6a00]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          {tool.isNew && (
-            <div className="absolute top-5 right-5 text-[9px] font-mono uppercase tracking-[0.15em] text-[#ff6a00] bg-[#ff6a00]/8 border border-[#ff6a00]/20 px-2.5 py-1 rounded-full">New</div>
-          )}
-          <div className="relative z-10 w-12 h-12 rounded-2xl bg-[#f4f1ea] flex items-center justify-center mb-6 group-hover:bg-[#ff6a00] transition-all duration-500">
-            <Icon size={20} strokeWidth={1.75} className="text-black/70 group-hover:text-white transition-colors duration-500" />
+        <div className="relative flex flex-col h-full p-6 rounded-2xl bg-white border border-black/[0.06] transition-all duration-300 ease-out group-hover:border-black/20 group-hover:-translate-y-1 group-hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.22)] overflow-hidden">
+          {/* left accent bar */}
+          <div className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-[#ff6a00] scale-y-0 origin-top transition-transform duration-500 group-hover:scale-y-100" />
+          {/* corner wash */}
+          <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-[#ff6a00]/[0.06] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+          {/* index watermark */}
+          <span className="absolute top-4 right-5 text-[10px] font-mono tracking-[0.2em] text-black/[0.15] group-hover:text-[#ff6a00]/60 transition-colors duration-300">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          <div className="relative z-10 w-11 h-11 rounded-xl bg-[#f4f1ea] flex items-center justify-center mb-5 group-hover:bg-black transition-all duration-500 group-hover:scale-[1.04]">
+            <Icon size={19} strokeWidth={1.75} className="text-black/70 group-hover:text-white transition-colors duration-500" />
           </div>
-          <h3 className="relative z-10 text-[19px] font-normal text-black mb-2 tracking-tight leading-tight" style={{ fontFamily: 'Georgia, serif' }}>{tool.title}</h3>
-          <p className="relative z-10 text-[13px] text-black/50 leading-[1.65] font-light mb-8 flex-grow">{tool.desc}</p>
+
+          <div className="relative z-10 flex items-center gap-2 mb-1.5">
+            <h3 className="text-[15px] font-medium text-black tracking-tight group-hover:text-[#ff6a00] transition-colors duration-300" style={{ fontFamily: 'Georgia, serif' }}>
+              {tool.title}
+            </h3>
+            {tool.isNew && (
+              <span className="shrink-0 text-[9px] font-mono uppercase tracking-[0.15em] text-[#ff6a00] bg-[#ff6a00]/10 px-1.5 py-0.5 rounded">
+                New
+              </span>
+            )}
+          </div>
+
+          <p className="relative z-10 text-[12px] leading-[1.65] text-black/45 group-hover:text-black/65 transition-colors duration-300 mb-6 flex-grow font-light">
+            {tool.desc}
+          </p>
+
           <div className="relative z-10 flex items-center justify-between pt-4 border-t border-black/[0.06]">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40 group-hover:text-[#ff6a00] transition-colors duration-300">Open Tool</span>
-            <div className="w-7 h-7 rounded-full bg-[#f4f1ea] flex items-center justify-center group-hover:bg-[#ff6a00] transition-all duration-500 group-hover:translate-x-0.5">
-              <ArrowUpRight size={13} className="text-black/60 group-hover:text-white transition-colors duration-500" />
-            </div>
-          </div>
-          <div className="absolute bottom-3 right-5 text-[9px] font-mono uppercase tracking-[0.2em] text-black/15 group-hover:text-[#ff6a00]/40 transition-colors duration-500">
-            № {String(index + 1).padStart(2, '0')}
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/30 group-hover:text-black/50 transition-colors duration-300">
+              Open tool
+            </span>
+            <span className="w-7 h-7 rounded-full bg-[#f4f1ea] flex items-center justify-center group-hover:bg-[#ff6a00] transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <ArrowUpRight size={12} className="text-black/50 group-hover:text-white transition-colors duration-500" />
+            </span>
           </div>
         </div>
       </Link>
@@ -305,15 +247,123 @@ const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
   );
 };
 
-// Reusable section meta
+// --- FEATURED HERO CARD ---
+const FeaturedHeroCard = ({ tool }: { tool: Tool }) => {
+  const Icon = tool.icon;
+  return (
+    <Link href={`/pdf-tools/${tool.id}`} className="group relative flex flex-col justify-between overflow-hidden rounded-[26px] bg-[#0b0b0c] text-white border border-black/10 p-7 md:p-9 min-h-[320px] lg:min-h-0 lg:col-span-2 lg:row-span-2 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_50px_90px_-45px_rgba(0,0,0,0.65)]">
+      <div className="pointer-events-none absolute -top-24 -right-20 w-[380px] h-[380px] rounded-full bg-[#ff6a00]/25 blur-[95px] opacity-70 transition-opacity duration-700 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute bottom-[-120px] left-[-80px] w-[300px] h-[300px] rounded-full bg-white/[0.06] blur-[90px]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.07]" style={{ backgroundImage: "radial-gradient(currentColor 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+      <Icon className="pointer-events-none absolute -bottom-12 -right-8 text-white/[0.05] transition-transform duration-700 group-hover:scale-[1.06] group-hover:rotate-[-4deg]" size={230} strokeWidth={0.7} />
+
+      <div className="relative flex items-start justify-between">
+        <span className="inline-flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full bg-white/[0.07] border border-white/10 backdrop-blur-md">
+          <Sparkles size={11} className="text-[#ff6a00]" />
+          <span className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-white/75">Most used</span>
+        </span>
+        <span className="text-[10px] font-mono tracking-[0.2em] text-white/25">01</span>
+      </div>
+
+      <div className="relative mt-auto pt-10">
+        <div className="w-14 h-14 rounded-2xl bg-white/[0.07] border border-white/10 backdrop-blur-sm flex items-center justify-center mb-6 transition-all duration-500 group-hover:bg-[#ff6a00] group-hover:border-[#ff6a00] group-hover:scale-[1.04]">
+          <Icon size={22} strokeWidth={1.6} className="text-white" />
+        </div>
+        <h3 className="text-[28px] md:text-[36px] leading-[1.05] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
+          {tool.title}
+        </h3>
+        <p className="mt-3 text-[13px] text-white/50 leading-relaxed max-w-[360px]">{tool.desc}</p>
+        <div className="mt-7 inline-flex items-center gap-2 text-[12.5px] font-medium text-white">
+          <span className="relative">
+            Open tool
+            <span className="absolute left-0 -bottom-1 h-px w-full bg-white/25 transition-colors duration-300 group-hover:bg-[#ff6a00]" />
+          </span>
+          <ArrowUpRight size={14} className="text-[#ff6a00] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+// --- FEATURED MINI CARD ---
+const FeaturedMiniCard = ({ tool, rank }: { tool: Tool; rank: number }) => {
+  const Icon = tool.icon;
+  return (
+    <Link href={`/pdf-tools/${tool.id}`} className="group relative flex flex-col h-full min-h-[150px] p-5 rounded-[22px] bg-white border border-black/[0.07] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-[0_30px_55px_-32px_rgba(0,0,0,0.35)]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[2.5px] bg-gradient-to-r from-[#ff6a00] via-[#ff6a00]/50 to-transparent scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
+      <div className="pointer-events-none absolute -top-16 -right-16 w-[130px] h-[130px] rounded-full bg-[#ff6a00]/[0.07] blur-[40px] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      <div className="relative flex items-start justify-between mb-5">
+        <div className="w-10 h-10 rounded-xl bg-[#f4f1ea] flex items-center justify-center transition-all duration-300 group-hover:bg-black group-hover:scale-[1.05]">
+          <Icon size={17} strokeWidth={1.75} className="text-black/70 transition-colors duration-300 group-hover:text-white" />
+        </div>
+        <span className="text-[10px] font-mono tracking-[0.18em] text-black/20 transition-colors duration-300 group-hover:text-[#ff6a00]">
+          {String(rank).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="relative mt-auto">
+        <div className="flex items-center gap-1.5">
+          <h4 className="text-[13.5px] font-medium tracking-tight text-black transition-colors duration-300 group-hover:text-[#ff6a00]">
+            {tool.title}
+          </h4>
+          {tool.isNew && (
+            <span className="shrink-0 text-[8.5px] font-mono uppercase tracking-[0.15em] px-1.5 py-0.5 rounded bg-[#ff6a00]/10 text-[#ff6a00]">
+              New
+            </span>
+          )}
+        </div>
+        <p className="text-[11.5px] leading-snug mt-1.5 text-black/45 line-clamp-2 transition-colors duration-300 group-hover:text-black/60 font-light">
+          {tool.desc}
+        </p>
+      </div>
+
+      <ArrowUpRight size={13} className="absolute bottom-5 right-5 text-[#ff6a00] opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" />
+    </Link>
+  );
+};
+
+// --- SECTION META ---
 const SectionMeta = ({ label, right }: { label: string; right: React.ReactNode }) => (
-  <div className="flex items-center justify-between pb-6 mb-16 border-b border-black/[0.12]">
+  <div className="flex items-center justify-between pb-6 mb-14 border-b border-black/[0.12]">
     <div className="flex items-center gap-3">
       <div className="w-1.5 h-1.5 rounded-full bg-[#ff6a00]" />
       <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-black/60">{label}</span>
     </div>
     <div className="hidden md:flex items-center gap-6 text-[11px] font-mono uppercase tracking-[0.2em] text-black/40">{right}</div>
   </div>
+);
+
+// --- SECTION HEADING (shared) ---
+const SectionHeading = ({
+  eyebrow, title, subtitle, align = 'left'
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  align?: 'left' | 'center';
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-100px' }}
+    transition={{ duration: 0.8, ease: 'easeOut' }}
+    className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 items-end ${align === 'center' ? 'text-center' : ''}`}
+  >
+    <div className="lg:col-span-7">
+      <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">{eyebrow}</div>
+      <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
+        {title}
+      </h2>
+    </div>
+    {subtitle && (
+      <div className="lg:col-span-5 lg:pb-4">
+        <div className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md lg:ml-auto">
+          {subtitle}
+        </div>
+      </div>
+    )}
+  </motion.div>
 );
 
 export default function PdfToolsPage() {
@@ -328,6 +378,7 @@ export default function PdfToolsPage() {
     return matchesCategory && matchesSearch;
   });
 
+  const featuredTools = toolsData.filter(t => t.isFeatured);
   const currentFaqs = faqsData[activeFaqCat];
 
   const toggleFaq = (index: number) => setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -346,15 +397,28 @@ export default function PdfToolsPage() {
         </div>
       </div>
 
-      {/* ===================== SECTION 1: HERO ===================== */}
-      <section className="relative pt-32 pb-24">
+      {/* ===================== HERO ===================== */}
+      <section className="relative pt-28 pb-10">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
-          <SectionMeta label="PDF Tools — 31 Available" right={<><span>100% Free</span><span>·</span><span>No Signup</span></>} />
+          <SectionMeta
+            label="PDF Tools — 31 Available"
+            right={<><span>100% Free</span><span>·</span><span>No Signup</span></>}
+          />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-14 items-end">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-end"
+          >
             <div className="lg:col-span-7">
-              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">Chapter 02 — The PDF Toolkit</div>
-              <h1 className="text-[48px] md:text-[68px] lg:text-[80px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
+              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">
+                Chapter 02 — The PDF Toolkit
+              </div>
+              <h1
+                className="text-[48px] md:text-[68px] lg:text-[80px] leading-[0.98] tracking-[-0.02em]"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
                 Every tool for<br />every <span className="italic text-[#ff6a00]">PDF</span> task.
               </h1>
             </div>
@@ -364,62 +428,157 @@ export default function PdfToolsPage() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Search */}
-          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="max-w-2xl mb-10">
-            <div className="relative flex items-center border-b border-black/20 focus-within:border-black transition-colors">
-              <Search className="text-black/40 mr-3" size={16} />
-              <input type="text" placeholder="Search the toolkit..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-transparent border-none outline-none text-black w-full placeholder:text-black/30 py-3 text-[15px]" />
-              <kbd className="hidden md:block text-[10px] text-black/40 border border-black/15 px-2 py-0.5 font-mono tracking-wider rounded">⌘ K</kbd>
-            </div>
-          </motion.div>
+      {/* ===================== STICKY FILTER BAR ===================== */}
+      <div className="sticky top-0 z-40 border-y border-black/[0.08] bg-[#f4f1ea]/90 backdrop-blur-xl">
+        <div className="container mx-auto px-8 relative max-w-[1400px]">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8 py-4">
 
-          {/* Category filters */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-10 pb-6 border-b border-black/[0.08]">
-            {categories.map((category) => {
-              const isActive = activeCategory === category.name;
-              return (
-                <button key={category.name} onClick={() => setActiveCategory(category.name)}
-                  className={`relative text-[13px] tracking-tight pb-1 transition-colors duration-300 group ${isActive ? 'text-black' : 'text-black/40 hover:text-black'}`}>
-                  <span className="font-medium">{category.label}</span>
-                  {isActive ? <span className="absolute -bottom-1 left-0 right-0 h-px bg-[#ff6a00]" />
-                    : <span className="absolute -bottom-1 left-0 right-0 h-px bg-black/30 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />}
-                  <span className="ml-1.5 text-[10px] font-mono text-black/30">
-                    {category.name === 'All' ? toolsData.length : toolsData.filter(t => t.category === category.name).length}
-                  </span>
+            {/* Search — compact inline */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative flex items-center border-b border-black/20 focus-within:border-[#ff6a00] transition-colors lg:max-w-[240px] shrink-0"
+            >
+              <Search className="text-black/40 mr-3 shrink-0" size={15} />
+              <input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-transparent border-none outline-none text-black w-full placeholder:text-black/30 py-2 text-[14px]"
+              />
+              {searchQuery ? (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40 hover:text-[#ff6a00] transition-colors shrink-0 pl-2"
+                  aria-label="Clear"
+                >
+                  Clear
                 </button>
-              );
-            })}
-          </motion.div>
+              ) : (
+                <kbd className="hidden md:block text-[10px] text-black/30 border border-black/15 px-1.5 py-0.5 font-mono tracking-wider rounded shrink-0">
+                  ⌘K
+                </kbd>
+              )}
+            </motion.div>
 
-          <div className="flex items-center justify-between mb-8 text-[11px] font-mono uppercase tracking-[0.15em] text-black/40">
-            <span>Showing {filteredTools.length} of {toolsData.length}</span>
-            {searchQuery && <button onClick={() => setSearchQuery('')} className="hover:text-[#ff6a00] transition-colors">Clear search</button>}
+            {/* Divider (desktop only) */}
+            <div className="hidden lg:block w-px h-6 bg-black/[0.1] shrink-0" />
+
+            {/* Category pills — horizontally scrollable */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex items-center gap-x-6 gap-y-2 overflow-x-auto flex-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              {categories.map((category) => {
+                const isActive = activeCategory === category.name;
+                const count =
+                  category.name === 'All'
+                    ? toolsData.length
+                    : toolsData.filter(t => t.category === category.name).length;
+                return (
+                  <button
+                    key={category.name}
+                    onClick={() => setActiveCategory(category.name)}
+                    className={`relative text-[13px] tracking-tight pb-1 transition-colors duration-300 group shrink-0 ${isActive ? 'text-black' : 'text-black/40 hover:text-black'}`}
+                  >
+                    <span className="font-medium whitespace-nowrap">{category.label}</span>
+                    {isActive ? (
+                      <span className="absolute -bottom-1 left-0 right-0 h-px bg-[#ff6a00]" />
+                    ) : (
+                      <span className="absolute -bottom-1 left-0 right-0 h-px bg-black/30 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    )}
+                    <span className="ml-1.5 text-[10px] font-mono text-black/30">{count}</span>
+                  </button>
+                );
+              })}
+            </motion.div>
+
+            {/* Count */}
+            <div className="hidden lg:flex items-center gap-3 shrink-0 text-[11px] font-mono uppercase tracking-[0.15em] text-black/40">
+              <span>
+                <span className="text-black/70">{filteredTools.length}</span> / {toolsData.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ===================== TOOL GRID ===================== */}
+      <section className="relative pt-14 pb-24">
+        <div className="container mx-auto px-8 relative max-w-[1400px]">
+          {/* Mobile count */}
+          <div className="lg:hidden mb-6 text-[11px] font-mono uppercase tracking-[0.15em] text-black/40">
+            Showing {filteredTools.length} of {toolsData.length}
           </div>
 
-          <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
             <AnimatePresence mode="popLayout">
-              {filteredTools.map((tool, i) => <ToolCard key={tool.id} tool={tool} index={i} />)}
+              {filteredTools.map((tool, i) => (
+                <ToolCard key={tool.id} tool={tool} index={i} />
+              ))}
             </AnimatePresence>
           </motion.div>
 
           <AnimatePresence>
             {filteredTools.length === 0 && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                className="text-center py-24 rounded-[22px] border border-black/[0.08] bg-white">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="text-center py-24 rounded-[22px] border border-black/[0.08] bg-white"
+              >
                 <Search className="mx-auto text-black/20 mb-4" size={32} strokeWidth={1.5} />
-                <h3 className="text-xl text-black mb-2" style={{ fontFamily: 'Georgia, serif' }}>Nothing found.</h3>
-                <p className="text-[13px] text-black/50">No tools match "{searchQuery}" in {activeCategory === 'All' ? 'any category' : activeCategory}.</p>
+                <h3 className="text-xl text-black mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                  Nothing found.
+                </h3>
+                <p className="text-[13px] text-black/50">
+                  No tools match "{searchQuery}" in {activeCategory === 'All' ? 'any category' : activeCategory}.
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </section>
 
-      {/* ===================== SECTION 2: STATS STRIP ===================== */}
-      <section className="relative py-16 border-y border-black/[0.08] bg-white">
+      {/* ===================== MOST USED (BENTO) ===================== */}
+      {!searchQuery && activeCategory === 'All' && (
+        <section className="relative py-24 md:py-28 border-t border-black/[0.08]">
+          <div className="container mx-auto px-8 relative max-w-[1400px]">
+            <SectionMeta label="Most Used This Week" right={<><span>Updated Weekly</span><span>·</span><span>7 Tools</span></>} />
+
+            <SectionHeading
+              eyebrow="The Essentials"
+              title={<>The tools people<br />reach for <span className="italic text-[#ff6a00]">first.</span></>}
+              subtitle="Hand-picked by usage data across 2 million users. These seven tools handle 80% of all PDF work."
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:grid-rows-2">
+              {featuredTools.slice(0, 5).map((tool, i) =>
+                i === 0 ? (
+                  <FeaturedHeroCard key={tool.id} tool={tool} />
+                ) : (
+                  <FeaturedMiniCard key={tool.id} tool={tool} rank={i + 1} />
+                )
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ===================== STATS STRIP ===================== */}
+      <section className="relative py-14 border-y border-black/[0.08] bg-white">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -430,7 +589,7 @@ export default function PdfToolsPage() {
             ].map((stat, i) => (
               <motion.div key={stat.label} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }} className="text-center md:text-left">
-                <div className="text-[40px] md:text-[52px] leading-none text-black tracking-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>{stat.value}</div>
+                <div className="text-[38px] md:text-[48px] leading-none text-black tracking-tight mb-2" style={{ fontFamily: 'Georgia, serif' }}>{stat.value}</div>
                 <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-black/50">{stat.label}</div>
               </motion.div>
             ))}
@@ -438,33 +597,24 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 3: HOW IT WORKS ===================== */}
+      {/* ===================== HOW IT WORKS ===================== */}
       <section className="relative py-24 md:py-32">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="How It Works" right={<><span>3 Steps</span><span>·</span><span>Under 30 Seconds</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: "easeOut" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-20 items-end">
-            <div className="lg:col-span-7">
-              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">The Process</div>
-              <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-                Three steps.<br />That's <span className="italic text-[#ff6a00]">it.</span>
-              </h2>
-            </div>
-            <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">
-                No accounts, no installations, no learning curve. Designed so anyone can use it — even your grandmother.
-              </p>
-            </div>
-          </motion.div>
+          <SectionHeading
+            eyebrow="The Process"
+            title={<>Three steps.<br />That's <span className="italic text-[#ff6a00]">it.</span></>}
+            subtitle="No accounts, no installations, no learning curve. Designed so anyone can use it — even your grandmother."
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
                 <motion.div key={step.n} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
                   transition={{ duration: 0.7, delay: i * 0.15, ease: "easeOut" }}
-                  className="group relative p-8 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.18)] transition-all duration-500">
+                  className="group relative p-8 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.22)] transition-all duration-500">
                   <div className="absolute top-6 right-7 text-[64px] leading-none text-black/[0.04] select-none pointer-events-none" style={{ fontFamily: 'Georgia, serif' }}>{step.n}</div>
                   <div className="relative z-10 w-12 h-12 rounded-2xl bg-[#f4f1ea] flex items-center justify-center mb-8 group-hover:bg-[#ff6a00] transition-all duration-500">
                     <Icon size={20} strokeWidth={1.75} className="text-black/70 group-hover:text-white transition-colors duration-500" />
@@ -482,24 +632,22 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 4: CATEGORIES DEEP DIVE ===================== */}
+      {/* ===================== CATEGORIES ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="The Six Categories" right={<><span>Organized</span><span>·</span><span>By Purpose</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="mb-20 max-w-3xl">
-            <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">The Categories</div>
-            <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-              Six categories.<br />Thirty-one <span className="italic text-[#ff6a00]">tools.</span>
-            </h2>
-          </motion.div>
+          <SectionHeading
+            eyebrow="The Categories"
+            title={<>Six categories.<br />Thirty-one <span className="italic text-[#ff6a00]">tools.</span></>}
+            subtitle="Every tool grouped by what it actually does. Pick a category, find your tool, get the job done."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {categoriesDetail.map((cat, i) => (
               <motion.div key={cat.num} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: i * 0.08, ease: "easeOut" }}
-                className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 transition-all duration-500">
+                className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 transition-all duration-500">
                 <div className="flex items-start justify-between mb-8">
                   <div className="w-1.5 h-1.5 rounded-full mt-2" style={{ backgroundColor: cat.color }} />
                   <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/30">{cat.num}</span>
@@ -519,32 +667,23 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 5: FEATURES ===================== */}
+      {/* ===================== FEATURES ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="Why idcardtools" right={<><span>6 Reasons</span><span>·</span><span>Built for Trust</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-20 items-end">
-            <div className="lg:col-span-7">
-              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">The Foundation</div>
-              <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-                Built with<br /><span className="italic text-[#ff6a00]">obsessive</span> care.
-              </h2>
-            </div>
-            <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">
-                Every feature exists because a user asked for it. Every decision is tested against one question — does this make our users' lives easier?
-              </p>
-            </div>
-          </motion.div>
+          <SectionHeading
+            eyebrow="The Foundation"
+            title={<>Built with<br /><span className="italic text-[#ff6a00]">obsessive</span> care.</>}
+            subtitle="Every feature exists because a user asked for it. Every decision is tested against one question — does this make our users' lives easier?"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((feature, i) => {
               const Icon = feature.icon;
               return (
                 <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 transition-all duration-500">
+                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 transition-all duration-500">
                   <div className="w-12 h-12 rounded-2xl bg-[#f4f1ea] group-hover:bg-[#ff6a00] flex items-center justify-center mb-6 transition-all duration-500">
                     <Icon size={20} strokeWidth={1.75} className="text-black/70 group-hover:text-white transition-colors duration-500" />
                   </div>
@@ -557,28 +696,25 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 6: USE CASES ===================== */}
+      {/* ===================== USE CASES ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="Built for Every Profession" right={<><span>6 Audiences</span><span>·</span><span>2M+ Users</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="mb-20 max-w-3xl">
-            <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">Who Uses idcardtools?</div>
-            <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-              For every<br /><span className="italic text-[#ff6a00]">profession.</span>
-            </h2>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Who Uses idcardtools?"
+            title={<>For every<br /><span className="italic text-[#ff6a00]">profession.</span></>}
+            subtitle="From chartered accountants to freelance designers, thousands of Indians rely on our PDF tools every single day."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {useCases.map((useCase, i) => {
               const Icon = useCase.icon;
               return (
                 <motion.div key={useCase.num} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group relative p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 transition-all duration-500">
+                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group relative p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 transition-all duration-500">
                   <div className="flex items-start justify-between mb-8">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500"
-                      style={{ backgroundColor: `${useCase.color}15` }}>
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500" style={{ backgroundColor: `${useCase.color}15` }}>
                       <Icon size={20} strokeWidth={1.75} style={{ color: useCase.color }} />
                     </div>
                     <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/30">{useCase.num}</span>
@@ -592,36 +728,24 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 7: COMPARISON TABLE ===================== */}
+      {/* ===================== COMPARISON ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="The Honest Comparison" right={<><span>Us vs. Them</span><span>·</span><span>No Bias</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 items-end">
-            <div className="lg:col-span-7">
-              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">Why Choose Us</div>
-              <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-                Compared to<br />the <span className="italic text-[#ff6a00]">alternatives.</span>
-              </h2>
-            </div>
-            <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">
-                We&apos;re not afraid to show you how we stack up against paid tools that cost ₹999/month.
-              </p>
-            </div>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Why Choose Us"
+            title={<>Compared to<br />the <span className="italic text-[#ff6a00]">alternatives.</span></>}
+            subtitle={<>We're not afraid to show you how we stack up against paid tools that cost ₹999/month.</>}
+          />
 
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.7 }} className="rounded-[22px] bg-white border border-black/[0.06] overflow-hidden">
-            {/* Header */}
             <div className="grid grid-cols-3 gap-4 px-6 md:px-8 py-5 border-b border-black/[0.08] bg-[#f4f1ea]/50">
               <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">Feature</div>
               <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#ff6a00] font-semibold">idcardtools</div>
               <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">Others</div>
             </div>
-
-            {/* Rows */}
             {comparisonRows.map((row, i) => (
               <motion.div key={row.feature} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
@@ -641,25 +765,23 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 8: SECURITY PILLARS ===================== */}
+      {/* ===================== SECURITY ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="Security & Privacy" right={<><span>AES-256</span><span>·</span><span>2h Deletion</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="mb-16 max-w-3xl">
-            <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">Security First</div>
-            <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-              Your files are<br />your <span className="italic text-[#ff6a00]">business.</span>
-            </h2>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Security First"
+            title={<>Your files are<br />your <span className="italic text-[#ff6a00]">business.</span></>}
+            subtitle="We never look at your documents. We never sell your data. We don't even know who you are."
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {securityPillars.map((pillar, i) => {
               const Icon = pillar.icon;
               return (
                 <motion.div key={pillar.n} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 transition-all duration-500">
+                  transition={{ duration: 0.6, delay: i * 0.08 }} className="group p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 transition-all duration-500">
                   <div className="flex items-start justify-between mb-8">
                     <div className="w-12 h-12 rounded-2xl bg-[#f4f1ea] group-hover:bg-[#ff6a00] flex items-center justify-center transition-all duration-500">
                       <Icon size={20} strokeWidth={1.75} className="text-black/70 group-hover:text-white transition-colors duration-500" />
@@ -675,7 +797,7 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 9: REVIEWS ===================== */}
+      {/* ===================== REVIEWS ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="Testimonials" right={<><span>4.9 / 5.0</span><span>·</span><span>2,847 Reviews</span></>} />
@@ -705,7 +827,7 @@ export default function PdfToolsPage() {
             {reviews.map((review, i) => (
               <motion.div key={review.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="group relative p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500 flex flex-col">
+                className="group relative p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.22)] transition-all duration-500 flex flex-col">
                 <div className="flex items-center gap-1 mb-6">
                   {[...Array(5)].map((_, j) => <Star key={j} size={12} className="fill-[#ff6a00] text-[#ff6a00]" />)}
                 </div>
@@ -732,25 +854,16 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 10: FAQs ===================== */}
+      {/* ===================== FAQS ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="Questions & Answers" right={<><span>12 FAQs</span><span>·</span><span>Updated Oct 2025</span></>} />
 
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 mb-16 items-end">
-            <div className="lg:col-span-7">
-              <div className="text-[11px] font-mono uppercase tracking-[0.25em] text-black/40 mb-5">Frequently Asked</div>
-              <h2 className="text-[40px] md:text-[56px] lg:text-[64px] leading-[0.98] tracking-[-0.02em]" style={{ fontFamily: 'Georgia, serif' }}>
-                Answers to your<br /><span className="italic text-[#ff6a00]">curious</span> questions.
-              </h2>
-            </div>
-            <div className="lg:col-span-5 lg:pb-4">
-              <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">
-                Everything you might want to know about our tools, privacy, Aadhaar PVC cards, and more.
-              </p>
-            </div>
-          </motion.div>
+          <SectionHeading
+            eyebrow="Frequently Asked"
+            title={<>Answers to your<br /><span className="italic text-[#ff6a00]">curious</span> questions.</>}
+            subtitle="Everything you might want to know about our tools, privacy, Aadhaar PVC cards, and more."
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-4">
@@ -833,7 +946,7 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 11: BLOG / RESOURCES ===================== */}
+      {/* ===================== BLOG ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <SectionMeta label="From the Journal" right={<><span>Latest Articles</span><span>·</span><span>Weekly</span></>} />
@@ -864,7 +977,7 @@ export default function PdfToolsPage() {
               <motion.div key={post.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}>
                 <Link href="/blog#articles" className="block group">
-                  <div className="p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 transition-all duration-500">
+                  <div className="p-7 rounded-[22px] bg-white border border-black/[0.06] hover:border-black/20 hover:-translate-y-1 transition-all duration-500">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="w-1.5 h-1.5 rounded-full bg-[#ff6a00]" />
                       <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40">{post.category}</span>
@@ -884,7 +997,7 @@ export default function PdfToolsPage() {
         </div>
       </section>
 
-      {/* ===================== SECTION 12: FINAL CTA ===================== */}
+      {/* ===================== FINAL CTA ===================== */}
       <section className="relative py-24 md:py-32 border-t border-black/[0.08]">
         <div className="container mx-auto px-8 relative max-w-[1400px]">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }}
