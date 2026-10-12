@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "copyfiles -f \"node_modules/@imgly/background-removal-data/dist/*\" public/imgly/",
+    "postinstall": "node scripts/copy-imgly-assets.mjs",
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
