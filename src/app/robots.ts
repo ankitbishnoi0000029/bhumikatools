@@ -12,6 +12,9 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://idcardtools.com/sitemap.xml",
+    sitemap: [
+      "https://idcardtools.com/sitemap.xml",
+      "https://idcardtools.com/sitemap-image-tools.xml",
+    ],
   };
 }
