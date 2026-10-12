@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { AnalyticsConsent } from "@/components/analytics/analytics-consent";
 import "./globals.css";
 
 const SITE_URL = "https://idcardtools.com";
@@ -54,17 +55,19 @@ export const metadata: Metadata = {
   generator: "Next.js",
   category: "Productivity",
   classification: "PDF Tools, ID Card Printing",
+  verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : {}),
+    ...(process.env.BING_SITE_VERIFICATION
+      ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } }
+      : {}),
+  },
 
   // Icons
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
     shortcut: "/favicon.ico",
-  },
-
-  // Canonical
-  alternates: {
-    canonical: SITE_URL,
-    languages: { "en-IN": SITE_URL },
   },
 
   // OpenGraph
@@ -180,40 +183,6 @@ export default function RootLayout({
               url: SITE_URL,
               logo: `${SITE_URL}/favicon.ico`,
               description: SITE_DESCRIPTION,
-              foundingDate: "2023",
-              founders: [{ "@type": "Person", name: "idcardtools Team" }],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bangalore",
-                addressRegion: "Karnataka",
-                postalCode: "560038",
-                addressCountry: "IN",
-                streetAddress: "Indiranagar",
-              },
-              contactPoint: [
-                {
-                  "@type": "ContactPoint",
-                  telephone: "+91-9876543210",
-                  contactType: "customer support",
-                  email: "hello@idcardtools.com",
-                  areaServed: "IN",
-                  availableLanguage: ["English", "Hindi"],
-                },
-                {
-                  "@type": "ContactPoint",
-                  telephone: "+91-9876543210",
-                  contactType: "sales",
-                  email: "sales@idcardtools.com",
-                  areaServed: "IN",
-                },
-              ],
-              sameAs: [
-                "https://twitter.com/idcardtools",
-                "https://www.instagram.com/idcardtools",
-                "https://www.linkedin.com/company/idcardtools",
-                "https://github.com/idcardtools",
-                "https://www.youtube.com/@idcardtools",
-              ],
             }),
           }}
         />
@@ -250,54 +219,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* Structured Data — LocalBusiness */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "@id": `${SITE_URL}#business`,
-              name: "idcardtools",
-              image: `${SITE_URL}/demo.png`,
-              url: SITE_URL,
-              telephone: "+91-9876543210",
-              priceRange: "₹99 - ₹499",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "Indiranagar",
-                addressLocality: "Bangalore",
-                addressRegion: "Karnataka",
-                postalCode: "560038",
-                addressCountry: "IN",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 12.9716,
-                longitude: 77.5946,
-              },
-              openingHoursSpecification: [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                  opens: "10:00",
-                  closes: "18:00",
-                },
-              ],
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.9",
-                reviewCount: "2847",
-                bestRating: "5",
-                worstRating: "1",
-              },
-            }),
-          }}
-        />
       </head>
 
       <body className="relative min-h-screen bg-[#f4f1ea] text-[#0a0a0a] antialiased">
         <main className="relative mt-20">{children}</main>
+        <AnalyticsConsent />
       </body>
     </html>
   );

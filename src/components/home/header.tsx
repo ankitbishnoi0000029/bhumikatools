@@ -101,11 +101,10 @@ const toolsMenu: MenuCategory[] = [
     name: "PDF Intelligence",
     slug: "intelligence",
     group: "pdf",
-    desc: "AI-powered tools",
+    desc: "Compare and translate PDF documents",
     color: "#ec4899",
     tools: [
       { id: "compare", title: "Compare PDF", icon: ShieldAlert },
-      { id: "ai-summarizer", title: "AI Summarizer", icon: Brain, isNew: true },
       { id: "translate", title: "Translate PDF", icon: Languages, isNew: true },
     ],
   },

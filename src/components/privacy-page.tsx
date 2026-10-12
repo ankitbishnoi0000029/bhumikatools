@@ -18,9 +18,9 @@ const sections = [
 
 const highlights = [
   { icon: Trash2, label: '2-hour deletion', desc: 'Every file you upload is permanently deleted within 2 hours.' },
-  { icon: Lock, label: 'End-to-end encryption', desc: 'TLS 1.3 in transit, AES-256 at rest.' },
-  { icon: Eye, label: 'Zero tracking', desc: 'No ads, no third-party analytics, no data sold.' },
-  { icon: UserCheck, label: 'You own your data', desc: 'Always. We claim no rights over your files.' },
+  { icon: Lock, label: 'Security controls', desc: 'See the current service and account safeguards described below.' },
+  { icon: Eye, label: 'Analytics by choice', desc: 'Optional Google Analytics loads only after you opt in.' },
+  { icon: UserCheck, label: 'Privacy settings', desc: 'Change or withdraw your analytics choice from any page.' },
 ];
 
 export default function PrivacyPage() {
@@ -176,8 +176,8 @@ export default function PrivacyPage() {
                 who visits idcardtools.com.
               </p>
               <p className="text-black/70 italic">
-                The short version: we don&apos;t sell your data, we don&apos;t run ads, and 
-                we delete your files within 2 hours.
+                The short version: analytics is optional, is not loaded before consent, and
+                can be disabled again from Privacy settings.
               </p>
             </Section>
 
@@ -188,6 +188,7 @@ export default function PrivacyPage() {
                 { term: 'Account information', def: 'If you sign up, we store your name and email. Passwords are hashed with bcrypt.' },
                 { term: 'Order information', def: 'For PVC card orders: shipping address, phone number, and payment confirmation (no card details).' },
                 { term: 'Basic usage logs', def: 'IP address, browser type, and error logs — used only to prevent abuse and fix bugs. Deleted after 30 days.' },
+                { term: 'Optional analytics', def: 'If Google Analytics is configured and you opt in, page visits and Core Web Vitals are sent to Google for site measurement. Analytics is not loaded if you reject.' },
               ]} />
               <p className="text-black/70">
                 We do <strong className="text-black">not</strong> collect: browsing history, 
@@ -196,12 +197,13 @@ export default function PrivacyPage() {
             </Section>
 
             <Section id="use" num="03" title="How we use it">
-              <p>Your data is used for exactly four purposes:</p>
+              <p>Your data is used for these service purposes:</p>
               <List items={[
                 { term: 'To deliver the service', def: 'Process your files, print your cards, and ship your orders.' },
                 { term: 'To communicate', def: 'Order updates, security alerts, and (rarely) product announcements — with a one-click unsubscribe.' },
                 { term: 'To keep the platform safe', def: 'Detect abuse, prevent spam, and protect our infrastructure.' },
                 { term: 'To improve the product', def: 'Anonymized, aggregated statistics only. Never tied to your identity.' },
+                { term: 'To measure site performance', def: 'With your consent, Google Analytics receives page views and Core Web Vitals when the site is configured with a GA4 Measurement ID.' },
               ]} />
             </Section>
 
@@ -225,30 +227,31 @@ export default function PrivacyPage() {
 
             <Section id="sharing" num="05" title="Sharing your data">
               <p>
-                We share data with exactly three types of third parties — all vetted, 
-                all necessary to run the service:
+                Service providers may process limited information to support site and order functionality:
               </p>
               <List items={[
                 { term: 'Payment processors', def: 'Razorpay and Stripe handle payments. We never see your card details.' },
                 { term: 'Cloud infrastructure', def: 'AWS Mumbai region for file processing. Files are encrypted at rest.' },
                 { term: 'Shipping partners', def: 'Delhivery and India Post receive only your name, address, and phone for card delivery.' },
+                { term: 'Google Analytics', def: 'If configured, Google receives page-view and Core Web Vitals events only after you opt in. See Google’s privacy information at policies.google.com/privacy.' },
               ]} />
               <p className="text-black/70">
                 We do <strong className="text-black">not</strong> sell your data. We do 
-                <strong className="text-black"> not</strong> share your data with advertisers, 
-                data brokers, or any government agency unless legally compelled.
+                <strong className="text-black"> not</strong> sell your personal information or use Google Analytics for advertising. Analytics use is optional and can be withdrawn through Privacy settings.
               </p>
             </Section>
 
             <Section id="cookies" num="06" title="Cookies">
               <p>
-                We use only the cookies required to keep you logged in and to protect 
-                against CSRF attacks. No tracking cookies. No third-party pixels. No 
-                advertising IDs.
+                Your analytics choice is saved in this browser&apos;s local storage. Google
+                Analytics is not loaded unless you opt in; after opt-in, Google Analytics
+                may use cookies to measure visits. Rejecting analytics prevents the
+                analytics scripts from loading.
               </p>
               <p>
-                If you disable cookies in your browser, you can still use every tool on 
-                this site — you just won&apos;t be able to stay logged in.
+                You can change your choice at any time with the Privacy settings button
+                shown on every page. Clearing this browser&apos;s site storage also clears
+                the saved choice.
               </p>
             </Section>
 

@@ -152,7 +152,7 @@ export default function BlogPage() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16"
         >
-          <Link href="/blog#articles" className="block group">
+          <Link href="/blog/aadhaar-pvc-guide" className="block group">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 p-8 md:p-10 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500">
               
               {/* Left: Featured tag */}

@@ -1,0 +1,22 @@
+# idcardtools
+
+> idcardtools offers online PDF and image tools, along with E-Aadhaar PVC card printing information.
+
+## Key pages
+
+- [Home](https://idcardtools.com/): E-Aadhaar PVC card printing and online document tools.
+- [PDF tools](https://idcardtools.com/pdf-tools): Free PDF tools for merging, splitting, compressing, converting, and editing documents.
+- [Image tools](https://idcardtools.com/image-tools): Online image conversion and editing tools.
+- [Blog](https://idcardtools.com/blog): Guides and updates about PDF tools, document privacy, and E-Aadhaar PVC cards.
+- [About](https://idcardtools.com/about): Information about idcardtools.
+- [Contact](https://idcardtools.com/contacts): Contact and service information.
+- [Privacy policy](https://idcardtools.com/privacy): Privacy information.
+- [Terms](https://idcardtools.com/terms): Terms of service.
+
+## Popular PDF tools
+
+- [Merge PDF](https://idcardtools.com/pdf-tools/merge)
+- [Compress PDF](https://idcardtools.com/pdf-tools/compress)
+- [Split PDF](https://idcardtools.com/pdf-tools/split)
+- [PDF to Word](https://idcardtools.com/pdf-tools/pdf-word)
+- [JPG to PDF](https://idcardtools.com/pdf-tools/jpg-pdf)

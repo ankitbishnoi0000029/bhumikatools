@@ -38,15 +38,15 @@ const toolsData: Tool[] = [
   { id: 'ocr', title: 'OCR PDF', desc: 'Convert scanned PDFs into searchable and selectable text.', icon: ScanText, category: 'Optimize PDF', isFeatured: true },
   { id: 'scan', title: 'Scan to PDF', desc: 'Capture scans from your phone and send to browser.', icon: FileInput, category: 'Optimize PDF' },
   { id: 'pdf-word', title: 'PDF to Word', desc: 'Convert PDFs into editable DOC and DOCX documents.', icon: FileOutput, category: 'Convert PDF', isFeatured: true },
-  { id: 'pdf-ppt', title: 'PDF to PowerPoint', desc: 'Turn PDFs into editable PPT and PPTX slideshows.', icon: Presentation, category: 'Convert PDF' },
-  { id: 'pdf-excel', title: 'PDF to Excel', desc: 'Pull data straight from PDFs into Excel spreadsheets.', icon: FileSpreadsheet, category: 'Convert PDF' },
+  { id: 'pdf-to-powerpoint', title: 'PDF to PowerPoint', desc: 'Turn PDFs into editable PPT and PPTX slideshows.', icon: Presentation, category: 'Convert PDF' },
+  { id: 'pdf-to-excel', title: 'PDF to Excel', desc: 'Pull data straight from PDFs into Excel spreadsheets.', icon: FileSpreadsheet, category: 'Convert PDF' },
   { id: 'word-pdf', title: 'Word to PDF', desc: 'Make DOC and DOCX files easy to read as PDF.', icon: FileText, category: 'Convert PDF' },
   { id: 'ppt-pdf', title: 'PowerPoint to PDF', desc: 'Make PPT and PPTX slideshows easy to view.', icon: Presentation, category: 'Convert PDF' },
-  { id: 'excel-pdf', title: 'Excel to PDF', desc: 'Make Excel spreadsheets easy to read as PDF.', icon: FileSpreadsheet, category: 'Convert PDF' },
+  { id: 'excel-to-pdf', title: 'Excel to PDF', desc: 'Make Excel spreadsheets easy to read as PDF.', icon: FileSpreadsheet, category: 'Convert PDF' },
   { id: 'pdf-jpg', title: 'PDF to JPG', desc: 'Convert each PDF page into a JPG or extract images.', icon: ImageIcon, category: 'Convert PDF', isFeatured: true },
   { id: 'jpg-pdf', title: 'JPG to PDF', desc: 'Convert JPG images to PDF with adjustable margins.', icon: ImageIcon, category: 'Convert PDF' },
   { id: 'html-pdf', title: 'HTML to PDF', desc: 'Convert webpages in HTML to PDF with one click.', icon: FileCode2, category: 'Convert PDF' },
-  { id: 'pdf-a', title: 'PDF to PDF/A', desc: 'Transform PDF to the ISO-standardized archival format.', icon: FileText, category: 'Convert PDF' },
+  { id: 'markdown-pdf', title: 'Markdown to PDF', desc: 'Convert Markdown documents into PDF files.', icon: FileText, category: 'Convert PDF' },
   { id: 'pdf-md', title: 'PDF to Markdown', desc: 'Turn PDFs into Markdown for notes, docs, and LLMs.', icon: FileCode2, category: 'Convert PDF', isNew: true },
   { id: 'edit', title: 'Edit PDF', desc: 'Add text, images, shapes, or freehand annotations.', icon: Edit3, category: 'Edit PDF', isFeatured: true },
   { id: 'sign', title: 'Sign PDF', desc: 'Sign yourself or request e-signatures from others.', icon: PenTool, category: 'Edit PDF' },
@@ -56,7 +56,7 @@ const toolsData: Tool[] = [
   { id: 'protect', title: 'Protect PDF', desc: 'Encrypt PDF documents to prevent unauthorized access.', icon: Lock, category: 'PDF Security' },
   { id: 'redact', title: 'Redact PDF', desc: 'Permanently remove sensitive information from a PDF.', icon: EyeOff, category: 'PDF Security' },
   { id: 'compare', title: 'Compare PDF', desc: 'Side-by-side comparison to spot changes between versions.', icon: ShieldAlert, category: 'PDF Intelligence' },
-  { id: 'ai-summarizer', title: 'AI Summarizer', desc: 'Generate concise summaries from articles and essays.', icon: Brain, category: 'PDF Intelligence', isNew: true },
+  { id: 'pdf-read', title: 'Read PDF', desc: 'Open and read PDF documents in your browser.', icon: FileText, category: 'PDF Intelligence' },
   { id: 'translate', title: 'Translate PDF', desc: 'Translate PDFs with AI while preserving layout.', icon: Languages, category: 'PDF Intelligence', isNew: true },
 ];
 
@@ -77,7 +77,7 @@ const categoriesDetail = [
   { num: '03', name: 'Convert PDF', slug: 'convert', desc: 'Convert PDFs to and from Word, Excel, PowerPoint, JPG, HTML, and Markdown. Preserve formatting with 99% accuracy.', tools: ['PDF to Word', 'PDF to Excel', 'Word to PDF', 'JPG to PDF'], color: '#3b82f6' },
   { num: '04', name: 'Edit PDF', slug: 'edit', desc: 'Add text, images, and annotations. Sign documents electronically. Watermark pages. Create interactive fillable forms.', tools: ['Edit', 'Sign', 'Watermark', 'Forms'], color: '#a855f7' },
   { num: '05', name: 'PDF Security', slug: 'security', desc: 'Protect sensitive documents with password encryption. Remove forgotten passwords from your own files. Redact permanently.', tools: ['Unlock', 'Protect', 'Redact'], color: '#ef4444' },
-  { num: '06', name: 'PDF Intelligence', slug: 'intelligence', desc: 'AI-powered tools: summarize long PDFs in seconds, translate while preserving layout, compare versions side-by-side.', tools: ['AI Summarizer', 'Translate', 'Compare'], color: '#ec4899' },
+  { num: '06', name: 'PDF Intelligence', slug: 'intelligence', desc: 'Review differences between PDF versions and translate supported document text.', tools: ['Translate', 'Compare'], color: '#ec4899' },
 ];
 
 // --- HOW IT WORKS DATA ---
@@ -190,17 +190,7 @@ const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => {
   return (
     <motion.div variants={itemVariants} className="h-full">
       <Link
-        href={
-          tool.id === "pdf-ppt"
-            ? "/pdf-tools/pdf-to-powerpoint"
-            : tool.id === "pdf-excel"
-              ? "/pdf-tools/pdf-to-excel"
-              : tool.id === "excel-pdf"
-                ? "/pdf-tools/excel-to-pdf"
-                : ["crop", "pdf-a", "ai-summarizer"].includes(tool.id)
-                  ? "/pdf-tools"
-                  : `/pdf-tools/${tool.id}`
-        }
+        href={`/pdf-tools/${tool.id}`}
         className="block h-full outline-none group"
       >
         <div className="relative flex flex-col h-full p-6 rounded-2xl bg-white border border-black/[0.06] transition-all duration-300 ease-out group-hover:border-black/20 group-hover:-translate-y-1 group-hover:shadow-[0_24px_50px_-24px_rgba(0,0,0,0.22)] overflow-hidden">

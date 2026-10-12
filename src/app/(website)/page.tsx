@@ -8,9 +8,9 @@ import { Faqs } from "@/components/home/faqs";
 import { FinalCta } from "@/components/home/final-cta";
 
 export const metadata: Metadata = {
-  title: "Print E-Aadhaar on PVC Card + 31 Free PDF Tools",
+  title: { absolute: "E-Aadhaar PVC Printing & Free PDF Tools | idcardtools" },
   description:
-    "Print your E-Aadhaar on premium PVC cards (from ₹99) and access 31+ free PDF tools. UIDAI-compliant. Delivered in 24 hours. No signup required. Trusted by 2M+ Indians.",
+    "Print your E-Aadhaar on a PVC card, or use 31+ free PDF tools to merge, convert, and edit documents. No signup. Explore private, browser-based tools today.",
   alternates: {
     canonical: "https://idcardtools.com",
   },
@@ -128,8 +128,8 @@ const productSchema = {
     "@type": "AggregateOffer",
     priceCurrency: "INR",
     lowPrice: "99",
-    highPrice: "499",
-    offerCount: "3",
+    highPrice: "149",
+    offerCount: "2",
     availability: "https://schema.org/InStock",
     offers: [
       {
@@ -150,39 +150,6 @@ const productSchema = {
       },
     ],
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "2847",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: [
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Priya Sharma" },
-      datePublished: "2025-10-12",
-      reviewBody:
-        "I printed over 200 E-Aadhaar PVC cards for my clients last month. The quality is exactly like a bank card.",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-    },
-    {
-      "@type": "Review",
-      author: { "@type": "Person", name: "Rajesh Kumar" },
-      datePublished: "2025-10-08",
-      reviewBody:
-        "The AI summarizer saved me hours of reading contracts. What used to take an evening now takes 30 seconds.",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-    },
-  ],
 };
 
 const breadcrumbSchema = {
@@ -216,17 +183,8 @@ export default function Home() {
       />
 
       {/* Semantic HTML5 structure */}
-      <article itemScope itemType="https://schema.org/WebPage">
-        <header className="sr-only">
-          <h1>idcardtools — Print E-Aadhaar on PVC Card and Free PDF Tools</h1>
-          <p>
-            Print your E-Aadhaar on premium PVC cards. 31+ free PDF tools for merge,
-            split, compress, convert, sign, and protect. UIDAI-compliant. No signup.
-            Trusted by 2 million+ Indians.
-          </p>
-        </header>
-
-        <Hero />
+        <article itemScope itemType="https://schema.org/WebPage">
+          <Hero />
         <HowItWorks />
         <AutoIdCropper />
         <FeaturedProduct />

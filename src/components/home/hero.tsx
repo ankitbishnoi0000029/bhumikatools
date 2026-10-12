@@ -64,11 +64,9 @@ export const Hero = () => {
               className="font-serif text-[52px] md:text-[72px] lg:text-[88px] leading-[0.98] tracking-[-0.02em] mb-10"
               style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
             >
-              Your Aadhaar,
+              Print E-Aadhaar
               <br />
-              <span className="italic text-[#ff6a00]">printed</span> the way
-              <br />
-              it <span className="italic">deserves</span> to be.
+              on a <span className="italic text-[#ff6a00]">PVC card</span>
             </motion.h1>
 
             {/* Subheading */}
@@ -147,6 +145,7 @@ export const Hero = () => {
                   src="/aadhaar-to-pvc.png"
                   alt="E-Aadhaar to PVC card"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
                   className="object-cover"
                   priority
                 />

@@ -11,7 +11,7 @@ const PAGE_URL = `${SITE_URL}/privacy`;
 export const metadata: Metadata = {
   title: "Privacy Policy — How We Protect Your Data",
   description:
-    "Read idcardtools' privacy policy in plain English. 2-hour file auto-deletion, TLS 1.3 encryption, zero tracking, and no data selling. Your documents stay yours — always.",
+    "Review how idcardtools handles files, accounts, orders, and optional analytics. Learn what information is collected, how it is used, and how to change your privacy choices.",
   keywords: [
     "idcardtools privacy policy",
     "pdf tools privacy",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "browser-based pdf privacy",
     "aadhaar printing privacy",
     "secure pdf tools",
-    "no tracking pdf tools",
+    "consent based analytics",
     "2 hour file deletion",
     "tls encryption pdf",
     "how idcardtools protects data",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "idcardtools",
     title: "Privacy Policy — How We Protect Your Data | idcardtools",
     description:
-      "Plain-English privacy policy. 2-hour deletion, TLS 1.3 encryption, zero tracking. Your documents stay yours.",
+      "Plain-English details about file handling, account data, orders, and optional analytics. Review your privacy choices at any time.",
     countryName: "India",
     images: [
       {
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     creator: "@idcardtools",
     title: "Privacy Policy — idcardtools",
     description:
-      "Plain-English privacy policy. 2-hour deletion. Zero tracking. No data selling.",
+      "How we handle your documents, accounts, orders, and optional analytics.",
     images: [`${SITE_URL}/demo.png`],
   },
   robots: {
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     },
   },
   other: {
-    "article:modified_time": "2025-10-15",
+    "article:modified_time": "2026-10-12",
     "article:published_time": "2023-06-01",
     "legal:privacy_contact": "privacy@idcardtools.com",
     "legal:dpo": "idcardtools Legal Team",
@@ -105,7 +105,7 @@ const privacyPageSchema = {
   url: PAGE_URL,
   inLanguage: "en-IN",
   datePublished: "2023-06-01",
-  dateModified: "2025-10-15",
+  dateModified: "2026-10-12",
   isPartOf: {
     "@type": "WebSite",
     name: "idcardtools",
@@ -154,30 +154,6 @@ const organizationSchema = {
     width: 512,
     height: 512,
   },
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      contactType: "privacy",
-      email: "privacy@idcardtools.com",
-      areaServed: "Worldwide",
-      availableLanguage: ["English", "Hindi"],
-    },
-    {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      email: "hello@idcardtools.com",
-      telephone: "+91-9876543210",
-      areaServed: "IN",
-    },
-  ],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Indiranagar",
-    addressLocality: "Bangalore",
-    addressRegion: "Karnataka",
-    postalCode: "560038",
-    addressCountry: "IN",
-  },
 };
 
 // 3. BreadcrumbList Schema
@@ -220,7 +196,7 @@ const faqSchema = {
       name: "Does idcardtools sell my data?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Never. We do not sell, share, or rent your data to anyone. We don't run ads, we don't use third-party analytics, and we don't track you across the web.",
+        text: "We do not sell your personal information. If Google Analytics is configured, it is loaded only after you opt in and is used to measure site visits and Core Web Vitals. You can reject or withdraw that choice in Privacy settings.",
       },
     },
     {
@@ -268,7 +244,7 @@ const faqSchema = {
       name: "Does idcardtools use cookies?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We use only the essential cookies required to keep you logged in and protect against CSRF attacks. No tracking cookies, no third-party pixels, no advertising IDs.",
+        text: "Analytics is not loaded unless you opt in. If enabled, Google Analytics may use cookies after consent. Your choice is stored in this browser and can be changed using Privacy settings.",
       },
     },
   ],
@@ -282,7 +258,7 @@ const privacyPolicySchema = {
   name: "idcardtools Privacy Policy",
   url: PAGE_URL,
   datePublished: "2023-06-01",
-  dateModified: "2025-10-15",
+  dateModified: "2026-10-12",
   inLanguage: "en-IN",
   publisher: {
     "@id": `${SITE_URL}#organization`,

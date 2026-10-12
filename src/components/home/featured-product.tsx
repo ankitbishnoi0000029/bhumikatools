@@ -60,8 +60,8 @@ export const FeaturedProduct = () => {
                   src="/aadhaar-to-pvc.png"
                   alt="E-Aadhaar to PVC card"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
-                  priority
                 />
               </div>
             </div>

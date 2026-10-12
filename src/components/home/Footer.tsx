@@ -11,8 +11,9 @@ const footerColumns = [
     links: [
       { name: 'Home', href: '/' },
       { name: 'PDF Tools', href: '/pdf-tools' },
-      { name: 'Free PDF Tools', href: '/pdf-tools' },
+      { name: 'Image Tools', href: '/image-tools' },
       { name: 'Blog', href: '/blog' },
+      { name: 'Aadhaar PVC Guide', href: '/blog/aadhaar-pvc-guide' },
     ],
   },
   {

@@ -215,15 +215,15 @@ const collectionSchema = {
       { "@type": "ListItem", position: 10, name: "Scan to PDF", url: `${PAGE_URL}/scan` },
       // Convert
       { "@type": "ListItem", position: 11, name: "PDF to Word", url: `${PAGE_URL}/pdf-word` },
-      { "@type": "ListItem", position: 12, name: "PDF to PowerPoint", url: `${PAGE_URL}/pdf-ppt` },
-      { "@type": "ListItem", position: 13, name: "PDF to Excel", url: `${PAGE_URL}/pdf-excel` },
+      { "@type": "ListItem", position: 12, name: "PDF to PowerPoint", url: `${PAGE_URL}/pdf-to-powerpoint` },
+      { "@type": "ListItem", position: 13, name: "PDF to Excel", url: `${PAGE_URL}/pdf-to-excel` },
       { "@type": "ListItem", position: 14, name: "Word to PDF", url: `${PAGE_URL}/word-pdf` },
       { "@type": "ListItem", position: 15, name: "PowerPoint to PDF", url: `${PAGE_URL}/ppt-pdf` },
-      { "@type": "ListItem", position: 16, name: "Excel to PDF", url: `${PAGE_URL}/excel-pdf` },
+      { "@type": "ListItem", position: 16, name: "Excel to PDF", url: `${PAGE_URL}/excel-to-pdf` },
       { "@type": "ListItem", position: 17, name: "PDF to JPG", url: `${PAGE_URL}/pdf-jpg` },
       { "@type": "ListItem", position: 18, name: "JPG to PDF", url: `${PAGE_URL}/jpg-pdf` },
       { "@type": "ListItem", position: 19, name: "HTML to PDF", url: `${PAGE_URL}/html-pdf` },
-      { "@type": "ListItem", position: 20, name: "PDF to PDF/A", url: `${PAGE_URL}/pdf-a` },
+      { "@type": "ListItem", position: 20, name: "Markdown to PDF", url: `${PAGE_URL}/markdown-pdf` },
       { "@type": "ListItem", position: 21, name: "PDF to Markdown", url: `${PAGE_URL}/pdf-md` },
       // Edit
       { "@type": "ListItem", position: 22, name: "Edit PDF", url: `${PAGE_URL}/edit` },
@@ -236,7 +236,7 @@ const collectionSchema = {
       { "@type": "ListItem", position: 28, name: "Redact PDF", url: `${PAGE_URL}/redact` },
       // Intelligence
       { "@type": "ListItem", position: 29, name: "Compare PDF", url: `${PAGE_URL}/compare` },
-      { "@type": "ListItem", position: 30, name: "AI Summarizer", url: `${PAGE_URL}/ai-summarizer` },
+      { "@type": "ListItem", position: 30, name: "Read PDF", url: `${PAGE_URL}/pdf-read` },
       { "@type": "ListItem", position: 31, name: "Translate PDF", url: `${PAGE_URL}/translate` },
     ],
   },
@@ -284,14 +284,6 @@ const softwareSchema = {
       "@type": "Place",
       name: "Worldwide",
     },
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "2847",
-    bestRating: "5",
-    worstRating: "1",
-    ratingExplanation: "Based on 2,847 verified user reviews",
   },
   author: {
     "@type": "Organization",
