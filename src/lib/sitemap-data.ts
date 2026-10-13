@@ -15,12 +15,13 @@ const pdfToolSlugs = [
   "html-pdf", "jpg-pdf", "markdown-pdf", "merge", "ocr", "organize",
   "page-numbers", "pdf-jpg", "pdf-md", "pdf-read", "pdf-to-excel",
   "pdf-to-powerpoint", "pdf-word", "ppt-pdf", "protect", "redact",
-  "repair", "rotate", "scan", "sign", "split", "translate", "unlock",
+  "repair", "rotate", "scan", "sign", "split", "translate",
   "watermark", "word-pdf",
 ];
 
 const generalSitemapUrls: SitemapEntry[] = [
   SITE_URL,
+  `${SITE_URL}/e-aadhaar`,
   `${SITE_URL}/about`,
   `${SITE_URL}/contacts`,
   `${SITE_URL}/blog`,
@@ -54,7 +55,11 @@ export const imageToolSitemapUrls: SitemapEntry[] = [
   priority: url === `${SITE_URL}/image-tools` ? 0.8 : 0.6,
 }));
 
-export const sitemapUrls: SitemapEntry[] = generalSitemapUrls;
+export const allSitemapUrls: SitemapEntry[] = [
+  ...generalSitemapUrls,
+  ...pdfToolSitemapUrls,
+  ...imageToolSitemapUrls,
+];
 
 export function sitemapUrlSetXml(urls: SitemapEntry[]) {
   const entries = urls
@@ -67,23 +72,4 @@ export function sitemapUrlSetXml(urls: SitemapEntry[]) {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries}
 </urlset>`;
-}
-
-export const sitemapChildren = [
-  `${SITE_URL}/sitemap-general.xml`,
-  `${SITE_URL}/sitemap-pdf-tools.xml`,
-  `${SITE_URL}/sitemap-image-tools.xml`,
-];
-
-export function sitemapIndexXml(children: string[] = sitemapChildren) {
-  const entries = children
-    .map(
-      (loc) =>
-        `  <sitemap>\n    <loc>${loc}</loc>\n    <lastmod>${LAST_MODIFIED}</lastmod>\n  </sitemap>`
-    )
-    .join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries}
-</sitemapindex>`;
 }

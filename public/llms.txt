@@ -86,5 +86,5 @@
 
 ## Machine-readable files
 
-- [Sitemap index](https://idcardtools.com/sitemap.xml): Sitemap index with separate sitemaps for general pages, PDF tools, and image tools.
+- [Sitemap](https://idcardtools.com/sitemap.xml): All site URLs (general pages, PDF tools, and image tools).
 - [RSS feed](https://idcardtools.com/blog/rss.xml): RSS feed for the blog.
