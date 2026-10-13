@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Privacy Policy",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy — idcardtools",
     description:
       "How we handle your documents, accounts, orders, and optional analytics.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: {
     index: true,

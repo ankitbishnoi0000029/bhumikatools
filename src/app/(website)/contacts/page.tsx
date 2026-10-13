@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "Contact idcardtools",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "Contact idcardtools — Support & Bulk Orders",
     description:
       "Email support within 2 hours. Bulk PVC card orders welcome.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: {
     index: true,
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     },
   },
   other: {
-    "contact:email": "hello@idcardtools.com",
+    "contact:email": "info@idcardtools.com",
     "contact:phone_number": "+91-9876543210",
     "contact:country_name": "India",
     "contact:region": "Karnataka",
@@ -139,7 +139,7 @@ const organizationSchema = {
   description:
     "idcardtools provides free PDF tools and premium E-Aadhaar PVC card printing services across India.",
   foundingDate: "2023",
-  email: "hello@idcardtools.com",
+  email: "info@idcardtools.com",
   telephone: "+91-9876543210",
   address: {
     "@type": "PostalAddress",
@@ -153,7 +153,7 @@ const organizationSchema = {
     {
       "@type": "ContactPoint",
       telephone: "+91-9876543210",
-      email: "hello@idcardtools.com",
+      email: "info@idcardtools.com",
       contactType: "customer support",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi", "Kannada"],
@@ -197,10 +197,10 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   "@id": `${SITE_URL}#localbusiness`,
   name: "idcardtools",
-  image: `${SITE_URL}/demo.png`,
+  image: `${SITE_URL}/aitools.png`,
   url: SITE_URL,
   telephone: "+91-9876543210",
-  email: "hello@idcardtools.com",
+  email: "info@idcardtools.com",
   priceRange: "₹99 - ₹499",
   address: {
     "@type": "PostalAddress",
@@ -282,7 +282,7 @@ const faqSchema = {
       name: "Do you offer phone support?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, we offer phone support for PVC card orders and bulk inquiries. For all other questions, please email hello@idcardtools.com for the fastest response.",
+        text: "Yes, we offer phone support for PVC card orders and bulk inquiries. For all other questions, please email info@idcardtools.com for the fastest response.",
       },
     },
     {
@@ -290,7 +290,7 @@ const faqSchema = {
       name: "Can I visit the idcardtools office?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, by appointment only. Our office is located in Indiranagar, Bangalore. Email hello@idcardtools.com to schedule a visit.",
+        text: "Yes, by appointment only. Our office is located in Indiranagar, Bangalore. Email info@idcardtools.com to schedule a visit.",
       },
     },
     {
@@ -298,7 +298,7 @@ const faqSchema = {
       name: "How do I place a bulk PVC card order?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Email us at hello@idcardtools.com with your quantity requirement (minimum 10 cards) and we'll send you a custom quote within 24 hours. Special pricing applies for orders of 100+ cards.",
+        text: "Email us at info@idcardtools.com with your quantity requirement (minimum 10 cards) and we'll send you a custom quote within 24 hours. Special pricing applies for orders of 100+ cards.",
       },
     },
     {

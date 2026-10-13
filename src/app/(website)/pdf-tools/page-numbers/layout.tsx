@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Add Page Numbers to PDF Online",
     description: "Number pages in PDF documents and customize where page numbers appear.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Add PDF page numbers with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Add PDF page numbers with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Add Page Numbers to PDF Online",
     description: "Number pages in PDF documents and customize where page numbers appear.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

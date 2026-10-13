@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Compare PDF Files Online Free",
     description: "Find differences between two PDF documents with a free online PDF comparison tool.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Compare PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Compare PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Compare PDF Files Online Free",
     description: "Find differences between two PDF documents with a free online PDF comparison tool.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

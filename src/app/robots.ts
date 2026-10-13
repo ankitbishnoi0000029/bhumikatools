@@ -14,6 +14,8 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: [
       "https://idcardtools.com/sitemap.xml",
+      "https://idcardtools.com/sitemap-general.xml",
+      "https://idcardtools.com/sitemap-pdf-tools.xml",
       "https://idcardtools.com/sitemap-image-tools.xml",
     ],
   };

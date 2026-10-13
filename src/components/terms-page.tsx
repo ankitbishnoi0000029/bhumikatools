@@ -29,7 +29,7 @@ export default function TermsPage() {
   const [activeSection, setActiveSection] = useState('acceptance');
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden">
 
       {/* Vertical rules */}
       <div className="absolute inset-0 pointer-events-none hidden md:block">

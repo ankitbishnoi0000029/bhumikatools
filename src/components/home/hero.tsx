@@ -122,7 +122,7 @@ export const Hero = () => {
                 </span>
               </Link>
 
-              <Link href="/demo.png" className="group inline-flex items-center gap-3">
+              <Link href="/aitools.png" className="group inline-flex items-center gap-3">
                 <span className="relative text-[15px] font-medium text-black/50 pb-1 hover:text-black transition-colors">
                   View a sample
                   <span className="absolute left-0 right-0 bottom-0 h-px bg-black/20 group-hover:bg-black transition-colors duration-300" />

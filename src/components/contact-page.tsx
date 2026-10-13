@@ -9,15 +9,15 @@ const contactMethods = [
     n: '01',
     icon: Mail,
     label: 'Email',
-    value: 'hello@idcardtools.com',
-    href: 'mailto:hello@idcardtools.com',
+    value: 'info@idcardtools.com',
+    href: 'mailto:info@idcardtools.com',
     response: 'Under 2 hours',
   },
   {
     n: '02',
     icon: Phone,
     label: 'Phone',
-    value: '+91 98765 43210',
+    value: '+91 86995-92500',
     href: 'tel:+919876543210',
     response: 'Mon-Fri, 10AM-6PM',
   },
@@ -48,7 +48,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden">
 
       <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="container mx-auto px-8 h-full relative max-w-[1400px]">

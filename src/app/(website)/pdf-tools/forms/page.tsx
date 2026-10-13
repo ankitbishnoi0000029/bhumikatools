@@ -867,7 +867,7 @@ export default function FormsPage() {
   // ============================================
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden min-h-screen">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden min-h-screen">
       <input ref={inputRef} type="file" accept="application/pdf,.pdf" onChange={handleInputChange} className="hidden" />
 
       {/* Vertical rules */}

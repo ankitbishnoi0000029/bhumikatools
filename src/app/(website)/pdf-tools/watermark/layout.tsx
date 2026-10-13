@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Add or Remove a PDF Watermark Online",
     description: "Customize text or image watermarks on PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Add a PDF watermark with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Add a PDF watermark with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Add or Remove a PDF Watermark Online",
     description: "Customize text or image watermarks on PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

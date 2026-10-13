@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Word to PDF Converter Online Free",
     description: "Convert Word DOC and DOCX files into portable PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert Word to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert Word to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Word to PDF Converter Online Free",
     description: "Convert Word DOC and DOCX files into portable PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

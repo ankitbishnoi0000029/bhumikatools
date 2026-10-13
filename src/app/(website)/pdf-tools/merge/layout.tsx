@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Merge PDF Files Online Free",
     description: "Join multiple PDF documents into a single file with a free online PDF merger.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Merge PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Merge PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Merge PDF Files Online Free",
     description: "Join multiple PDF documents into a single file with a free online PDF merger.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

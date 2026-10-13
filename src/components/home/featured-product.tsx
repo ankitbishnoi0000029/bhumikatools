@@ -172,7 +172,7 @@ export const FeaturedProduct = () => {
                 </span>
               </Link>
 
-              <Link href="/demo.png" className="group inline-flex items-center gap-3">
+              <Link href="/aitools.png" className="group inline-flex items-center gap-3">
                 <span className="relative text-[15px] text-black/50 hover:text-black transition-colors pb-1">
                   View sample card
                 </span>

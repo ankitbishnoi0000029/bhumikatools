@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "JPG to PDF Converter Online Free",
     description: "Turn JPG and JPEG images into PDF documents with a free online converter.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert JPG to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert JPG to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "JPG to PDF Converter Online Free",
     description: "Turn JPG and JPEG images into PDF documents with a free online converter.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

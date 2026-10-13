@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Unlock PDF Online",
     description: "Remove PDF password protection from documents you are authorized to access.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Unlock PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Unlock PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Unlock PDF Online",
     description: "Remove PDF password protection from documents you are authorized to access.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { imageToolSlugs } from "@/lib/image-tool-metadata";
 import {
   Search,
   ArrowUpRight,
@@ -60,6 +61,8 @@ type Category = {
   tools: Tool[];
 };
 
+const availableImageToolSlugs = new Set<string>(imageToolSlugs);
+
 // ============================================================
 // DATA
 // ============================================================
@@ -69,7 +72,7 @@ const imageCategories: Category[] = [
     slug: "image-ai",
     desc: "Generate, enhance, and remove with AI",
     tools: [
-      { id: "remove-background", title: "Remove Background", icon: Eraser, desc: "Instantly detect and cut out backgrounds.", isNew: true },
+      { id: "bg-remove", title: "Remove Background", icon: Eraser, desc: "Instantly detect and cut out backgrounds.", isNew: true },
       { id: "transparent-background", title: "Make Background Transparent", icon: Eraser, desc: "Make background transparent instantly." },
       { id: "remove-watermark", title: "Remove Watermark", icon: Trash2, desc: "Remove watermark from your photo." },
       { id: "remove-objects-photo", title: "Remove Objects Photo", icon: Eraser, desc: "Remove unwanted objects from your photo." },
@@ -145,17 +148,20 @@ const imageCategories: Category[] = [
       { id: "image-to-text", title: "Image to Text", icon: Type, desc: "Extract text from an image using OCR.", isNew: true },
     ],
   },
-];
+].map((category) => ({
+  ...category,
+  tools: category.tools.filter((tool) => availableImageToolSlugs.has(tool.id)),
+})).filter((category) => category.tools.length > 0);
 
 const totalImageTools = imageCategories.reduce((n, c) => n + c.tools.length, 0);
 
 const FEATURED_IDS = [
-  "ai-image-generator",
-  "remove-background",
+  "bg-remove",
   "upscale-image",
   "heic-to-jpg",
   "compress-image",
-  "image-to-text",
+  "image-splitter",
+  "photo-editor",
 ];
 
 // ============================================================

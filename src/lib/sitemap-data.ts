@@ -3,31 +3,6 @@ import { imageToolSlugs } from "@/lib/image-tool-metadata";
 const SITE_URL = "https://idcardtools.com";
 const LAST_MODIFIED = "2026-10-13";
 
-const homeSitemapUrls = [
-  SITE_URL,
-  `${SITE_URL}/about`,
-  `${SITE_URL}/contacts`,
-  `${SITE_URL}/privacy`,
-  `${SITE_URL}/terms`,
-];
-
-const toolSitemapUrls = [
-  `${SITE_URL}/pdf-tools`,
-  ...[
-    "compare", "compress", "crop", "edit", "excel-to-pdf", "forms",
-    "html-pdf", "jpg-pdf", "markdown-pdf", "merge", "ocr", "organize",
-    "page-numbers", "pdf-jpg", "pdf-md", "pdf-read", "pdf-to-excel",
-    "pdf-to-powerpoint", "pdf-word", "ppt-pdf", "protect", "redact",
-    "repair", "rotate", "scan", "sign", "split", "translate", "unlock",
-    "watermark", "word-pdf",
-  ].map((slug) => `${SITE_URL}/pdf-tools/${slug}`),
-];
-
-const blogSitemapUrls = [
-  `${SITE_URL}/blog`,
-  `${SITE_URL}/blog/aadhaar-pvc-guide`,
-];
-
 export type SitemapEntry = {
   url: string;
   lastModified: string;
@@ -35,15 +10,38 @@ export type SitemapEntry = {
   priority: number;
 };
 
-export const sitemapUrls: SitemapEntry[] = [
-  ...homeSitemapUrls,
-  ...toolSitemapUrls,
-  ...blogSitemapUrls,
+const pdfToolSlugs = [
+  "compare", "compress", "edit", "excel-to-pdf", "forms",
+  "html-pdf", "jpg-pdf", "markdown-pdf", "merge", "ocr", "organize",
+  "page-numbers", "pdf-jpg", "pdf-md", "pdf-read", "pdf-to-excel",
+  "pdf-to-powerpoint", "pdf-word", "ppt-pdf", "protect", "redact",
+  "repair", "rotate", "scan", "sign", "split", "translate", "unlock",
+  "watermark", "word-pdf",
+];
+
+const generalSitemapUrls: SitemapEntry[] = [
+  SITE_URL,
+  `${SITE_URL}/about`,
+  `${SITE_URL}/contacts`,
+  `${SITE_URL}/blog`,
+  `${SITE_URL}/blog/aadhaar-pvc-guide`,
+  `${SITE_URL}/privacy`,
+  `${SITE_URL}/terms`,
 ].map((url) => ({
   url,
   lastModified: LAST_MODIFIED,
-  changeFrequency: url === SITE_URL ? "weekly" : "monthly",
-  priority: url === SITE_URL ? 1 : url.endsWith("/blog") || url.endsWith("/pdf-tools") ? 0.8 : 0.6,
+  changeFrequency: url === SITE_URL ? ("weekly" as const) : ("monthly" as const),
+  priority: url === SITE_URL ? 1 : url.endsWith("/blog") ? 0.8 : 0.6,
+}));
+
+export const pdfToolSitemapUrls: SitemapEntry[] = [
+  `${SITE_URL}/pdf-tools`,
+  ...pdfToolSlugs.map((slug) => `${SITE_URL}/pdf-tools/${slug}`),
+].map((url) => ({
+  url,
+  lastModified: LAST_MODIFIED,
+  changeFrequency: "monthly" as const,
+  priority: url === `${SITE_URL}/pdf-tools` ? 0.8 : 0.6,
 }));
 
 export const imageToolSitemapUrls: SitemapEntry[] = [
@@ -52,9 +50,11 @@ export const imageToolSitemapUrls: SitemapEntry[] = [
 ].map((url) => ({
   url,
   lastModified: LAST_MODIFIED,
-  changeFrequency: "monthly",
+  changeFrequency: "monthly" as const,
   priority: url === `${SITE_URL}/image-tools` ? 0.8 : 0.6,
 }));
+
+export const sitemapUrls: SitemapEntry[] = generalSitemapUrls;
 
 export function sitemapUrlSetXml(urls: SitemapEntry[]) {
   const entries = urls
@@ -67,4 +67,23 @@ export function sitemapUrlSetXml(urls: SitemapEntry[]) {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries}
 </urlset>`;
+}
+
+export const sitemapChildren = [
+  `${SITE_URL}/sitemap-general.xml`,
+  `${SITE_URL}/sitemap-pdf-tools.xml`,
+  `${SITE_URL}/sitemap-image-tools.xml`,
+];
+
+export function sitemapIndexXml(children: string[] = sitemapChildren) {
+  const entries = children
+    .map(
+      (loc) =>
+        `  <sitemap>\n    <loc>${loc}</loc>\n    <lastmod>${LAST_MODIFIED}</lastmod>\n  </sitemap>`
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries}
+</sitemapindex>`;
 }

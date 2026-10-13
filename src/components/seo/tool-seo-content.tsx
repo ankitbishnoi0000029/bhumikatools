@@ -7,7 +7,6 @@ const SITE_URL = "https://idcardtools.com";
 const toolDetails: Record<string, { name: string; description: string }> = {
   compare: { name: "Compare PDF", description: "compare two PDF documents and review their differences" },
   compress: { name: "Compress PDF", description: "reduce the file size of a PDF document" },
-  crop: { name: "Crop PDF", description: "crop PDF pages to remove unwanted margins" },
   edit: { name: "Edit PDF", description: "add or adjust content in a PDF document" },
   "excel-to-pdf": { name: "Excel to PDF", description: "convert an Excel spreadsheet into a PDF document" },
   forms: { name: "PDF Forms", description: "work with interactive PDF forms" },
@@ -129,7 +128,7 @@ export function ToolSeoContent() {
   };
 
   return (
-    <section className="container mx-auto max-w-[1400px] px-8 pb-20">
+    <section className="container mx-auto max-w-350 px-8 pb-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

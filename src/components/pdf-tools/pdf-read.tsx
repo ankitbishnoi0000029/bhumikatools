@@ -224,7 +224,9 @@ export default function PDFReader({ initialFile = null }: PDFReaderProps) {
             </h1>
           </div>
           <div className="lg:col-span-5 lg:pb-4">
-            <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">Open, read, and navigate PDFs directly in your browser. Zoom, rotate, search, print, and download — all without uploads to any server.</p>
+            <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">View and read PDFs online for free, with no registration or software installation needed. Open your file in any browser, then read, annotate, fill, or share it from one place.
+
+.</p>
           </div>
         </motion.div>
 

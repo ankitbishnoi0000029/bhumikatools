@@ -7,7 +7,7 @@ import {
   FileText, Layers, Scissors, Minimize, FileOutput, Edit3,
   Image as ImageIcon, PenTool, Stamp, RotateCw, FileCode2,
   Lock, Unlock, LayoutList, FileSpreadsheet, Presentation,
-  Wrench, ScanText, ShieldAlert, EyeOff, Crop, FileInput,
+  Wrench, ScanText, ShieldAlert, EyeOff, FileInput,
   Brain, Languages, ArrowUpRight, Search, Star, Plus, Minus,
   UploadCloud, Settings, Download, CheckCircle2, Shield, Zap,
   Users, Briefcase, GraduationCap, Building2, Heart, Scale,
@@ -32,7 +32,6 @@ const toolsData: Tool[] = [
   { id: 'rotate', title: 'Rotate PDF', desc: 'Rotate your PDFs the way you need them.', icon: RotateCw, category: 'Organize PDF' },
   { id: 'organize', title: 'Organize PDF', desc: 'Sort pages however you like. Delete or add pages.', icon: LayoutList, category: 'Organize PDF' },
   { id: 'page-numbers', title: 'Page Numbers', desc: 'Add page numbers with chosen typography and position.', icon: FileText, category: 'Organize PDF' },
-  { id: 'crop', title: 'Crop PDF', desc: 'Crop margins or select specific areas of your document.', icon: Crop, category: 'Organize PDF' },
   { id: 'compress', title: 'Compress PDF', desc: 'Reduce file size while optimizing for maximal quality.', icon: Minimize, category: 'Optimize PDF', isFeatured: true },
   { id: 'repair', title: 'Repair PDF', desc: 'Repair damaged PDFs and recover corrupted data.', icon: Wrench, category: 'Optimize PDF' },
   { id: 'ocr', title: 'OCR PDF', desc: 'Convert scanned PDFs into searchable and selectable text.', icon: ScanText, category: 'Optimize PDF', isFeatured: true },
@@ -72,7 +71,7 @@ const categories = [
 
 // --- CATEGORIES DEEP DIVE ---
 const categoriesDetail = [
-  { num: '01', name: 'Organize PDF', slug: 'organize', desc: 'Rearrange, reorder, and restructure your documents. Merge multiple PDFs, split large files, rotate pages, or crop unwanted margins.', tools: ['Merge', 'Split', 'Rotate', 'Organize', 'Page Numbers', 'Crop'], color: '#ff6a00' },
+  { num: '01', name: 'Organize PDF', slug: 'organize', desc: 'Rearrange, reorder, and restructure your documents. Merge multiple PDFs, split large files, or rotate pages.', tools: ['Merge', 'Split', 'Rotate', 'Organize', 'Page Numbers'], color: '#ff6a00' },
   { num: '02', name: 'Optimize PDF', slug: 'optimize', desc: 'Reduce file size, repair damaged PDFs, and unlock scanned documents with OCR. Perfect for emailing or archiving large files.', tools: ['Compress', 'Repair', 'OCR', 'Scan'], color: '#10b981' },
   { num: '03', name: 'Convert PDF', slug: 'convert', desc: 'Convert PDFs to and from Word, Excel, PowerPoint, JPG, HTML, and Markdown. Preserve formatting with 99% accuracy.', tools: ['PDF to Word', 'PDF to Excel', 'Word to PDF', 'JPG to PDF'], color: '#3b82f6' },
   { num: '04', name: 'Edit PDF', slug: 'edit', desc: 'Add text, images, and annotations. Sign documents electronically. Watermark pages. Create interactive fillable forms.', tools: ['Edit', 'Sign', 'Watermark', 'Forms'], color: '#a855f7' },

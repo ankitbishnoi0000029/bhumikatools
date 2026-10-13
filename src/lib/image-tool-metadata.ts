@@ -57,7 +57,7 @@ export function imageToolMetadata(slug: ImageToolSlug): Metadata {
       siteName: "idcardtools",
       images: [
         {
-          url: "/demo.png",
+          url: "/aitools.png",
           width: 1200,
           height: 630,
           alt: `${name} online with idcardtools`,

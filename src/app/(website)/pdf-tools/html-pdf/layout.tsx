@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "HTML to PDF Converter Online Free",
     description: "Turn HTML documents into shareable PDF files with a free online converter.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert HTML to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert HTML to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "HTML to PDF Converter Online Free",
     description: "Turn HTML documents into shareable PDF files with a free online converter.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

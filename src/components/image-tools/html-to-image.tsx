@@ -67,7 +67,7 @@ const TEMPLATES: { name: string; icon: string; html: string }[] = [
   </div>
   <div style="display: flex; justify-content: space-between; align-items: flex-end;">
     <div style="font-size: 13px; opacity: 0.9; line-height: 1.6;">
-      aarav@studio.in<br/>+91 98765 43210
+      aarav@studio.in<br/>+91 86995-92500
     </div>
     <div style="font-size: 11px; opacity: 0.6; font-family: monospace; letter-spacing: 0.2em;">STUDIO.IN</div>
   </div>

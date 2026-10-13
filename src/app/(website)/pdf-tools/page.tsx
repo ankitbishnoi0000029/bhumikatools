@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PdfToolsPage from "@/components/pdf-tools/pdf-landing";
+import { pdfToolDetails } from "@/lib/pagecontent";
 
 // ============================================
 // SEO METADATA
@@ -13,8 +13,7 @@ export const metadata: Metadata = {
   // ---------- Basic Meta ----------
   title: "Free PDF Tools Online — Merge, Split, Compress, Convert & More",
   description:
-    "31+ free PDF tools to merge, split, compress, convert, sign, and protect PDFs. No signup, no watermarks, no limits. Files processed in your browser — 100% private and secure. Trusted by 2M+ Indians.",
-  
+    "Free online PDF tools to merge, compress, create, edit and convert PDFs. ✓ No limits and no watermarks. ✓ No installation or registration required.",
   keywords: [
     // Primary
     "free pdf tools",
@@ -95,20 +94,20 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: PAGE_URL,
     siteName: "idcardtools",
-    title: "Free PDF Tools Online — 31+ Tools for Every Task",
+    title: "Free PDF Tools Online — 30+ Tools for Every Task",
     description:
       "Merge, split, compress, convert, sign, protect. All PDF tools free forever. No signup. Files processed in your browser.",
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
-        alt: "idcardtools — 31+ Free PDF Tools",
+        alt: "idcardtools — 30+ Free PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools PDF Tools",
@@ -122,10 +121,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@idcardtools",
     creator: "@idcardtools",
-    title: "Free PDF Tools — 31+ Tools for Every Task",
+    title: "Free PDF Tools — 30+ Tools for Every Task",
     description:
       "Merge, split, compress, convert PDFs. Free forever. No signup. Privacy-first.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
 
   // ---------- Robots ----------
@@ -161,10 +160,10 @@ const collectionSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "@id": `${PAGE_URL}#collection`,
-  name: "Free PDF Tools — 31+ Tools for Every Task",
+  name: "Free PDF Tools — 30+ Tools for Every Task",
   headline: "Every tool for every PDF task",
   description:
-    "31+ free PDF tools to merge, split, compress, convert, sign, and protect PDFs. All browser-based. No signup. 100% free forever.",
+    "30+ free PDF tools to merge, split, compress, convert, sign, and protect PDFs. All browser-based. No signup. 100% free forever.",
   url: PAGE_URL,
   inLanguage: "en-IN",
   isPartOf: {
@@ -174,7 +173,7 @@ const collectionSchema = {
   },
   primaryImageOfPage: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/demo.png`,
+    url: `${SITE_URL}/aitools.png`,
     width: 1200,
     height: 630,
   },
@@ -198,7 +197,7 @@ const collectionSchema = {
   mainEntity: {
     "@type": "ItemList",
     name: "PDF Tools",
-    numberOfItems: 31,
+    numberOfItems: 30,
     itemListOrder: "https://schema.org/ItemListOrderAscending",
     itemListElement: [
       // Organize
@@ -207,37 +206,36 @@ const collectionSchema = {
       { "@type": "ListItem", position: 3, name: "Rotate PDF", url: `${PAGE_URL}/rotate` },
       { "@type": "ListItem", position: 4, name: "Organize PDF", url: `${PAGE_URL}/organize` },
       { "@type": "ListItem", position: 5, name: "Page Numbers", url: `${PAGE_URL}/page-numbers` },
-      { "@type": "ListItem", position: 6, name: "Crop PDF", url: `${PAGE_URL}/crop` },
       // Optimize
-      { "@type": "ListItem", position: 7, name: "Compress PDF", url: `${PAGE_URL}/compress` },
-      { "@type": "ListItem", position: 8, name: "Repair PDF", url: `${PAGE_URL}/repair` },
-      { "@type": "ListItem", position: 9, name: "OCR PDF", url: `${PAGE_URL}/ocr` },
-      { "@type": "ListItem", position: 10, name: "Scan to PDF", url: `${PAGE_URL}/scan` },
+      { "@type": "ListItem", position: 6, name: "Compress PDF", url: `${PAGE_URL}/compress` },
+      { "@type": "ListItem", position: 7, name: "Repair PDF", url: `${PAGE_URL}/repair` },
+      { "@type": "ListItem", position: 8, name: "OCR PDF", url: `${PAGE_URL}/ocr` },
+      { "@type": "ListItem", position: 9, name: "Scan to PDF", url: `${PAGE_URL}/scan` },
       // Convert
-      { "@type": "ListItem", position: 11, name: "PDF to Word", url: `${PAGE_URL}/pdf-word` },
-      { "@type": "ListItem", position: 12, name: "PDF to PowerPoint", url: `${PAGE_URL}/pdf-to-powerpoint` },
-      { "@type": "ListItem", position: 13, name: "PDF to Excel", url: `${PAGE_URL}/pdf-to-excel` },
-      { "@type": "ListItem", position: 14, name: "Word to PDF", url: `${PAGE_URL}/word-pdf` },
-      { "@type": "ListItem", position: 15, name: "PowerPoint to PDF", url: `${PAGE_URL}/ppt-pdf` },
-      { "@type": "ListItem", position: 16, name: "Excel to PDF", url: `${PAGE_URL}/excel-to-pdf` },
-      { "@type": "ListItem", position: 17, name: "PDF to JPG", url: `${PAGE_URL}/pdf-jpg` },
-      { "@type": "ListItem", position: 18, name: "JPG to PDF", url: `${PAGE_URL}/jpg-pdf` },
-      { "@type": "ListItem", position: 19, name: "HTML to PDF", url: `${PAGE_URL}/html-pdf` },
-      { "@type": "ListItem", position: 20, name: "Markdown to PDF", url: `${PAGE_URL}/markdown-pdf` },
-      { "@type": "ListItem", position: 21, name: "PDF to Markdown", url: `${PAGE_URL}/pdf-md` },
+      { "@type": "ListItem", position: 10, name: "PDF to Word", url: `${PAGE_URL}/pdf-word` },
+      { "@type": "ListItem", position: 11, name: "PDF to PowerPoint", url: `${PAGE_URL}/pdf-to-powerpoint` },
+      { "@type": "ListItem", position: 12, name: "PDF to Excel", url: `${PAGE_URL}/pdf-to-excel` },
+      { "@type": "ListItem", position: 13, name: "Word to PDF", url: `${PAGE_URL}/word-pdf` },
+      { "@type": "ListItem", position: 14, name: "PowerPoint to PDF", url: `${PAGE_URL}/ppt-pdf` },
+      { "@type": "ListItem", position: 15, name: "Excel to PDF", url: `${PAGE_URL}/excel-to-pdf` },
+      { "@type": "ListItem", position: 16, name: "PDF to JPG", url: `${PAGE_URL}/pdf-jpg` },
+      { "@type": "ListItem", position: 17, name: "JPG to PDF", url: `${PAGE_URL}/jpg-pdf` },
+      { "@type": "ListItem", position: 18, name: "HTML to PDF", url: `${PAGE_URL}/html-pdf` },
+      { "@type": "ListItem", position: 19, name: "Markdown to PDF", url: `${PAGE_URL}/markdown-pdf` },
+      { "@type": "ListItem", position: 20, name: "PDF to Markdown", url: `${PAGE_URL}/pdf-md` },
       // Edit
-      { "@type": "ListItem", position: 22, name: "Edit PDF", url: `${PAGE_URL}/edit` },
-      { "@type": "ListItem", position: 23, name: "Sign PDF", url: `${PAGE_URL}/sign` },
-      { "@type": "ListItem", position: 24, name: "Watermark PDF", url: `${PAGE_URL}/watermark` },
-      { "@type": "ListItem", position: 25, name: "PDF Forms", url: `${PAGE_URL}/forms` },
+      { "@type": "ListItem", position: 21, name: "Edit PDF", url: `${PAGE_URL}/edit` },
+      { "@type": "ListItem", position: 22, name: "Sign PDF", url: `${PAGE_URL}/sign` },
+      { "@type": "ListItem", position: 23, name: "Watermark PDF", url: `${PAGE_URL}/watermark` },
+      { "@type": "ListItem", position: 24, name: "PDF Forms", url: `${PAGE_URL}/forms` },
       // Security
-      { "@type": "ListItem", position: 26, name: "Unlock PDF", url: `${PAGE_URL}/unlock` },
-      { "@type": "ListItem", position: 27, name: "Protect PDF", url: `${PAGE_URL}/protect` },
-      { "@type": "ListItem", position: 28, name: "Redact PDF", url: `${PAGE_URL}/redact` },
+      { "@type": "ListItem", position: 25, name: "Unlock PDF", url: `${PAGE_URL}/unlock` },
+      { "@type": "ListItem", position: 26, name: "Protect PDF", url: `${PAGE_URL}/protect` },
+      { "@type": "ListItem", position: 27, name: "Redact PDF", url: `${PAGE_URL}/redact` },
       // Intelligence
-      { "@type": "ListItem", position: 29, name: "Compare PDF", url: `${PAGE_URL}/compare` },
-      { "@type": "ListItem", position: 30, name: "Read PDF", url: `${PAGE_URL}/pdf-read` },
-      { "@type": "ListItem", position: 31, name: "Translate PDF", url: `${PAGE_URL}/translate` },
+      { "@type": "ListItem", position: 28, name: "Compare PDF", url: `${PAGE_URL}/compare` },
+      { "@type": "ListItem", position: 29, name: "Read PDF", url: `${PAGE_URL}/pdf-read` },
+      { "@type": "ListItem", position: 30, name: "Translate PDF", url: `${PAGE_URL}/translate` },
     ],
   },
 };
@@ -250,7 +248,7 @@ const softwareSchema = {
   name: "idcardtools PDF Toolkit",
   alternateName: ["ID Card Tools PDF", "idcardtools"],
   description:
-    "A comprehensive suite of 31+ free PDF tools. Merge, split, compress, convert, edit, sign, protect, and analyze PDF files online.",
+    "A comprehensive suite of 30+ free PDF tools. Merge, split, compress, convert, edit, sign, protect, and analyze PDF files online.",
   url: PAGE_URL,
   applicationCategory: "BusinessApplication",
   applicationSubCategory: "PDF Tools",
@@ -273,7 +271,7 @@ const softwareSchema = {
     "Translate PDFs while preserving layout",
     "Compare two PDF versions",
   ],
-  screenshot: `${SITE_URL}/screenshots/pdf-tools.png`,
+  screenshot: `${SITE_URL}/aitools.png`,
   offers: {
     "@type": "Offer",
     price: "0",
@@ -312,7 +310,7 @@ const faqSchema = {
       name: "Are all PDF tools on idcardtools really free?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — all 31 PDF tools are 100% free, forever. No signup, no hidden charges, no watermarks, no page limits. We only charge for the optional physical PVC card printing and delivery service.",
+        text: "Yes — all 30 PDF tools are 100% free, forever. No signup, no hidden charges, no watermarks, no page limits. We only charge for the optional physical PVC card printing and delivery service.",
       },
     },
     {
@@ -376,7 +374,7 @@ const faqSchema = {
       name: "What happens if a PDF conversion fails?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "If something goes wrong during conversion, try again with a smaller file or a different format. If it still fails, email the file to hello@idcardtools.com and our team will investigate within 24 hours.",
+        text: "If something goes wrong during conversion, try again with a smaller file or a different format. If it still fails, email the file to info@idcardtools.com and our team will investigate within 24 hours.",
       },
     },
     {
@@ -413,7 +411,7 @@ const howToSchema = {
   "@id": `${PAGE_URL}#howto`,
   name: "How to Use idcardtools PDF Tools",
   description:
-    "Learn how to use any of the 31 free PDF tools on idcardtools in 3 simple steps.",
+    "Learn how to use any of the 30 free PDF tools on idcardtools in 3 simple steps.",
   totalTime: "PT30S",
   estimatedCost: {
     "@type": "MonetaryAmount",
@@ -431,7 +429,6 @@ const howToSchema = {
       name: "Upload your file",
       text: "Drag and drop your PDF, Word, Excel, or image into the upload zone. Files up to 5GB supported.",
       url: `${PAGE_URL}#upload`,
-      image: `${SITE_URL}/howto/step-1.png`,
     },
     {
       "@type": "HowToStep",
@@ -439,7 +436,6 @@ const howToSchema = {
       name: "Choose your tool",
       text: "Select from merge, split, compress, convert, sign, or protect. All tools are available in one clean workspace.",
       url: `${PAGE_URL}#tools`,
-      image: `${SITE_URL}/howto/step-2.png`,
     },
     {
       "@type": "HowToStep",
@@ -447,7 +443,6 @@ const howToSchema = {
       name: "Download instantly",
       text: "Your processed file is ready in seconds. No signup, no watermarks, no limits.",
       url: `${PAGE_URL}#download`,
-      image: `${SITE_URL}/howto/step-3.png`,
     },
   ],
 };
@@ -473,44 +468,23 @@ const breadcrumbSchema = {
   ],
 };
 
-// 6. ItemList Schema (for individual tools SEO)
+// 6. ItemList Schema (SoftwareApplication entries for every PDF tool)
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "@id": `${PAGE_URL}#tools-list`,
   name: "idcardtools PDF Tools",
-  description: "Complete list of 31 free PDF tools offered by idcardtools",
-  numberOfItems: 31,
-  itemListElement: [
-    {
-      "@type": "SoftwareApplication",
-      position: 1,
-      name: "Merge PDF",
-      url: `${PAGE_URL}/merge`,
-      applicationCategory: "PDF Tool",
-      operatingSystem: "Web",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 2,
-      name: "Split PDF",
-      url: `${PAGE_URL}/split`,
-      applicationCategory: "PDF Tool",
-      operatingSystem: "Web",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
-    },
-    {
-      "@type": "SoftwareApplication",
-      position: 3,
-      name: "Compress PDF",
-      url: `${PAGE_URL}/compress`,
-      applicationCategory: "PDF Tool",
-      operatingSystem: "Web",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
-    },
-    // ... add all 31
-  ],
+  description: "Complete list of the free PDF tools offered by idcardtools",
+  numberOfItems: Object.keys(pdfToolDetails).length,
+  itemListElement: Object.entries(pdfToolDetails).map(([slug, details], index) => ({
+    "@type": "SoftwareApplication",
+    position: index + 1,
+    name: details.name,
+    url: `${PAGE_URL}/${slug}`,
+    applicationCategory: "PDF Tool",
+    operatingSystem: "Web",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+  })),
 };
 
 // ============================================
@@ -552,30 +526,6 @@ const Page = () => {
         itemType="https://schema.org/CollectionPage"
         className="contents"
       >
-        {/* SEO-only hidden H1 (if PdfToolsPage already has visible H1, this can be removed or used for screen readers) */}
-        <header className="sr-only">
-          <h1 itemProp="name">
-            Free PDF Tools Online — Merge, Split, Compress, Convert PDFs | idcardtools
-          </h1>
-          <p itemProp="description">
-            31+ free PDF tools to merge, split, compress, convert, sign, and protect PDF files.
-            No signup required. Files processed in your browser. 100% free forever.
-            Trusted by 2 million+ users across India.
-          </p>
-          <nav aria-label="Breadcrumb">
-            <ol>
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <a href="/pdf-tools" aria-current="page">
-                  PDF Tools
-                </a>
-              </li>
-            </ol>
-          </nav>
-        </header>
-
         {/* Main content */}
         <PdfToolsPage />
       </article>

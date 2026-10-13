@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Compress PDF Online Free",
     description: "Shrink PDF file size online for easier storage, sharing, and uploads.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Compress PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Compress PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Compress PDF Online Free",
     description: "Shrink PDF file size online for easier storage, sharing, and uploads.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

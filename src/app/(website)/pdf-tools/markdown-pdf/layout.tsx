@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Markdown to PDF Converter Online Free",
     description: "Export Markdown notes and documents as formatted PDF files online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert Markdown to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert Markdown to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Markdown to PDF Converter Online Free",
     description: "Export Markdown notes and documents as formatted PDF files online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

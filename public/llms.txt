@@ -1,22 +1,90 @@
 # idcardtools
 
-> idcardtools offers online PDF and image tools, along with E-Aadhaar PVC card printing information.
+> Free, privacy-first online PDF and image tools, plus E-Aadhaar PVC card printing information. No signup, no watermarks. Most tools run entirely in your browser.
 
 ## Key pages
 
-- [Home](https://idcardtools.com/): E-Aadhaar PVC card printing and online document tools.
-- [PDF tools](https://idcardtools.com/pdf-tools): Free PDF tools for merging, splitting, compressing, converting, and editing documents.
-- [Image tools](https://idcardtools.com/image-tools): Online image conversion and editing tools.
-- [Blog](https://idcardtools.com/blog): Guides and updates about PDF tools, document privacy, and E-Aadhaar PVC cards.
-- [About](https://idcardtools.com/about): Information about idcardtools.
-- [Contact](https://idcardtools.com/contacts): Contact and service information.
-- [Privacy policy](https://idcardtools.com/privacy): Privacy information.
-- [Terms](https://idcardtools.com/terms): Terms of service.
+- [Home](https://idcardtools.com): E-Aadhaar PVC card printing and free online document and image tools.
+- [E-Aadhaar PVC Card](https://idcardtools.com/e-aadhaar): Print your E-Aadhaar on a UIDAI-compliant 600-micron PVC card.
+- [PDF Tools](https://idcardtools.com/pdf-tools): 30 free PDF tools to merge, split, compress, convert, edit, sign, and protect documents.
+- [Image Tools](https://idcardtools.com/image-tools): 30 free image tools to convert, resize, crop, compress, and edit photos.
+- [Blog](https://idcardtools.com/blog): Guides on PDF tools, document privacy, and E-Aadhaar PVC cards.
+- [About](https://idcardtools.com/about): Information about the idcardtools team and mission.
+- [Contact](https://idcardtools.com/contacts): Support, bulk PVC card orders, and partnerships.
+- [Privacy Policy](https://idcardtools.com/privacy): How the site handles files and analytics consent.
+- [Terms](https://idcardtools.com/terms): Terms of service for the website and tools.
 
-## Popular PDF tools
+## PDF tools
 
-- [Merge PDF](https://idcardtools.com/pdf-tools/merge)
-- [Compress PDF](https://idcardtools.com/pdf-tools/compress)
-- [Split PDF](https://idcardtools.com/pdf-tools/split)
-- [PDF to Word](https://idcardtools.com/pdf-tools/pdf-word)
-- [JPG to PDF](https://idcardtools.com/pdf-tools/jpg-pdf)
+- [Compare PDF](https://idcardtools.com/pdf-tools/compare): Compare two PDF documents and review their differences.
+- [Compress PDF](https://idcardtools.com/pdf-tools/compress): Reduce the file size of a PDF document.
+- [Edit PDF](https://idcardtools.com/pdf-tools/edit): Add or adjust content in a PDF document.
+- [Excel to PDF](https://idcardtools.com/pdf-tools/excel-to-pdf): Convert an Excel spreadsheet into a PDF document.
+- [PDF Forms](https://idcardtools.com/pdf-tools/forms): Work with interactive PDF forms.
+- [HTML to PDF](https://idcardtools.com/pdf-tools/html-pdf): Convert HTML content into a PDF document.
+- [JPG to PDF](https://idcardtools.com/pdf-tools/jpg-pdf): Convert JPG images into a PDF document.
+- [Markdown to PDF](https://idcardtools.com/pdf-tools/markdown-pdf): Convert Markdown content into a PDF document.
+- [Merge PDF](https://idcardtools.com/pdf-tools/merge): Combine multiple PDF files into one document.
+- [OCR PDF](https://idcardtools.com/pdf-tools/ocr): Recognize text in scanned PDF pages.
+- [Organize PDF](https://idcardtools.com/pdf-tools/organize): Reorder, rotate, or remove pages in a PDF.
+- [Add Page Numbers to PDF](https://idcardtools.com/pdf-tools/page-numbers): Add page numbers to a PDF document.
+- [PDF to JPG](https://idcardtools.com/pdf-tools/pdf-jpg): Convert PDF pages into JPG images.
+- [PDF to Markdown](https://idcardtools.com/pdf-tools/pdf-md): Extract PDF content into Markdown text.
+- [Read PDF](https://idcardtools.com/pdf-tools/pdf-read): Open and read a PDF document in your browser.
+- [PDF to Excel](https://idcardtools.com/pdf-tools/pdf-to-excel): Convert supported PDF tables into an Excel spreadsheet.
+- [PDF to PowerPoint](https://idcardtools.com/pdf-tools/pdf-to-powerpoint): Convert PDF pages into a PowerPoint presentation.
+- [PDF to Word](https://idcardtools.com/pdf-tools/pdf-word): Convert a PDF document into an editable Word file.
+- [PowerPoint to PDF](https://idcardtools.com/pdf-tools/ppt-pdf): Convert a PowerPoint presentation into a PDF.
+- [Protect PDF](https://idcardtools.com/pdf-tools/protect): Set password protection on a PDF document.
+- [Redact PDF](https://idcardtools.com/pdf-tools/redact): Remove selected sensitive content from a PDF.
+- [Repair PDF](https://idcardtools.com/pdf-tools/repair): Attempt to recover a damaged PDF document.
+- [Rotate PDF](https://idcardtools.com/pdf-tools/rotate): Rotate PDF pages to the correct orientation.
+- [Scan to PDF](https://idcardtools.com/pdf-tools/scan): Capture document pages and save them as a PDF.
+- [Sign PDF](https://idcardtools.com/pdf-tools/sign): Place a signature on a PDF document.
+- [Split PDF](https://idcardtools.com/pdf-tools/split): Separate pages or page ranges from a PDF.
+- [Translate PDF](https://idcardtools.com/pdf-tools/translate): Translate supported PDF text into another language.
+- [Unlock PDF](https://idcardtools.com/pdf-tools/unlock): Remove password protection from a PDF you are authorized to access.
+- [Watermark PDF](https://idcardtools.com/pdf-tools/watermark): Add a text or image watermark to a PDF.
+- [Word to PDF](https://idcardtools.com/pdf-tools/word-pdf): Convert a Word document into a PDF.
+
+## Image tools
+
+- [Background Remover](https://idcardtools.com/image-tools/bg-remove): Remove a background from a photo.
+- [Collage Maker](https://idcardtools.com/image-tools/collage-maker): Combine photos into a collage.
+- [Colorize Photo](https://idcardtools.com/image-tools/colorize-photo): Add color to a black-and-white photo.
+- [Combine Images](https://idcardtools.com/image-tools/combine-images): Combine multiple images into one composition.
+- [Compress Image](https://idcardtools.com/image-tools/compress-image): Reduce the file size of an image.
+- [Convert from JPG](https://idcardtools.com/image-tools/convert-from-jpg): Convert a JPG image to another format.
+- [Convert to JPG](https://idcardtools.com/image-tools/convert-to-jpg): Convert an image into JPG format.
+- [Crop Image](https://idcardtools.com/image-tools/crop-image): Crop an image to the framing you need.
+- [HEIC to JPG](https://idcardtools.com/image-tools/heic-to-jpg): Convert HEIC photos into JPG images.
+- [HEIC to PNG](https://idcardtools.com/image-tools/heic-to-png): Convert HEIC photos into PNG images.
+- [HTML to Image](https://idcardtools.com/image-tools/html-to-image): Render HTML content as an image.
+- [Image Splitter](https://idcardtools.com/image-tools/image-splitter): Divide an image into smaller sections.
+- [JPG to GIF](https://idcardtools.com/image-tools/jpg-to-gif): Convert JPG images into GIF format.
+- [JPG to PNG](https://idcardtools.com/image-tools/jpg-to-png): Convert JPG images into PNG format.
+- [JPG to SVG](https://idcardtools.com/image-tools/jpg-to-svg): Trace a JPG image into an SVG graphic.
+- [JPG to WebP](https://idcardtools.com/image-tools/jpg-to-webp): Convert JPG images into WebP format.
+- [Make Round Image](https://idcardtools.com/image-tools/make-round-image): Crop an image into a circular shape.
+- [Photo Editor](https://idcardtools.com/image-tools/photo-editor): Edit an image using the available options.
+- [Pixelate Image](https://idcardtools.com/image-tools/pixelate-image): Pixelate selected areas of an image.
+- [PNG to JPG](https://idcardtools.com/image-tools/png-to-jpg): Convert PNG images into JPG format.
+- [PNG to SVG](https://idcardtools.com/image-tools/png-to-svg): Trace a PNG image into an SVG graphic.
+- [PNG to WebP](https://idcardtools.com/image-tools/png-to-webp): Convert PNG images into WebP format.
+- [Profile Photo Maker](https://idcardtools.com/image-tools/profile-photo-maker): Prepare an image for a profile photo.
+- [Resize Image](https://idcardtools.com/image-tools/resize-image): Resize an image to selected dimensions.
+- [Rotate Image](https://idcardtools.com/image-tools/rotate-image): Rotate an image to the correct orientation.
+- [SVG to PNG](https://idcardtools.com/image-tools/svg-to-png): Convert SVG graphics into PNG images.
+- [Upscale Image](https://idcardtools.com/image-tools/upscale-image): Increase image dimensions with the available tool.
+- [Watermark Image](https://idcardtools.com/image-tools/watermark-image): Add a watermark to an image.
+- [WebP to JPG](https://idcardtools.com/image-tools/webp-to-jpg): Convert WebP images into JPG format.
+- [WebP to PNG](https://idcardtools.com/image-tools/webp-to-png): Convert WebP images into PNG format.
+
+## Guides
+
+- [Aadhaar PVC Card Guide](https://idcardtools.com/blog/aadhaar-pvc-guide): The complete guide to printing your E-Aadhaar on a PVC card, including official UIDAI services vs private printing.
+
+## Machine-readable files
+
+- [Sitemap index](https://idcardtools.com/sitemap.xml): Sitemap index with separate sitemaps for general pages, PDF tools, and image tools.
+- [RSS feed](https://idcardtools.com/blog/rss.xml): RSS feed for the blog.

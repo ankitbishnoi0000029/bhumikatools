@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Edit PDF Online Free",
     description: "Add text, images, shapes, and annotations to PDF files with a free online editor.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Edit PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Edit PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Edit PDF Online Free",
     description: "Add text, images, shapes, and annotations to PDF files with a free online editor.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

@@ -202,7 +202,7 @@ export default function MergePDFPage() {
   const prevPreview = () => setPreviewIndex((i) => Math.max(i - 1, 0));
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden min-h-screen">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden min-h-screen">
       {/* ============================================ */}
       {/* HIDDEN FILE INPUTS — ALWAYS MOUNTED */}
       {/* ============================================ */}

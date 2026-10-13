@@ -36,7 +36,7 @@ export async function GET() {
       <guid isPermaLink="false">${SITE_URL}/blog#${post.slug}</guid>
       <description><![CDATA[${post.excerpt}]]></description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-      <author>hello@idcardtools.com (${post.author})</author>
+      <author>info@idcardtools.com (${post.author})</author>
     </item>`
     )
     .join("");

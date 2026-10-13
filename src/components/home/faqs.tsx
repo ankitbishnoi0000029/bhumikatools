@@ -15,7 +15,7 @@ const faqCategories = [
 const faqsData: Record<string, { q: string; a: string }[]> = {
   general: [
     {
-      q: 'Is CyberNexas really free to use?',
+      q: 'Is idcardtools really free to use?',
       a: 'Yes — all our PDF tools are 100% free, forever. No signup, no hidden charges, no watermarks. We only charge for the physical E-Aadhaar PVC card delivery service (from ₹99).',
     },
     {
@@ -46,7 +46,7 @@ const faqsData: Record<string, { q: string; a: string }[]> = {
     },
     {
       q: 'Can I order in bulk for my team or family?',
-      a: 'Absolutely. We offer special pricing for orders of 10+ cards. Email us at hello@cybernexas.com with the quantity and we\'ll send you a custom quote within 24 hours.',
+      a: 'Absolutely. We offer special pricing for orders of 10+ cards. Email us at hello@idcardtools.com with the quantity and we\'ll send you a custom quote within 24 hours.',
     },
   ],
   tools: [
@@ -251,11 +251,11 @@ export const Faqs = () => {
                       Email
                     </div>
                     <a 
-                      href="mailto:hello@cybernexas.com" 
+                      href="mailto:hello@idcardtools.com" 
                       className="text-[14px] text-black hover:text-[#ff6a00] transition-colors"
                       style={{ fontFamily: 'Georgia, serif' }}
                     >
-                      hello@cybernexas.com
+                      hello@idcardtools.com
                     </a>
                   </div>
                   <div>

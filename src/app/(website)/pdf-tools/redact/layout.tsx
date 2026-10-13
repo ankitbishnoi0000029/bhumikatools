@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Redact PDF Online Free",
     description: "Remove sensitive information from PDF documents before sharing them.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Redact PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Redact PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Redact PDF Online Free",
     description: "Remove sensitive information from PDF documents before sharing them.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

@@ -99,7 +99,7 @@ export const metadata: Metadata = {
     title: "PDF Viewer | Open PDFs Online with Our Free PDF Reader",
     description: "Open and read PDFs online with this fast PDF viewer. Free, private, no signup required.",
     countryName: "India",
-    images: [{ url: `${SITE_URL}/demo.png`, width: 1200, height: 630, alt: "idcardtools PDF Reader", type: "image/png" }],
+    images: [{ url: `${SITE_URL}/aitools.png`, width: 1200, height: 630, alt: "idcardtools PDF Reader", type: "image/png" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     creator: "@idcardtools",
     title: "PDF Viewer | Open PDFs Online with Our Free PDF Reader",
     description: "Open and read PDFs online with this fast PDF viewer. 100% private, no signup.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
 };

@@ -694,7 +694,7 @@ export default function PptToPdfPage() {
   // ============================================
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden min-h-screen">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden min-h-screen">
       <input
         ref={inputRef}
         type="file"

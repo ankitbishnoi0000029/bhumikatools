@@ -17,7 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] min-h-screen pt-32 pb-24 overflow-hidden">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] min-h-screen pt-16 pb-24 overflow-hidden">
       {/* Vertical rules */}
       <div className="absolute inset-0 pointer-events-none hidden md:block">
         <div className="container mx-auto px-8 h-full relative max-w-[1400px]">

@@ -155,7 +155,7 @@ export const Footer = () => {
                     className="text-[15px] text-black hover:text-[#ff6a00] transition-colors"
                     style={{ fontFamily: 'Georgia, serif' }}
                   >
-                    +91 98765 43210
+                    +91 86995-92500
                   </a>
                 </div>
               </div>

@@ -62,14 +62,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Blog — PDF Tools & Document Guides",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools Blog",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     title: "Blog — PDF Tips, Aadhaar PVC Guides & Privacy Insights",
     description:
       "Expert guides on PDF tools, E-Aadhaar PVC printing, and document privacy.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: {
     index: true,
@@ -120,7 +120,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "8 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
   {
     slug: "pdf-privacy",
@@ -131,7 +131,7 @@ const blogPosts = [
     author: "Priya Sharma",
     category: "Privacy",
     readTime: "5 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
   {
     slug: "pan-card-guide",
@@ -142,7 +142,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "4 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
   {
     slug: "ai-ocr",
@@ -153,7 +153,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Product Update",
     readTime: "6 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
   {
     slug: "digital-india",
@@ -164,7 +164,7 @@ const blogPosts = [
     author: "Rajesh Kumar",
     category: "Industry",
     readTime: "10 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
   {
     slug: "merge-pdf-guide",
@@ -175,7 +175,7 @@ const blogPosts = [
     author: "Team idcardtools",
     category: "Tutorial",
     readTime: "5 min",
-    image: `${SITE_URL}/demo.png`,
+    image: `${SITE_URL}/aitools.png`,
   },
 ];
 

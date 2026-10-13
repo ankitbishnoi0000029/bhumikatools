@@ -89,21 +89,21 @@ export default function BlogPage() {
     : posts.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden">
 
       <div className="absolute inset-0 pointer-events-none hidden md:block">
-        <div className="container mx-auto px-8 h-full relative max-w-[1400px]">
-          <div className="absolute left-8 top-0 bottom-0 w-px bg-black/[0.05]" />
-          <div className="absolute left-1/3 top-0 bottom-0 w-px bg-black/[0.05]" />
-          <div className="absolute left-2/3 top-0 bottom-0 w-px bg-black/[0.05]" />
-          <div className="absolute right-8 top-0 bottom-0 w-px bg-black/[0.05]" />
+        <div className="container mx-auto px-8 h-full relative max-w-350">
+          <div className="absolute left-8 top-0 bottom-0 w-px bg-black/5" />
+          <div className="absolute left-1/3 top-0 bottom-0 w-px bg-black/5" />
+          <div className="absolute left-2/3 top-0 bottom-0 w-px bg-black/5" />
+          <div className="absolute right-8 top-0 bottom-0 w-px bg-black/5" />
         </div>
       </div>
 
-      <div className="container mx-auto px-8 relative max-w-[1400px]">
+      <div className="container mx-auto px-8 relative max-w-350">
 
         {/* Top meta */}
-        <div className="flex items-center justify-between pb-6 mb-16 border-b border-black/[0.12]">
+        <div className="flex items-center justify-between pb-6 mb-16 border-b border-black/12">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 rounded-full bg-[#ff6a00]" />
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-black/60">
@@ -153,7 +153,7 @@ export default function BlogPage() {
           className="mb-16"
         >
           <Link href="/blog/aadhaar-pvc-guide" className="block group">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 p-8 md:p-10 rounded-[22px] bg-white border border-black/[0.06] hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 p-8 md:p-10 rounded-[22px] bg-white border border-black/6 hover:border-[#ff6a00]/40 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500">
               
               {/* Left: Featured tag */}
               <div className="lg:col-span-4 flex flex-col justify-between">
@@ -219,7 +219,7 @@ export default function BlogPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-12 pb-6 border-b border-black/[0.08]"
+          className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-12 pb-6 border-b border-black/8"
         >
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
@@ -258,7 +258,7 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: i * 0.05, ease: "easeOut" }}
             >
               <Link href="/blog#articles" className="block h-full outline-none group">
-                <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/[0.06] group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500 overflow-hidden">
+                <div className="relative flex flex-col h-full p-7 rounded-[22px] bg-white border border-black/6 group-hover:border-[#ff6a00]/40 group-hover:-translate-y-1 group-hover:shadow-[0_20px_50px_-15px_rgba(255,106,0,0.15)] transition-all duration-500 overflow-hidden">
 
                   {/* Color accent */}
                   <div 
@@ -279,19 +279,19 @@ export default function BlogPage() {
 
                   {/* Title */}
                   <h3 
-                    className="relative z-10 text-[20px] leading-[1.25] tracking-tight text-black mb-3 group-hover:text-[#ff6a00] transition-colors"
+                    className="relative z-10 text-[20px] leading-tight tracking-tight text-black mb-3 group-hover:text-[#ff6a00] transition-colors"
                     style={{ fontFamily: 'Georgia, serif' }}
                   >
                     {post.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="relative z-10 text-[13px] leading-[1.7] text-black/55 font-light mb-8 flex-grow">
+                  <p className="relative z-10 text-[13px] leading-[1.7] text-black/55 font-light mb-8 grow">
                     {post.excerpt}
                   </p>
 
                   {/* Meta bottom */}
-                  <div className="relative z-10 pt-5 border-t border-black/[0.06] flex items-center justify-between">
+                  <div className="relative z-10 pt-5 border-t border-black/6 flex items-center justify-between">
                     <div className="text-[10px] font-mono uppercase tracking-[0.15em] text-black/40">
                       {post.date}
                     </div>
@@ -308,7 +308,7 @@ export default function BlogPage() {
 
         {/* Empty state */}
         {filteredPosts.length === 0 && (
-          <div className="py-24 text-center border border-black/[0.08] rounded-[22px] bg-white">
+          <div className="py-24 text-center border border-black/8 rounded-[22px] bg-white">
             <div className="text-[20px] text-black mb-2" style={{ fontFamily: 'Georgia, serif' }}>
               No articles yet.
             </div>

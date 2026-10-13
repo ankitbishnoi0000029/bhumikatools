@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Organize PDF Pages Online Free",
     description: "Rearrange, rotate, and remove PDF pages with a free online PDF organizer.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Organize PDF pages with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Organize PDF pages with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Organize PDF Pages Online Free",
     description: "Rearrange, rotate, and remove PDF pages with a free online PDF organizer.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

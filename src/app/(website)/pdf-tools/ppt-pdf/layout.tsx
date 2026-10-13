@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "PowerPoint to PDF Converter Online",
     description: "Export PPT and PPTX presentations to portable PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert PowerPoint to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert PowerPoint to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "PowerPoint to PDF Converter Online",
     description: "Export PPT and PPTX presentations to portable PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

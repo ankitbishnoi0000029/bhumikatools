@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Protect PDF with a Password Online",
     description: "Add password protection and security settings to PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Protect PDF files with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Protect PDF files with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Protect PDF with a Password Online",
     description: "Add password protection and security settings to PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Fill and Create PDF Forms Online",
     description: "Complete PDF form fields or prepare interactive fillable PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Fill PDF forms with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Fill PDF forms with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Fill and Create PDF Forms Online",
     description: "Complete PDF form fields or prepare interactive fillable PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

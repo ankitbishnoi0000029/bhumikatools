@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Search, ChevronDown, Menu, X, ArrowUpRight, User2, Layers, Scissors, RotateCw, LayoutList, FileText, Crop, Minimize, Wrench, ScanText, FileInput, FileOutput, Presentation, FileSpreadsheet, Image as ImageIcon, FileCode2, Edit3, PenTool, Stamp, Lock, Unlock, EyeOff, ShieldAlert, Brain, Languages, Sparkles, LucideCreditCardReader, ImageDown, ImageUp, Eraser, Smile, Expand, ScanFace, Palette, Scaling, Wand2, Type, UserRound, UserMinus, Trash2, Focus, Plus, Square, Contrast, Grid3x3, LayoutGrid, Film, Circle, Download, Music, Volume2, VolumeX, Captions, Mic, Podcast, Radio, Video, type LucideIcon } from "lucide-react";
+import { Search, ChevronDown, Menu, X, ArrowUpRight, User2, Layers, Scissors, RotateCw, LayoutList, FileText, Crop, Minimize, Wrench, ScanText, FileInput, FileOutput, Presentation, FileSpreadsheet, Image as ImageIcon, FileCode2, Edit3, PenTool, Stamp, Lock, Unlock, EyeOff, ShieldAlert, Languages, Sparkles, LucideCreditCardReader, ImageDown, ImageUp, Eraser, Expand, Palette, Scaling, UserRound, Circle, type LucideIcon, Grid3x3 } from "lucide-react";
 
 type MenuTool = {
   id: string;
@@ -17,7 +17,7 @@ type MenuTool = {
 type MenuCategory = {
   name: string;
   slug: string;
-  group: "pdf" | "image" | "video";
+  group: "pdf" | "image";
   desc: string;
   color: string;
   tools: MenuTool[];
@@ -65,7 +65,7 @@ const toolsMenu: MenuCategory[] = [
       { id: "pdf-word", title: "PDF to Word", icon: FileOutput },
       { id: "pdf-to-powerpoint", title: "PDF to PowerPoint", icon: Presentation },
       { id: "pdf-to-excel", title: "PDF to Excel", icon: FileSpreadsheet },
-      { id: "pdf-to-jpg", title: "PDF to JPG", icon: ImageIcon },
+      { id: "pdf-jpg", title: "PDF to JPG", icon: ImageIcon },
       { id: "word-pdf", title: "Word to PDF", icon: FileText },
       { id: "jpg-pdf", title: "JPG to PDF", icon: ImageIcon },
       { id: "html-pdf", title: "HTML to PDF", icon: FileCode2 },
@@ -176,118 +176,17 @@ const toolsMenu: MenuCategory[] = [
     ],
   },
 
-  {
-    name: "Convert Video",
-    slug: "video-convert",
-    group: "video",
-    desc: "Convert between video formats",
-    color: "#3b82f6",
-    tools: [
-      { id: "mov-to-mp4", title: "MOV to MP4", icon: Video, desc: "Convert MOV to MP4." },
-      { id: "mp4-to-avi", title: "MP4 to AVI", icon: Video, desc: "Convert MP4 to AVI." },
-      { id: "webm-to-mp4", title: "WEBM to MP4", icon: Video, desc: "Convert WEBM to MP4." },
-      { id: "mkv-to-mp4", title: "MKV to MP4", icon: Video, desc: "Convert MKV to MP4." },
-      { id: "avi-to-mp4", title: "AVI to MP4", icon: Video, desc: "Convert AVI to MP4." },
-      { id: "mp4-to-mov", title: "MP4 to MOV", icon: Video, desc: "Convert MP4 to MOV." },
-      { id: "mp4-to-webm", title: "MP4 to WEBM", icon: Video, desc: "Convert MP4 to WEBM." },
-      { id: "mov-to-avi", title: "MOV to AVI", icon: Video, desc: "Convert MOV to AVI." },
-      { id: "avi-to-mov", title: "AVI to MOV", icon: Video, desc: "Convert AVI to MOV." },
-      { id: "mkv-to-mov", title: "MKV to MOV", icon: Video, desc: "Convert MKV to MOV." },
-      { id: "webm-to-mov", title: "WEBM to MOV", icon: Video, desc: "Convert WEBM to MOV." },
-      { id: "avi-to-mkv", title: "AVI to MKV", icon: Video, desc: "Convert AVI to MKV." },
-      { id: "mkv-to-avi", title: "MKV to AVI", icon: Video, desc: "Convert MKV to AVI." },
-      { id: "m4a-to-mp4", title: "M4A to MP4", icon: Video, desc: "Convert M4A to MP4." },
-      { id: "aac-to-mp4", title: "AAC to MP4", icon: Video, desc: "Convert AAC to MP4." },
-    ],
-  },
-  {
-    name: "Video to Audio",
-    slug: "video-audio",
-    group: "video",
-    desc: "Extract or convert to audio formats",
-    color: "#10b981",
-    tools: [
-      { id: "mp4-to-mp3", title: "MP4 to MP3", icon: Music, desc: "Convert MP4 to MP3 audio." },
-      { id: "extract-audio", title: "Extract Audio from Video", icon: Music, desc: "Extract audio from your video." },
-      { id: "mov-to-mp3", title: "MOV to MP3", icon: Music, desc: "Convert MOV to MP3 audio." },
-      { id: "mp4-to-wav", title: "MP4 to WAV", icon: Music, desc: "Convert MP4 to WAV audio." },
-      { id: "mkv-to-mp3", title: "MKV to MP3", icon: Music, desc: "Convert MKV to MP3 audio." },
-      { id: "webm-to-mp3", title: "WEBM to MP3", icon: Music, desc: "Convert WEBM to MP3." },
-      { id: "mov-to-wav", title: "MOV to WAV", icon: Music, desc: "Convert MOV to WAV audio." },
-      { id: "avi-to-mp3", title: "AVI to MP3", icon: Music, desc: "Convert AVI to MP3 audio." },
-      { id: "m4a-to-mp3", title: "M4A to MP3", icon: Music, desc: "Convert M4A to MP3 audio." },
-      { id: "m4a-to-wav", title: "M4A to WAV", icon: Music, desc: "Convert M4A to WAV audio." },
-      { id: "ogg-to-mp3", title: "OGG to MP3", icon: Music, desc: "Convert OGG to MP3 audio." },
-      { id: "ogg-to-wav", title: "OGG to WAV", icon: Music, desc: "Convert OGG to WAV." },
-      { id: "mp4-to-ogg", title: "MP4 to OGG", icon: Music, desc: "Convert MP4 to OGG audio." },
-      { id: "aac-to-mp3", title: "AAC to MP3", icon: Music, desc: "Convert AAC to MP3 audio." },
-      { id: "aac-to-wav", title: "AAC to WAV", icon: Music, desc: "Convert AAC to WAV audio." },
-      { id: "aac-to-m4r", title: "AAC to M4R", icon: Music, desc: "Convert AAC to M4R audio." },
-      { id: "aac-to-flac", title: "AAC to FLAC", icon: Music, desc: "Convert AAC to FLAC audio." },
-    ],
-  },
-  {
-    name: "Video to GIF",
-    slug: "video-gif",
-    group: "video",
-    desc: "Convert between video and GIF",
-    color: "#a855f7",
-    tools: [
-      { id: "video-to-gif", title: "Video to Gif", icon: Film, desc: "Upload MP4 and convert to animated GIF." },
-      { id: "mp4-to-gif", title: "MP4 to GIF", icon: Film, desc: "Convert MP4 to GIF." },
-      { id: "mov-to-gif", title: "MOV to GIF", icon: Film, desc: "Convert MOV to GIF." },
-      { id: "mkv-to-gif", title: "MKV to GIF", icon: Film, desc: "Convert MKV to GIF." },
-      { id: "avi-to-gif", title: "AVI to GIF", icon: Film, desc: "Convert AVI to GIF." },
-      { id: "gif-to-mov", title: "GIF to MOV", icon: Film, desc: "Convert animated GIF to MOV online." },
-      { id: "gif-to-webm", title: "GIF to WEBM", icon: Film, desc: "Convert animated GIF to WEBM online." },
-      { id: "video-to-webp", title: "Video to WebP", icon: ImageIcon, desc: "Upload a video file to convert to WebP." },
-    ],
-  },
-  {
-    name: "Edit & Compress",
-    slug: "video-edit",
-    group: "video",
-    desc: "Trim, resize, mute, and compress video",
-    color: "#f59e0b",
-    tools: [
-      { id: "trim-video", title: "Trim Video", icon: Scissors, desc: "Select start/stop and download trimmed video." },
-      { id: "resize-video", title: "Resize Video", icon: Scaling, desc: "Resize video resolution, maintain aspect ratio." },
-      { id: "mute-video", title: "Mute Video", icon: VolumeX, desc: "Download the video with no sound." },
-      { id: "add-subtitles", title: "Add subtitles", icon: Captions, desc: "Add subtitles to video." },
-      { id: "compress-video", title: "Compress Video", icon: Minimize, desc: "Lessen the file size of a video file." },
-      { id: "compress-mov", title: "Compress MOV", icon: Minimize, desc: "Compress MOV video." },
-      { id: "compress-avi", title: "Compress AVI", icon: Minimize, desc: "Compress AVI video." },
-      { id: "compress-mkv", title: "Compress MKV", icon: Minimize, desc: "Compress MKV video." },
-    ],
-  },
-  {
-    name: "Transcribe & Text",
-    slug: "video-transcribe",
-    group: "video",
-    desc: "Turn video and audio into text",
-    color: "#ec4899",
-    tools: [
-      { id: "youtube-to-text", title: "Youtube to Text", icon: Mic, desc: "Convert video to text.", isNew: true },
-      { id: "video-to-text", title: "Video to Text", icon: Type, desc: "Transcribe video to text.", isNew: true },
-      { id: "audio-to-text", title: "Audio to Text", icon: Mic, desc: "Transcribe audio to text.", isNew: true },
-      { id: "youtube-transcript", title: "YouTube Transcript Generator", icon: Radio, desc: "Transcribe YouTube video." },
-      { id: "transcribe-podcast", title: "Transcribe Podcast", icon: Podcast, desc: "Transcribe podcast to text." },
-      { id: "summarize-podcast", title: "Summarize Podcast", icon: Brain, desc: "Summarize podcast content." },
-    ],
-  },
 ];
 
 // --- HELPERS ---
 const getToolHref = (tool: { id: string }, category: { slug: string; group: string }) => {
   if (category.group === "image") return `/image-tools/${tool.id}`;
-  if (category.group === "video") return `/video-tools/${tool.id}`;
   if (tool.id === "crop" || tool.id === "ai-summarizer") return "/pdf-tools";
   return `/pdf-tools/${tool.id}`;
 };
 
 const getCategoryHref = (category: { slug: string; group: string }) => {
   if (category.group === "image") return `/image-tools?category=${category.slug}`;
-  if (category.group === "video") return `/video-tools?category=${category.slug}`;
   return `/pdf-tools?category=${category.slug}`;
 };
 
@@ -297,7 +196,7 @@ export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showToolsMenu, setShowToolsMenu] = useState(false);
-  const [activeMenuGroup, setActiveMenuGroup] = useState<"pdf" | "image" | "video">("pdf");
+  const [activeMenuGroup, setActiveMenuGroup] = useState<"pdf" | "image">("pdf");
   const [activeToolsCategory, setActiveToolsCategory] = useState<string>("organize");
 
   const headerRef = useRef<HTMLElement | null>(null);
@@ -323,7 +222,7 @@ export const Header = () => {
     }
   };
 
-  const openToolsMenu = (group: "pdf" | "image" | "video", category: string) => {
+  const openToolsMenu = (group: "pdf" | "image", category: string) => {
     clearCloseTimer();
     setActiveMenuGroup(group);
     setActiveToolsCategory(category);
@@ -383,13 +282,6 @@ export const Header = () => {
       group: "image" as const,
       defaultCategory: "image-ai",
     },
-    // {
-    //   name: "Video Tools",
-    //   href: "/video-tools",
-    //   dropdown: true,
-    //   group: "video" as const,
-    //   defaultCategory: "video-convert",
-    // },
     { name: "Contacts", href: "/contacts" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
@@ -404,9 +296,9 @@ export const Header = () => {
 
   const activeCat = toolsMenu.find((c) => c.slug === activeToolsCategory) ?? visibleCategories[0];
 
-  const isMediaGroup = activeMenuGroup === "image" || activeMenuGroup === "video";
+  const isMediaGroup = activeMenuGroup === "image";
 
-  const groupLabel = activeMenuGroup === "image" ? "Image Categories" : activeMenuGroup === "video" ? "Video Categories" : "PDF Categories";
+  const groupLabel = activeMenuGroup === "image" ? "Image Categories" : "PDF Categories";
 
   return (
     <>
@@ -916,7 +808,7 @@ export const Header = () => {
                         />
                       </motion.div>
                       <span className="text-[11px] text-black/60">
-                        <span className="font-medium text-black">New:</span> {activeMenuGroup === "video" ? "Youtube to Text, Video to Text & Audio to Text ab live hain" : activeMenuGroup === "image" ? "Image Tools ab 5 categories me organized hain" : "PDF to JPG and AI Summarizer now available"}
+                        <span className="font-medium text-black">New:</span> {activeMenuGroup === "image" ? "Image Tools ab 5 categories me organized hain" : "PDF to JPG and AI Summarizer now available"}
                       </span>
                     </motion.div>
                     <motion.div
@@ -925,7 +817,7 @@ export const Header = () => {
                       transition={{ delay: 0.45, duration: 0.5 }}
                     >
                       <Link
-                        href={activeMenuGroup === "video" ? "/video-tools" : activeMenuGroup === "image" ? "/image-tools" : "/pdf-tools"}
+                        href={activeMenuGroup === "image" ? "/image-tools" : "/pdf-tools"}
                         className="group inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.15em] text-black hover:text-[#ff6a00] transition-colors"
                       >
                         Try it
@@ -1024,11 +916,11 @@ export const Header = () => {
               <div className="mt-8 px-6 pb-8">
                 <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/40 mb-3">Get in touch</div>
                 <a
-                  href="mailto:hello@idcardtools.com"
+                  href="mailto:info@idcardtools.com"
                   className="block text-lg tracking-tight text-black hover:text-[#ff6a00] transition-colors"
                   style={{ fontFamily: "Georgia, serif" }}
                 >
-                  hello@idcardtools.com
+                  info@idcardtools.com
                 </a>
               </div>
             </motion.div>

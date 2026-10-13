@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "Excel to PDF Converter Online Free",
     description: "Convert Excel XLS and XLSX spreadsheets into PDF documents online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Convert Excel to PDF with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Convert Excel to PDF with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Excel to PDF Converter Online Free",
     description: "Convert Excel XLS and XLSX spreadsheets into PDF documents online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

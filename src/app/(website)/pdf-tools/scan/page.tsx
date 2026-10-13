@@ -521,7 +521,7 @@ export default function ScanToPdfPage() {
   // ============================================
 
   return (
-    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-32 pb-24 overflow-hidden min-h-screen">
+    <div className="relative bg-[#f4f1ea] text-[#0a0a0a] pt-16 pb-24 overflow-hidden min-h-screen">
       {/* Hidden inputs */}
       <input
         ref={fileInputRef}

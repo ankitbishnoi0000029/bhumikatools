@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "Print E-Aadhaar on premium PVC cards. 31+ free PDF tools. UIDAI-compliant. Delivered in 24 hours.",
     url: "https://idcardtools.com",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

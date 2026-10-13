@@ -80,7 +80,7 @@ export const HowItWorks = () => {
           </div>
           <div className="lg:col-span-5 lg:pb-4">
             <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md">
-              No accounts, no installations, no learning curve. CyberNexas is 
+              No accounts, no installations, no learning curve. idcardtools is 
               designed so anyone can use it — even your grandmother.
             </p>
           </div>

@@ -152,7 +152,7 @@ export const Reviews = () => {
           <div className="lg:col-span-5 lg:pb-4">
             <p className="text-[15px] md:text-[16px] leading-[1.7] text-black/60 max-w-md mb-8">
               From chartered accountants to freelance designers, thousands 
-              of Indians rely on CyberNexas every day.
+              of Indians rely on idcardtools every day.
             </p>
 
             {/* Star rating summary */}

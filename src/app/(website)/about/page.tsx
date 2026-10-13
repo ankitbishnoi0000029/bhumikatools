@@ -54,14 +54,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "About idcardtools — Privacy-First PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools About",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: "About idcardtools — Privacy-First PDF Tools",
     description:
       "Building free, privacy-first PDF tools and premium Aadhaar PVC cards. Trusted by 2M+ Indians.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: {
     index: true,
@@ -122,7 +122,7 @@ const aboutPageSchema = {
   },
   primaryImageOfPage: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/demo.png`,
+    url: `${SITE_URL}/aitools.png`,
     width: 1200,
     height: 630,
   },
@@ -153,7 +153,7 @@ const organizationSchema = {
     width: 512,
     height: 512,
   },
-  image: `${SITE_URL}/demo.png`,
+  image: `${SITE_URL}/aitools.png`,
   description:
     "idcardtools provides 31+ free, privacy-first PDF tools and premium E-Aadhaar PVC card printing services across India. Founded in 2023. Trusted by 2M+ users.",
   slogan: "Secure · Innovate · Succeed",
@@ -167,7 +167,7 @@ const organizationSchema = {
     minValue: 5,
     maxValue: 20,
   },
-  email: "hello@idcardtools.com",
+  email: "info@idcardtools.com",
   telephone: "+91-9876543210",
   address: {
     "@type": "PostalAddress",
@@ -194,7 +194,7 @@ const organizationSchema = {
     {
       "@type": "ContactPoint",
       telephone: "+91-9876543210",
-      email: "hello@idcardtools.com",
+      email: "info@idcardtools.com",
       contactType: "customer support",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi"],

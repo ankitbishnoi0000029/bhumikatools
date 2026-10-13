@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     title: "OCR PDF Online Free",
     description: "Recognize text in scanned PDF documents and make them searchable online.",
     siteName: "idcardtools",
-    images: [{ url: "/demo.png", width: 1200, height: 630, alt: "Run OCR on PDFs with idcardtools" }],
+    images: [{ url: "/aitools.png", width: 1200, height: 630, alt: "Run OCR on PDFs with idcardtools" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "OCR PDF Online Free",
     description: "Recognize text in scanned PDF documents and make them searchable online.",
-    images: ["/demo.png"],
+    images: ["/aitools.png"],
   },
 };
 

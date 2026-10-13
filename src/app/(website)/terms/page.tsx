@@ -52,14 +52,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools Terms of Service",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools Terms",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "Terms of Service — idcardtools",
     description:
       "Plain-English terms of service. Free tools, refund policy, and your rights.",
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
   robots: {
     index: true,
@@ -175,7 +175,7 @@ const organizationSchema = {
     {
       "@type": "ContactPoint",
       contactType: "customer support",
-      email: "hello@idcardtools.com",
+      email: "info@idcardtools.com",
       telephone: "+91-9876543210",
       areaServed: "IN",
     },
@@ -294,7 +294,7 @@ const faqSchema = {
       name: "What happens if a PVC card is lost in transit?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "If your PVC card is lost in transit, we re-print and re-ship it at no extra cost. Just email hello@idcardtools.com with your order number and we'll take care of it.",
+        text: "If your PVC card is lost in transit, we re-print and re-ship it at no extra cost. Just email info@idcardtools.com with your order number and we'll take care of it.",
       },
     },
   ],

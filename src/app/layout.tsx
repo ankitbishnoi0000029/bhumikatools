@@ -81,14 +81,14 @@ export const metadata: Metadata = {
     countryName: "India",
     images: [
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 630,
         alt: "idcardtools — Print E-Aadhaar on PVC Card & Free PDF Tools",
         type: "image/png",
       },
       {
-        url: `${SITE_URL}/demo.png`,
+        url: `${SITE_URL}/aitools.png`,
         width: 1200,
         height: 1200,
         alt: "idcardtools",
@@ -104,7 +104,7 @@ export const metadata: Metadata = {
     creator: "@idcardtools",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [`${SITE_URL}/demo.png`],
+    images: [`${SITE_URL}/aitools.png`],
   },
 
   // Robots
